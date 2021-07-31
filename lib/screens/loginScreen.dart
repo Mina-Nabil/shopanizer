@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopanizer/widgets/textbox_with_label.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -9,8 +10,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-        child: Text("Login"),
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: Center(
+          child: TextBoxWithLabel(
+            labelText: 'First Name',
+            placeHolder: 'First Name',
+          ),
+        ),
       ),
     );
   }
