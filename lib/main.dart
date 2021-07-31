@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/Themes/shopanizer_theme.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:shopanizer/screens/SplashScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
       title: 'Shopanizer',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          primaryColor: ShopColors.primary,
           inputDecorationTheme: InputDecorationTheme(
               filled: true,
               fillColor: ShopColors.textInputBG,
@@ -32,21 +33,5 @@ class MyApp extends StatelessWidget {
               ))),
       home: SplashScreen(),
     );
-  }
-}
-
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(
-          child: SvgPicture.asset('assets/icons/splashIcon.svg'),
-        ));
   }
 }
