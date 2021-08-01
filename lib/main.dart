@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopanizer/Themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/Themes/shopanizer_theme.dart';
 import 'package:shopanizer/screens/SplashScreen.dart';
 
 void main() {

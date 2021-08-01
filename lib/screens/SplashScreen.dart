@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shopanizer/screens/homeScreen.dart';
-import 'package:shopanizer/screens/loginScreen.dart';
+import 'package:shopanizer/screens/home/homeScreen.dart';
+import 'package:shopanizer/screens/auth/loginScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

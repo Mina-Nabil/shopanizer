@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
-import 'package:shopanizer/Themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/Themes/shopanizer_theme.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
