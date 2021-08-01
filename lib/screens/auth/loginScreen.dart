@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopanizer/widgets/textbox_with_label.dart';
+import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
