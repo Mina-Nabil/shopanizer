@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shopanizer/shared/Themes/shopanizer_theme.dart';
-import 'package:shopanizer/screens/SplashScreen.dart';
-
+import 'package:shopanizer/screens/splash_screen.dart';
+import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 void main() {
   runApp(MyApp());
 }
@@ -14,6 +13,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: ShopColors.primary,
+
+          textTheme: TextTheme(
+            bodyText2: TextStyle(
+              color: ShopColors.textColor,
+              fontFamily: "Poppins"
+            ),
+          ),
           inputDecorationTheme: InputDecorationTheme(
               filled: true,
               fillColor: ShopColors.textInputBG,

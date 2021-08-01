@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/svg.dart';
-import 'package:shopanizer/shared/Themes/shopanizer_theme.dart';
+import 'package:shopanizer/screens/home/home_tab.dart';
+import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 
-class HomeScreen extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   late final TabController _tabController;
 
@@ -22,13 +23,15 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: TabBarView(
-        controller: _tabController,
-        children: [
-          Center(child: Text("Home")),
-          Center(child: Text("Notification")),
-          Center(child: Text("User")),
-        ],
+      body: SafeArea(
+        child: TabBarView(
+          controller: _tabController,
+          children: [
+            HomeTab(),
+            Center(child: Text("Notification")),
+            Center(child: Text("User")),
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
