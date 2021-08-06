@@ -72,7 +72,7 @@ class _HomeTabState extends State<HomeTab> {
                 height: MediaQuery.of(context).size.width / 2,
                 child: SvgPicture.asset('assets/images/empty_home.svg')),
                 Text("You have no groups or lists yet!"),
-                Text("Organize your shoping and start now", style: TextStyle(color: ShopColors.primary, fontWeight: FontWeight.bold),),
+                Text("Organize your shopping and start now", style: TextStyle(color: ShopColors.primary, fontWeight: FontWeight.bold),),
               ],
             ),
           ),
