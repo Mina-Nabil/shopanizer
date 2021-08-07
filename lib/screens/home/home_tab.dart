@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shopanizer/screens/home/new_group_screen.dart';
+import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:flutter_svg/svg.dart';
@@ -14,15 +16,15 @@ class _HomeTabState extends State<HomeTab> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+        padding: EdgeInsets.only(left: 20, right: 20, top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [_buildHeader(), _buildBody()],
         ),
       ),
       floatingActionButton: EaxpandableFAB(
-        addGroupAction: () => print("add group"),
-        addListAction: () => print("add list"),
+        addGroupAction: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewGroupScreen())),
+        addListAction: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewListScreen())),
       ),
     );
   }

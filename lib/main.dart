@@ -13,7 +13,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
           primaryColor: ShopColors.primary,
-
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.transparent,
+            iconTheme: IconThemeData(color: ShopColors.textColor),
+            shadowColor: Colors.transparent
+          ),
           textTheme: TextTheme(
             bodyText2: TextStyle(
               color: ShopColors.textColor,
