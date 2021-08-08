@@ -8,6 +8,8 @@ import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:flutter_svg/svg.dart';
 
 class HomeTab extends StatefulWidget {
+  static final screenName = "Home";
+
   @override
   _HomeTabState createState() => _HomeTabState();
 }
