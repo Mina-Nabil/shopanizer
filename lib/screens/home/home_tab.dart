@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
+import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:flutter_svg/svg.dart';
@@ -23,7 +25,7 @@ class _HomeTabState extends State<HomeTab> {
         ),
       ),
       floatingActionButton: EaxpandableFAB(
-        addGroupAction: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewGroupScreen())),
+        addGroupAction: () => Navigator.push(context, MaterialPageRoute( builder: (BuildContext context) => NewGroupScreen())),
         addListAction: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewListScreen())),
       ),
     );
@@ -33,7 +35,7 @@ class _HomeTabState extends State<HomeTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Hello Mostafa",
+        Text("Hello Mina",
             style: TextStyle(
               fontWeight: FontWeight.w500,
             )),
@@ -72,7 +74,7 @@ class _HomeTabState extends State<HomeTab> {
                 Container(
                 width: MediaQuery.of(context).size.width / 2,
                 height: MediaQuery.of(context).size.width / 2,
-                child: SvgPicture.asset('assets/images/empty_home.svg')),
+                child: SvgPicture.asset(Paths.emptyHomeIcon)),
                 Text("You have no groups or lists yet!"),
                 Text("Organize your shopping and start now", style: TextStyle(color: ShopColors.primary, fontWeight: FontWeight.bold),),
               ],
