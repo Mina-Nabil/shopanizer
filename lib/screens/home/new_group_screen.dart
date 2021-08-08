@@ -11,13 +11,25 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20,),
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
         child: Column(
           children: [
             Text(
               "Add new group",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
+            Container(
+                child: Center(
+              child: ElevatedButton(
+                child: Text("PRESS"),
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) => NewGroupScreen()),
+                ),
+              ),
+            ))
           ],
         ),
       ),
