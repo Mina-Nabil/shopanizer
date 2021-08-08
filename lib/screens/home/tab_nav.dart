@@ -15,7 +15,7 @@ class TabNavigator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late Widget child;
-    if (tabItem == "Home")
+    if (tabItem == HomeTab.screenName)
       child = SafeArea(child: HomeTab());
     else if (tabItem == "Notifications")
       child = SafeArea(
@@ -24,7 +24,7 @@ class TabNavigator extends StatelessWidget {
           child: Text("Notifications"),
         ),
       ));
-    else if (tabItem == "Profile") child = SafeArea(child: AddNewItemScreen());
+    else if (tabItem == AddNewItemScreen.screenName) child = SafeArea(child: AddNewItemScreen());
 
     return Navigator(
       key: navigatorKey,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
 
 class AddNewItemScreen extends StatefulWidget {
+  static final screenName = "AddNewItem";
+
   const AddNewItemScreen({Key? key}) : super(key: key);
 
   @override

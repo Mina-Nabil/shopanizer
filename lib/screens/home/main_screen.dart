@@ -17,12 +17,12 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
-  late String _currentPage = "Home";
-  final List<String> pageKeys = ["Home", "Notifications", "Profile"];
+  late String _currentPage = HomeTab.screenName;
+  final List<String> pageKeys = [HomeTab.screenName, "Notifications", AddNewItemScreen.screenName];
   final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
-    "Home": GlobalKey<NavigatorState>(),
+    HomeTab.screenName: GlobalKey<NavigatorState>(),
     "Notifications": GlobalKey<NavigatorState>(),
-    "Profile": GlobalKey<NavigatorState>(),
+    AddNewItemScreen.screenName: GlobalKey<NavigatorState>(),
   };
 
   @override
@@ -36,8 +36,8 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
       onWillPop: () async {
         final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
         if (isFirstRouteInCurrentTab) {
-          if (_currentPage != "Home") {
-            _selectTab("Home", 1);
+          if (_currentPage != HomeTab.screenName) {
+            _selectTab(HomeTab.screenName, 1);
             return false;
           }
         }
@@ -48,9 +48,9 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         backgroundColor: Colors.white,
         body: Stack(
           children: [
-            _buildOffStageWidget("Home"),
+            _buildOffStageWidget(HomeTab.screenName),
             _buildOffStageWidget("Notifications"),
-            _buildOffStageWidget("Profile"),
+            _buildOffStageWidget(AddNewItemScreen.screenName),
           ],
         ),
         bottomNavigationBar: CupertinoTabBar(
@@ -93,19 +93,12 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   }
 
   Widget _buildOffStageWidget(String tabItem) {
-    if (_navigatorKeys[tabItem] != null) {
-      return Offstage(
-        offstage: _currentPage != tabItem,
-        child: TabNavigator(
-          navigatorKey: _navigatorKeys[tabItem] ?? GlobalKey<NavigatorState>(),
-          tabItem: tabItem,
-        ),
-      );
-    } else {
-      print("GEET HNA");
-      return Container(
-        child: Text("EDA"),
-      );
-    }
+    return Offstage(
+      offstage: _currentPage != tabItem,
+      child: TabNavigator(
+        navigatorKey: _navigatorKeys[tabItem] ?? GlobalKey<NavigatorState>(),
+        tabItem: tabItem,
+      ),
+    );
   }
 }
