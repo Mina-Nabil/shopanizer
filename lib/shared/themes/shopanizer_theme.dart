@@ -14,4 +14,10 @@ class ShopColors {
   static Color tabBarBG = Color(0xFFFAFAFA);
   static Color tabBarBorder = Color(0xFF3809A3);
   static Color unSelectedTab = primary.withAlpha(76); // alpha 30%
+
+
+  static Color greenButton = Color(0xFF3BF2A3);
+
+
+
 }
