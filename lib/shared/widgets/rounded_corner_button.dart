@@ -24,7 +24,6 @@ class RoundedCornerButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return ElevatedButton(
       child: Row(
         children: [
@@ -33,6 +32,9 @@ class RoundedCornerButton extends StatelessWidget {
               Paths.checkIcon,
               color: textColor,
             ),
+          SizedBox(
+            width: 3.0,
+          ),
           Text(
             text,
             style: TextStyle(color: textColor),

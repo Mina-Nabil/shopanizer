@@ -10,6 +10,8 @@ class NewGroupScreen extends StatefulWidget {
 }
 
 class _NewGroupScreenState extends State<NewGroupScreen> {
+  TextEditingController _groupLabelController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +30,7 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 RoundedCornerButton(
-                  text: " Done",
+                  text: "Done",
                   backgroundColor: ShopColors.greenButton,
                   iconPath: Paths.checkIcon,
                   onPressCallback: () {},
@@ -36,6 +38,7 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
               ],
             ),
             TextBoxWithLabel(
+              controller: _groupLabelController,
               labelText: "Group Name",
               placeHolder: "Group Name",
             )

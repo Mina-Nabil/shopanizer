@@ -7,6 +7,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController _firstNameController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +16,7 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: EdgeInsets.all(10),
         child: Center(
           child: TextBoxWithLabel(
+            controller: _firstNameController,
             labelText: 'First Name',
             placeHolder: 'First Name',
           ),

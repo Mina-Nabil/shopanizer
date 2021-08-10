@@ -5,8 +5,11 @@ import '../Themes/shopanizer_theme.dart';
 class TextBoxWithLabel extends StatelessWidget {
   final String _labelText;
   final String _placeHolder;
-  TextBoxWithLabel({required String labelText, required String placeHolder})
+  final TextEditingController _controller;
+
+  TextBoxWithLabel({required String labelText, required String placeHolder, required TextEditingController controller})
       : this._labelText = labelText,
+        this._controller = controller,
         this._placeHolder = placeHolder;
 
   @override
@@ -35,6 +38,7 @@ class TextBoxWithLabel extends StatelessWidget {
             width: double.infinity,
           ),
           TextField(
+            controller: _controller,
             maxLines: 1,
             decoration: InputDecoration(
               border: InputBorder.none,

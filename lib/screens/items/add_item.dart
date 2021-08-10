@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
+import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/rounded_corner_button.dart';
 
@@ -31,7 +32,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                     "Add new Item",
                     style: ShopFonts.titleStyle,
                   ),
-                RoundedCornerButton(text: "Done", backgroundColor: Colors.green, onPressCallback: (){},)
+                RoundedCornerButton(text: "Done", backgroundColor: ShopColors.greenButton, onPressCallback: (){}, 
+                iconPath: Paths.checkIcon,)
               ],
             ),
           )
