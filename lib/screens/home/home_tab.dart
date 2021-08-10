@@ -27,10 +27,10 @@ class _HomeTabState extends State<HomeTab> {
         ),
       ),
       floatingActionButton: EaxpandableFAB(
-        widget1: SvgPicture.asset('assets/icons/group.svg'),
+        widget1: SvgPicture.asset(Paths.addGroupIcon),
         backgroundColor1: ShopColors.blue,
         onPressed1: () => Navigator.push(context, MaterialPageRoute( builder: (BuildContext context) => NewGroupScreen())),
-        widget2: SvgPicture.asset('assets/icons/list.svg'),
+        widget2: SvgPicture.asset(Paths.addListIcon),
         backgroundColor2: ShopColors.green,
         onPressed2: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewListScreen())),
       ),

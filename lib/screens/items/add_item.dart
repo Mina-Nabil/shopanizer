@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/widgets/rounded_corner_button.dart';
 
 class AddNewItemScreen extends StatefulWidget {
   static final screenName = "AddNewItem";
@@ -26,12 +27,11 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                FittedBox(
-                  child: Text(
+                 Text(
                     "Add new Item",
                     style: ShopFonts.titleStyle,
                   ),
-                ),
+                RoundedCornerButton(text: "Done", backgroundColor: Colors.green, onPressCallback: (){},)
               ],
             ),
           )

@@ -23,53 +23,61 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
     AddNewItemScreen.screenName: GlobalKey<NavigatorState>(),
   };
 
+  late final TabController _tabController;
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this, initialIndex: 0);
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async {
-        final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
-        if (isFirstRouteInCurrentTab) {
-          if (_currentPage != HomeTab.screenName) {
-            _selectTab(1);
-            return false;
+        onWillPop: () async {
+          final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
+          if (isFirstRouteInCurrentTab) {
+            if (_currentPage != HomeTab.screenName) {
+              _selectTab(0);
+              return false;
+            }
           }
-        }
-        // let system handle back button if we're on the first route
-        return isFirstRouteInCurrentTab;
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Stack(
-          children: [
-            _buildOffStageWidget(HomeTab.screenName),
-            _buildOffStageWidget("Notifications"),
-            _buildOffStageWidget(AddNewItemScreen.screenName),
-          ],
-        ),
-        bottomNavigationBar: CupertinoTabBar(
-          backgroundColor: ShopColors.tabBarBG,
-          border: Border(top: BorderSide(width: 0.25, color: ShopColors.tabBarBorder)),
-          onTap: _selectTab,
-          currentIndex: _selectedIndex,
-          items: [
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(Paths.homePageNavBarIcon,
-                  color: _selectedIndex == 0 ? ShopColors.primary : ShopColors.unSelectedTab),
+          // let system handle back button if we're on the first route
+          return isFirstRouteInCurrentTab;
+        },
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Stack(
+            children: [
+              _buildOffStageWidget(HomeTab.screenName),
+              _buildOffStageWidget("Notifications"),
+              _buildOffStageWidget(AddNewItemScreen.screenName),
+            ],
+          ),
+          bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+                color: ShopColors.tabBarBG, border: Border(top: BorderSide(width: 0.25, color: ShopColors.tabBarBorder))),
+            child: TabBar(
+              controller: _tabController,
+              onTap: _selectTab,
+              tabs: [
+                Tab(
+                  icon: SvgPicture.asset(Paths.homePageNavBarIcon,
+                      color: _selectedIndex == 0 ? ShopColors.primary : ShopColors.unSelectedTab),
+                ),
+                Tab(
+                  icon: SvgPicture.asset(Paths.notificationPageNavBarIcon,
+                      color: _selectedIndex == 1 ? ShopColors.primary : ShopColors.unSelectedTab),
+                ),
+                Tab(
+                  icon: Icon(
+                    Icons.person,
+                    color: _selectedIndex == 2 ? ShopColors.primary : ShopColors.unSelectedTab,
+                  ),
+                ),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(Paths.notificationPageNavBarIcon,
-                  color: _selectedIndex == 1 ? ShopColors.primary : ShopColors.unSelectedTab),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: _selectedIndex == 2 ? ShopColors.primary : ShopColors.unSelectedTab,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 
   void _selectTab(int index) {
