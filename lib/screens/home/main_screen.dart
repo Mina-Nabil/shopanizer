@@ -57,6 +57,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
             decoration: BoxDecoration(
                 color: ShopColors.tabBarBG, border: Border(top: BorderSide(width: 0.25, color: ShopColors.tabBarBorder))),
             child: TabBar(
+              indicatorColor: Colors.transparent,
               controller: _tabController,
               onTap: _selectTab,
               tabs: [
