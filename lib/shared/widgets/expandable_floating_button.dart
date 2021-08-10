@@ -1,15 +1,24 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/circular_button.dart';
-import 'package:flutter_svg/svg.dart';
+
 class EaxpandableFAB extends StatefulWidget {
+  EaxpandableFAB(
+      {required this.widget1,
+      required this.backgroundColor1,
+      required this.onPressed1,
+      this.widget2,
+      this.backgroundColor2,
+      this.onPressed2});
 
-  EaxpandableFAB({required this.addGroupAction, required this.addListAction});
+  final Widget widget1;
+  final Color backgroundColor1;
+  final VoidCallback onPressed1;
 
-  final VoidCallback addGroupAction;
-  final VoidCallback addListAction;
+  final Widget? widget2;
+  final Color? backgroundColor2;
+  final VoidCallback? onPressed2;
+
   @override
   _EaxpandableFABState createState() => _EaxpandableFABState();
 }
@@ -19,40 +28,53 @@ class _EaxpandableFABState extends State<EaxpandableFAB> {
   @override
   Widget build(BuildContext context) {
     return Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          if(isAddPressed)
-          CircularButton(
-            backgroundColor: ShopColors.green,
-            radius: 20,
-            child: SvgPicture.asset('assets/icons/list.svg'),
-            onPressed: widget.addListAction,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        if (isAddPressed) ..._getExpandedButtons(),
+        CircularButton(
+          backgroundColor: ShopColors.primary,
+          radius: 25,
+          child: Icon(
+            isAddPressed ? Icons.close : Icons.add,
+            color: Colors.white,
           ),
-          if(isAddPressed)
-          SizedBox(width: 10,),
-          if(isAddPressed)
-          CircularButton(
-            backgroundColor: ShopColors.blue,
+          onPressed: () {
+            setState(() {
+              isAddPressed = !isAddPressed;
+            });
+          },
+        )
+      ],
+    );
+  }
+
+  List<Widget> _getExpandedButtons() {
+    List<Widget> buttons = [];
+
+    if (widget.widget2 != null) {
+      buttons.add(
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: CircularButton(
+            backgroundColor: widget.backgroundColor2,
             radius: 20,
-            child: SvgPicture.asset('assets/icons/group.svg'),
-            onPressed: widget.addGroupAction,
+            child: widget.widget2,
+            onPressed: widget.onPressed2,
           ),
-          if(isAddPressed)
-          SizedBox(width: 10,),
-          CircularButton(
-            backgroundColor: ShopColors.primary,
-            radius: 25,
-            child: Icon(
-              isAddPressed? Icons.close : Icons.add,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              setState(() {
-                isAddPressed = !isAddPressed;
-              });
-            },
-          )
-        ],
-      );
+        ));
+    }
+
+    buttons.add(
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 5),
+        child: CircularButton(
+          backgroundColor: widget.backgroundColor1,
+          radius: 20,
+          child: widget.widget1,
+          onPressed: widget.onPressed1,
+        ),
+      ));
+
+    return buttons;
   }
 }
