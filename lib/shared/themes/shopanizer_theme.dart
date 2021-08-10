@@ -15,3 +15,8 @@ class ShopColors {
   static Color tabBarBorder = Color(0xFF3809A3);
   static Color unSelectedTab = primary.withAlpha(76); // alpha 30%
 }
+
+
+class ShopFonts {
+  static const TextStyle titleStyle = TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold);
+}

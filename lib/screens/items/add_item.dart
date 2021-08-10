@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
+import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 
 class AddNewItemScreen extends StatefulWidget {
   static final screenName = "AddNewItem";
@@ -13,15 +14,29 @@ class AddNewItemScreen extends StatefulWidget {
 class _AddNewItemScreenState extends State<AddNewItemScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Center(
-      child: ElevatedButton(
-        child: Text("PRESS"),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (BuildContext context) => NewGroupScreen()),
-        ),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FittedBox(
+                  child: Text(
+                    "Add new Item",
+                    style: ShopFonts.titleStyle,
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
-    ));
+    );
   }
 }

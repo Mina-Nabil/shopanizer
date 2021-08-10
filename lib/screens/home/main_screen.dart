@@ -8,8 +8,6 @@ import 'package:shopanizer/screens/items/add_item.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 
-enum MainTabs { home, notifications, profile }
-
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -26,18 +24,13 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
   };
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
         if (isFirstRouteInCurrentTab) {
           if (_currentPage != HomeTab.screenName) {
-            _selectTab(HomeTab.screenName, 1);
+            _selectTab(1);
             return false;
           }
         }
@@ -56,9 +49,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
         bottomNavigationBar: CupertinoTabBar(
           backgroundColor: ShopColors.tabBarBG,
           border: Border(top: BorderSide(width: 0.25, color: ShopColors.tabBarBorder)),
-          onTap: (int index) {
-            _selectTab(pageKeys[index], index);
-          },
+          onTap: _selectTab,
           currentIndex: _selectedIndex,
           items: [
             BottomNavigationBarItem(
@@ -81,7 +72,8 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
     );
   }
 
-  void _selectTab(String tabItem, int index) {
+  void _selectTab(int index) {
+    String tabItem = pageKeys[index];
     if (tabItem == _currentPage) {
       _navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
     } else {
