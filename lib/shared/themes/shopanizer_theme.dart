@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ShopColors {
+
   static const Color primary = Color(0xFF3D4596);
   static const Color blue = Color(0xFF37CCF4);
   static const Color green = Color(0xFF94EF60);
+  static const Color yellow = Color(0xFFFFBE0B);
 
   static Color textInputBG = primary.withAlpha(5); // alpha 2%
   static Color textInputBorder = primary.withAlpha(76); // alpha 30%
@@ -18,7 +20,7 @@ class ShopColors {
 
   static Color greenButton = Color(0xFF3BF2A3);
 
-
+  static Color propertyTilePurpleBgColor = primary.withAlpha(7); // alpha 30%
 
 }
 

@@ -41,7 +41,7 @@ class RoundedCornerButton extends StatelessWidget {
           )
         ],
       ),
-      onPressed: () => onPressCallback,
+      onPressed: () => onPressCallback(),
       style: ElevatedButton.styleFrom(
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(radius)),

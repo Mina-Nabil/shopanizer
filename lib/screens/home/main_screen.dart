@@ -14,6 +14,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
+
+  //screen dimensions
+  static const double navBarTopMargin = 2.0;
+  static const double navBarIconSize = 20.0;
+  static const double navBarHighlightCircleRadius = 5.0;
+
+
+
   int _selectedIndex = 0;
   late String _currentPage = HomeTab.screenName;
   final List<String> pageKeys = [HomeTab.screenName, "Notifications", AddNewItemScreen.screenName];
@@ -62,17 +70,64 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
               onTap: _selectTab,
               tabs: [
                 Tab(
-                  icon: SvgPicture.asset(Paths.homePageNavBarIcon,
-                      color: _selectedIndex == 0 ? ShopColors.primary : ShopColors.unSelectedTab),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: navBarTopMargin),
+                        child: SvgPicture.asset(
+                          Paths.homePageNavBarIcon,
+                          color: _selectedIndex == 0 ? ShopColors.primary : ShopColors.unSelectedTab,
+                          width: navBarIconSize,
+                        ),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: _selectedIndex == 0 ? ShopColors.blue : Colors.transparent, shape: BoxShape.circle),
+                        width: navBarHighlightCircleRadius,
+                        height: navBarHighlightCircleRadius,
+                      )
+                    ],
+                  ),
                 ),
                 Tab(
-                  icon: SvgPicture.asset(Paths.notificationPageNavBarIcon,
-                      color: _selectedIndex == 1 ? ShopColors.primary : ShopColors.unSelectedTab),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: navBarTopMargin),
+                          child: SvgPicture.asset(
+                            Paths.notificationPageNavBarIcon,
+                            color: _selectedIndex == 1 ? ShopColors.primary : ShopColors.unSelectedTab,
+                            width: navBarIconSize,
+                          )),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: _selectedIndex == 1 ? ShopColors.blue : Colors.transparent, shape: BoxShape.circle),
+                        width: navBarHighlightCircleRadius,
+                        height: navBarHighlightCircleRadius,
+                      )
+                    ],
+                  ),
                 ),
                 Tab(
-                  icon: Icon(
-                    Icons.person,
-                    color: _selectedIndex == 2 ? ShopColors.primary : ShopColors.unSelectedTab,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                          margin: EdgeInsets.only(top: navBarTopMargin),
+                          child: SvgPicture.asset(
+                            Paths.profilePageNavBarIcon,
+                            color: _selectedIndex == 2 ? ShopColors.primary : ShopColors.unSelectedTab,
+                            width: navBarIconSize,
+                          )),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: _selectedIndex == 2 ? ShopColors.blue : Colors.transparent, shape: BoxShape.circle),
+                        width: navBarHighlightCircleRadius,
+                        height: navBarHighlightCircleRadius,
+                      )
+                    ],
                   ),
                 ),
               ],

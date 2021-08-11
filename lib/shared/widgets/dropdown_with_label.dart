@@ -2,24 +2,22 @@ import 'package:flutter/material.dart';
 
 import '../Themes/shopanizer_theme.dart';
 
-class TextBoxWithLabel extends StatelessWidget {
-  //default dimensions
+class DropDownWithLabel extends StatelessWidget {
   static const borderRadius = 20.0;
-  final contentPadding = 10.0;
-  final labelFontSize = 14.0;
-  final labelSpacing = 10.0;
 
   final String _labelText;
-  final String _placeHolder;
-  final TextEditingController _controller;
-  final int maxLines;
+  final List<DropdownMenuItem<int>> _items;
+  final Function? _onChangedCallback;
+  final int _value;
 
-  final double margin ;
+  final double margin;
 
-  TextBoxWithLabel({required String labelText, required String placeHolder, required TextEditingController controller, this.margin = 10, this.maxLines=1})
+  DropDownWithLabel(
+      {required String labelText, required String placeHolder, required List<DropdownMenuItem<int>> items, required Function? onChangedCallback, required int value, this.margin = 10})
       : this._labelText = labelText,
-        this._controller = controller,
-        this._placeHolder = placeHolder;
+        this._items = items,
+        this._onChangedCallback = onChangedCallback,
+        this._value = value;
 
   @override
   Widget build(BuildContext context) {
@@ -36,29 +34,29 @@ class TextBoxWithLabel extends StatelessWidget {
               textAlign: TextAlign.left,
               style: TextStyle(
                 color: ShopColors.textColor,
-                fontSize: labelFontSize,
+                fontSize: 14,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.normal,
               ),
             ),
           ),
           Container(
-            height: labelSpacing,
+            height: 10,
             width: double.infinity,
           ),
-          TextField(
-            controller: _controller,
-            maxLines: maxLines,
+          DropdownButtonFormField(
+            value: _value,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-                borderSide: BorderSide(color:  ShopColors.tabBarBorder,)
-              ),
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                  borderSide: BorderSide(
+                    color: ShopColors.tabBarBorder,
+                  )),
               border: InputBorder.none,
-              hintText: _placeHolder,
-              contentPadding: EdgeInsets.all(contentPadding),
               hintStyle: TextStyle(color: ShopColors.placeHolderColor),
             ),
+            items: _items,
+            onChanged: (index) => _onChangedCallback!(index) ,
           ),
         ],
       ),
