@@ -42,7 +42,7 @@ class SingleTile extends StatelessWidget {
   }
 
   final textStyle = TextStyle(
-    color: ShopColors.textColor,
+    color: ShopColors.labelColor,
     fontSize: 14,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.normal,

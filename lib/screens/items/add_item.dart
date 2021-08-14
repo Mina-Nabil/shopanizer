@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/dropdown_with_label.dart';
 import 'package:shopanizer/shared/widgets/property_tile.dart';
-import 'package:shopanizer/shared/widgets/rounded_corner_button.dart';
+import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class AddNewItemScreen extends StatefulWidget {
@@ -69,12 +68,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   "Add new Item",
                   style: ShopFonts.titleStyle,
                 ),
-                RoundedCornerButton(
-                  text: "Done",
-                  backgroundColor: ShopColors.greenButton,
-                  onPressCallback: submitForm,
-                  iconPath: Paths.checkIcon,
-                ),
+                DoneButton(onPressed: () {},),
               ],
             ),
           ),

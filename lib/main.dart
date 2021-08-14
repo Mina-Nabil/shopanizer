@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           appBarTheme: AppBarTheme(
             backgroundColor: Colors.transparent,
-            iconTheme: IconThemeData(color: ShopColors.textColor),
+            iconTheme: IconThemeData(color: ShopColors.labelColor),
             shadowColor: Colors.transparent
           ),
           textTheme: TextTheme(
             bodyText2: TextStyle(
-              color: ShopColors.textColor,
+              color: ShopColors.labelColor,
               fontFamily: "Poppins"
             ),
           ),

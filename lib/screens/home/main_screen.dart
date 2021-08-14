@@ -83,7 +83,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                       ),
                       Container(
                         decoration: BoxDecoration(
-                            color: _selectedIndex == 0 ? ShopColors.blue : Colors.transparent, shape: BoxShape.circle),
+                            color: _selectedIndex == 0 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
                         width: navBarHighlightCircleRadius,
                         height: navBarHighlightCircleRadius,
                       )
@@ -103,7 +103,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                           )),
                       Container(
                         decoration: BoxDecoration(
-                            color: _selectedIndex == 1 ? ShopColors.blue : Colors.transparent, shape: BoxShape.circle),
+                            color: _selectedIndex == 1 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
                         width: navBarHighlightCircleRadius,
                         height: navBarHighlightCircleRadius,
                       )
@@ -123,7 +123,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                           )),
                       Container(
                         decoration: BoxDecoration(
-                            color: _selectedIndex == 2 ? ShopColors.blue : Colors.transparent, shape: BoxShape.circle),
+                            color: _selectedIndex == 2 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
                         width: navBarHighlightCircleRadius,
                         height: navBarHighlightCircleRadius,
                       )

@@ -35,7 +35,7 @@ class TextBoxWithLabel extends StatelessWidget {
               _labelText,
               textAlign: TextAlign.left,
               style: TextStyle(
-                color: ShopColors.textColor,
+                color: ShopColors.labelColor,
                 fontSize: labelFontSize,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.normal,
@@ -57,7 +57,7 @@ class TextBoxWithLabel extends StatelessWidget {
               border: InputBorder.none,
               hintText: _placeHolder,
               contentPadding: EdgeInsets.all(contentPadding),
-              hintStyle: TextStyle(color: ShopColors.placeHolderColor),
+              hintStyle: TextStyle(color: ShopColors.hintColor),
             ),
           ),
         ],

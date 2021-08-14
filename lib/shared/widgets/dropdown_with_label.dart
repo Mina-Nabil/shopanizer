@@ -33,7 +33,7 @@ class DropDownWithLabel extends StatelessWidget {
               _labelText,
               textAlign: TextAlign.left,
               style: TextStyle(
-                color: ShopColors.textColor,
+                color: ShopColors.labelColor,
                 fontSize: 14,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.normal,
@@ -53,7 +53,7 @@ class DropDownWithLabel extends StatelessWidget {
                     color: ShopColors.tabBarBorder,
                   )),
               border: InputBorder.none,
-              hintStyle: TextStyle(color: ShopColors.placeHolderColor),
+              hintStyle: TextStyle(color: ShopColors.hintColor),
             ),
             items: _items,
             onChanged: (index) => _onChangedCallback!(index) ,

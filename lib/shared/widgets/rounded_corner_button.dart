@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:flutter_svg/svg.dart';
 

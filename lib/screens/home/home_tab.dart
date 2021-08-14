@@ -28,7 +28,7 @@ class _HomeTabState extends State<HomeTab> {
       ),
       floatingActionButton: EaxpandableFAB(
         widget1: SvgPicture.asset(Paths.addGroupIcon),
-        backgroundColor1: ShopColors.blue,
+        backgroundColor1: ShopColors.blueButton,
         onPressed1: () => Navigator.push(context, MaterialPageRoute( builder: (BuildContext context) => NewGroupScreen())),
         widget2: SvgPicture.asset(Paths.addListIcon),
         backgroundColor2: ShopColors.green,
@@ -58,10 +58,10 @@ class _HomeTabState extends State<HomeTab> {
               isDense: true,
               prefixIcon: Icon(
                 Icons.search,
-                color: ShopColors.placeHolderColor,
+                color: ShopColors.hintColor,
               ),
               hintStyle: TextStyle(
-                color: ShopColors.placeHolderColor,
+                color: ShopColors.hintColor,
               ),
               contentPadding: EdgeInsets.all(10),
               hintText: "Search"),
