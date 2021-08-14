@@ -37,12 +37,16 @@ class SingleTile extends StatelessWidget {
     this.trailingIconPadding,
   }) {
     assert(tileText != null || tileTextEditingController != null);
-    assert(leadingIconPath == null || (leadingIconBackgroundColor != null && leadingIconColor != null));
-    assert(trailingIconPath == null || (trailingIconBackgroundColor != null && trailingIconOnPressCallback != null && trailingIconColor !=null));
+    assert(leadingIconPath == null ||
+        (leadingIconBackgroundColor != null && leadingIconColor != null));
+    assert(trailingIconPath == null ||
+        (trailingIconBackgroundColor != null &&
+            trailingIconOnPressCallback != null &&
+            trailingIconColor != null));
   }
 
   final textStyle = TextStyle(
-    color: ShopColors.labelColor,
+    color: ShopColors.labelDarkBlue,
     fontSize: 14,
     fontFamily: 'Poppins',
     fontWeight: FontWeight.normal,
@@ -55,15 +59,16 @@ class SingleTile extends StatelessWidget {
       height: singleTileHeight,
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(horizontal: leadingIconHorizontalMargin),
-      decoration: BoxDecoration(color: ShopColors.propertyTilePurpleBgColor),
+      decoration: BoxDecoration(color: ShopColors.primary3Precent),
       child: Row(
         children: [
           if (leadingIconPath != null)
             Container(
                 margin: EdgeInsets.only(right: leadingIconToLabelPadding),
                 child: CircularIcon(
-                  iconColor: leadingIconColor!,
-                   backgroundColor: leadingIconBackgroundColor!, iconPath: leadingIconPath!)),
+                    iconColor: leadingIconColor!,
+                    backgroundColor: leadingIconBackgroundColor!,
+                    iconPath: leadingIconPath!)),
           Expanded(
             child: tileText != null
                 ? Padding(
@@ -78,7 +83,8 @@ class SingleTile extends StatelessWidget {
                     child: TextFormField(
                     controller: tileTextEditingController,
                     decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(bottom: textEditingFieldPadding),
+                        contentPadding:
+                            EdgeInsets.only(bottom: textEditingFieldPadding),
                         hintText: tileTextEditingPlaceholder,
                         fillColor: Colors.transparent,
                         focusedBorder: InputBorder.none,
@@ -93,7 +99,8 @@ class SingleTile extends StatelessWidget {
             GestureDetector(
               onTap: () => trailingIconOnPressCallback!(),
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: trailingIconHorizontalMargin),
+                margin: EdgeInsets.symmetric(
+                    horizontal: trailingIconHorizontalMargin),
                 alignment: Alignment.center,
                 child: CircularIcon(
                   iconPath: trailingIconPath!,

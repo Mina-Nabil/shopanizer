@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../Themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/Themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/widgets/TextViews.dart';
 
 class TextBoxWithLabel extends StatelessWidget {
   //default dimensions
@@ -14,9 +15,14 @@ class TextBoxWithLabel extends StatelessWidget {
   final TextEditingController _controller;
   final int maxLines;
 
-  final double margin ;
+  final double margin;
 
-  TextBoxWithLabel({required String labelText, required String placeHolder, required TextEditingController controller, this.margin = 10, this.maxLines=1})
+  TextBoxWithLabel(
+      {required String labelText,
+      required String placeHolder,
+      required TextEditingController controller,
+      this.margin = 10,
+      this.maxLines = 1})
       : this._labelText = labelText,
         this._controller = controller,
         this._placeHolder = placeHolder;
@@ -31,15 +37,8 @@ class TextBoxWithLabel extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            child: Text(
-              _labelText,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: ShopColors.labelColor,
-                fontSize: labelFontSize,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.normal,
-              ),
+            child: LabelTV(
+              labelText: _labelText,
             ),
           ),
           Container(
@@ -51,13 +50,14 @@ class TextBoxWithLabel extends StatelessWidget {
             maxLines: maxLines,
             decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
-                borderSide: BorderSide(color:  ShopColors.tabBarBorder,)
-              ),
+                  borderRadius: BorderRadius.all(Radius.circular(borderRadius)),
+                  borderSide: BorderSide(
+                    color: ShopColors.tabBarBorder,
+                  )),
               border: InputBorder.none,
               hintText: _placeHolder,
               contentPadding: EdgeInsets.all(contentPadding),
-              hintStyle: TextStyle(color: ShopColors.hintColor),
+              hintStyle: TextStyle(color: ShopColors.placeHolderColor),
             ),
           ),
         ],

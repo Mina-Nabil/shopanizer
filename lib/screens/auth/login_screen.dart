@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -15,11 +16,15 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Container(
         padding: EdgeInsets.all(10),
         child: Center(
-          child: TextBoxWithLabel(
-            controller: _firstNameController,
-            labelText: 'First Name',
-            placeHolder: 'First Name',
+          child: Text(
+            "",
+            style: ShopTextStyles.s_r_1,
           ),
+          // child: TextBoxWithLabel(
+          //   controller: _firstNameController,
+          //   labelText: 'First Name',
+          //   placeHolder: 'First Name',
+          // ),
         ),
       ),
     );

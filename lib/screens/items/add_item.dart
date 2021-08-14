@@ -4,6 +4,7 @@ import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/dropdown_with_label.dart';
 import 'package:shopanizer/shared/widgets/property_tile.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
+import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class AddNewItemScreen extends StatefulWidget {
@@ -21,7 +22,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
 
   //form controllers
   TextEditingController _itemNameController = new TextEditingController();
-  TextEditingController _listDescriptionController = new TextEditingController();
+  TextEditingController _listDescriptionController =
+      new TextEditingController();
   List<DropdownMenuItem<int>> _categoryItems = [
     DropdownMenuItem(
       child: Text("HEEH"),
@@ -64,11 +66,12 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Add new Item",
-                  style: ShopFonts.titleStyle,
+                TitleTV2(
+                  titleText: "Add new Item",
                 ),
-                DoneButton(onPressed: () {},),
+                DoneButton(
+                  onPressed: () {},
+                ),
               ],
             ),
           ),
