@@ -17,9 +17,6 @@ class AddNewItemScreen extends StatefulWidget {
 }
 
 class _AddNewItemScreenState extends State<AddNewItemScreen> {
-  //screen constant dimensions
-  static const formFieldsPadding = 22.0;
-
   //form controllers
   TextEditingController _itemNameController = new TextEditingController();
   TextEditingController _listDescriptionController =
@@ -57,23 +54,21 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: ShopEdgeInsects.scaffoldPadding),
         shrinkWrap: true,
         children: [
           //title area
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: formFieldsPadding),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TitleTV2(
-                  titleText: "Add new Item",
-                ),
-                DoneButton(
-                  onPressed: () {},
-                ),
-              ],
-            ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TitleTV2(
+                titleText: "Add new Item",
+              ),
+              DoneButton(
+                onPressed: () {},
+              ),
+            ],
           ),
           FormSpacing(),
           //item name
@@ -81,7 +76,6 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
             labelText: "Item Name",
             placeHolder: "Bedroom 1",
             controller: _itemNameController,
-            margin: formFieldsPadding,
           ),
           FormSpacing(),
 
@@ -90,7 +84,6 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
             placeHolder: "Furniture",
             value: _selectedCategory,
             items: _categoryItems,
-            margin: formFieldsPadding,
             onChangedCallback: (index) {
               setState(() {
                 _selectedCategory = index;
@@ -106,7 +99,6 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
             placeHolder: "ay kalam kteerrrrr ",
             controller: _listDescriptionController,
             maxLines: 5,
-            margin: formFieldsPadding,
           ),
 
           FormSpacing(),
@@ -114,7 +106,6 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
             propertyName: "Brand",
             placeHolder: "Ikea",
             controllers: _brandsEditingControllers,
-            margin: formFieldsPadding,
             limit: 3,
             mainIconPath: Paths.starIcon,
             mainIconColor: ShopColors.yellow,

@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
           inputDecorationTheme: InputDecorationTheme(
               filled: true,
               fillColor: ShopColors.textFieldBG,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              hintStyle: TextStyle(color: ShopColors.hintColor),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(

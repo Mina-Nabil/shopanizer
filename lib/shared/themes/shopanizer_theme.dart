@@ -44,6 +44,11 @@ class ShopColors {
 
 }
 
+class ShopEdgeInsects {
+
+  static const scaffoldPadding = 20.0;
+}
+
 class ShopTextStyles {
   /// Font Size : 8  ,  Font Weight : Regular
   static const TextStyle s_r_1 =

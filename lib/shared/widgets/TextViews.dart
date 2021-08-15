@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 
-class LabelTV extends StatelessWidget {
+class LabelText extends StatelessWidget {
   final String labelText;
-  LabelTV({required this.labelText});
+  LabelText({required this.labelText});
   @override
   Widget build(BuildContext context) {
     return Text(labelText,
         textAlign: TextAlign.left,
-        style: ShopTextStyles.s_r_2.copyWith(color: ShopColors.labelDarkBlue));
+        style: ShopTextStyles.s_r_3.copyWith(color: ShopColors.labelDarkBlue));
   }
 }
 

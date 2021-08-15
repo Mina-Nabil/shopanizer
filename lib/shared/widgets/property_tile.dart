@@ -10,7 +10,6 @@ class PropertyTile extends StatefulWidget {
   //vars
   final String propertyName;
   final String placeHolder;
-  final double margin;
   final int limit;
   final String? mainIconPath;
   final Color? mainIconColor;
@@ -30,8 +29,7 @@ class PropertyTile extends StatefulWidget {
       this.mainIconBackgroundColor,
       this.extraIconPath,
       this.extraIconColor,
-      this.extraIconBackgroundColor,
-      this.margin = 10}) {
+      this.extraIconBackgroundColor}) {
     assert(mainIconPath == null || (mainIconBackgroundColor != null && mainIconColor != null));
     assert(extraIconPath == null || (extraIconBackgroundColor != null && extraIconColor != null));
     assert(controllers.length <= limit);
@@ -79,7 +77,6 @@ class _PropertyTileState extends State<PropertyTile> {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: widget.margin),
         child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

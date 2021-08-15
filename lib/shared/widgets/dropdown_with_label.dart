@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/widgets/TextViews.dart';
 
 class DropDownWithLabel extends StatelessWidget {
   static const borderRadius = 20.0;
@@ -10,15 +11,14 @@ class DropDownWithLabel extends StatelessWidget {
   final Function? _onChangedCallback;
   final int _value;
 
-  final double margin;
+
 
   DropDownWithLabel(
       {required String labelText,
       required String placeHolder,
       required List<DropdownMenuItem<int>> items,
       required Function? onChangedCallback,
-      required int value,
-      this.margin = 10})
+      required int value,})
       : this._labelText = labelText,
         this._items = items,
         this._onChangedCallback = onChangedCallback,
@@ -28,22 +28,12 @@ class DropDownWithLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.symmetric(horizontal: margin),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             width: double.infinity,
-            child: Text(
-              _labelText,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                color: ShopColors.labelDarkBlue,
-                fontSize: 14,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.normal,
-              ),
-            ),
+            child: LabelText(labelText: _labelText),
           ),
           Container(
             height: 10,
