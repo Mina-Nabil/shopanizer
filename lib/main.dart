@@ -25,20 +25,20 @@ class MyApp extends StatelessWidget {
           ),
           inputDecorationTheme: InputDecorationTheme(
               filled: true,
-              fillColor: ShopColors.textInputBG,
+              fillColor: ShopColors.textFieldBG,
               contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(
                     width: 0.2,
-                    color: ShopColors.textInputBorder,
+                    color: ShopColors.textFieldBorder,
                     style: BorderStyle.solid),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide(
                     width: 0.5,
-                    color: ShopColors.textInputBorder,
+                    color: ShopColors.textFieldBorder,
                     style: BorderStyle.solid),
               ))),
       home: SplashScreen(),

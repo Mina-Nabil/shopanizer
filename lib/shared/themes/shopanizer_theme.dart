@@ -11,10 +11,10 @@ class ShopColors {
   static const Color yellow = Color(0xFFFFBE0B);
 
   ///#3D4596 , 2%
-  static Color primary2Precent = primary.withAlpha(5); // alpha 2%
+  static Color textFieldBG = primary.withAlpha(5);
 
   ///#3D4596 , 30%
-  static Color primary30Precent = primary.withAlpha(76); // alpha 30%
+  static Color textFieldBorder = primary.withAlpha(76);
 
   ///#1B1F48 , 100%
   static Color labelDarkBlue = Color(0xFF1B1F48);
@@ -30,6 +30,8 @@ class ShopColors {
 
   ///#3809A3 , 100%
   static Color tabBarBorder = Color(0xFF3809A3);
+
+  static Color unSelectedTab = primary.withAlpha(76);
 
   ///#3BF2A3 , 100%
   static Color greenButton = Color(0xFF3BF2A3);

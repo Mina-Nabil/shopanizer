@@ -57,7 +57,7 @@ class TextBoxWithLabel extends StatelessWidget {
               border: InputBorder.none,
               hintText: _placeHolder,
               contentPadding: EdgeInsets.all(contentPadding),
-              hintStyle: TextStyle(color: ShopColors.placeHolderColor),
+              hintStyle: TextStyle(color: ShopColors.hintColor),
             ),
           ),
         ],
