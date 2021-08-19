@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:shopanizer/shared/paths.dart';
+import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
+import 'package:flutter_svg/svg.dart';
 
 class NewGroupScreen extends StatefulWidget {
   @override
@@ -8,7 +11,8 @@ class NewGroupScreen extends StatefulWidget {
 }
 
 class _NewGroupScreenState extends State<NewGroupScreen> {
-  TextEditingController _groupLabelController = new TextEditingController();
+  TextEditingController _groupNameController = new TextEditingController();
+  TextEditingController _groupDescController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +22,71 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
         padding: EdgeInsets.symmetric(
           horizontal: 20,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Add new group",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Add new group",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  DoneButton(
+                    onPressed: () {},
+                  )
+                ],
+              ),
+              Container(
+                height: MediaQuery.of(context).size.width / 3,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: ShopColors.primary,
+                  ),
                 ),
-                DoneButton(onPressed: () {},)
-              ],
-            ),
-            TextBoxWithLabel(
-              controller: _groupLabelController,
-              labelText: "Group Name",
-              placeHolder: "Group Name",
-            ),
-          ],
+                child: Stack(
+                  children: [
+                    Center(
+                      child: ClipOval(
+                          child: AspectRatio(
+                        aspectRatio: 1.0,
+                        child: SvgPicture.asset(
+                          Paths.camera,
+                          fit: BoxFit.scaleDown,
+                          color: ShopColors.primary,
+                        ),
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+              TextBoxWithLabel(
+                controller: _groupNameController,
+                labelText: "Group Name",
+                placeHolder: "Group Name",
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Divider(),
+              Text("Add Participants"),
+              Divider(),
+              SizedBox(
+                height: 20,
+              ),
+              TextBoxWithLabel(
+                controller: _groupDescController,
+                labelText: "Group Description",
+                placeHolder: "Group Description",
+                maxLines: 3,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
         ),
       ),
     );

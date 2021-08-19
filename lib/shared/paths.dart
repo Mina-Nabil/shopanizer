@@ -22,4 +22,5 @@ class Paths {
   static final String xIcon = 'assets/icons/xIcon.svg';
   
 
+  static final String camera = "assets/icons/camera.svg";
 }
