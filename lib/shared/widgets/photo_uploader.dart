@@ -8,7 +8,17 @@ import 'package:image_picker/image_picker.dart';
 import '../paths.dart';
 
 class PhotoUploader extends StatefulWidget {
-  PhotoUploader({required this.onPhotoUpload});
+  PhotoUploader.circular({required radius, required this.onPhotoUpload}) {
+    size = radius*2;
+    isCircular = true;
+  }
+
+  PhotoUploader.square({required this.size, required this.onPhotoUpload}) {
+    isCircular = false;
+  }
+  
+  late final double size;
+  late final isCircular;
   final Function(XFile image) onPhotoUpload;
 
   @override
@@ -20,9 +30,10 @@ class _PhotoUploaderState extends State<PhotoUploader> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Container(
-        height: MediaQuery.of(context).size.width / 3,
+        height: widget.size,
+        width: widget.size,
         decoration: BoxDecoration(
-          shape: BoxShape.circle,
+          shape: widget.isCircular? BoxShape.circle : BoxShape.rectangle,
           border: Border.all(
             color: ShopColors.primary,
           ),
@@ -39,7 +50,6 @@ class _PhotoUploaderState extends State<PhotoUploader> {
       ),
       onTap: () {
         getImage(ImageSource.camera);
-        //Navigator.of(context).pop();
       },
     );
   }

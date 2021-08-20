@@ -41,11 +41,15 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
                 ],
               ),
               _groupPhoto == null
-                  ? PhotoUploader(onPhotoUpload: (image) {
-                      setState(() {
-                        _groupPhoto = File(image.path);
-                      });
-                    })
+                  ? Center(
+                    child: PhotoUploader.circular(
+                      radius: MediaQuery.of(context).size.width / 6,
+                      onPhotoUpload: (image) {
+                        setState(() {
+                          _groupPhoto = File(image.path);
+                        });
+                      }),
+                  )
                   : CircleAvatar(
                       radius: MediaQuery.of(context).size.width / 6,
                       backgroundImage: Image.file(
