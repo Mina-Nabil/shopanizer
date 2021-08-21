@@ -17,8 +17,20 @@ class Paths {
 
   //properties icons
   static final String starIcon = 'assets/icons/star.svg';
-  static final String crossIcon = 'assets/icons/cross.svg';
   static final String emptyStarIcon = 'assets/icons/emptyStar.svg';
+  static final String priceIcon = 'assets/icons/price.svg';
+  static final String emptyPriceIcon = 'assets/icons/emptyPrice.svg';
+  static final String urlIcon = 'assets/icons/url.svg';
+  static final String emptyUrlIcon = 'assets/icons/emptyUrl.svg';
+  static final String locationIcon = 'assets/icons/location.svg';
+  static final String emptyLocationIcon = 'assets/icons/emptyLocation.svg';
+  static final String fbIcon = 'assets/icons/fb.svg';
+  static final String emptyFbIcon = 'assets/icons/emptyFb.svg';
+  static final String instagramIcon = 'assets/icons/instagram.svg';
+  static final String emptyInstagramIcon = 'assets/icons/emptyInstagram.svg';
+  static final String phoneIcon = 'assets/icons/phone.svg';
+  static final String emptyPhoneIcon = 'assets/icons/emptyPhone.svg';
+  static final String crossIcon = 'assets/icons/cross.svg';
   static final String xIcon = 'assets/icons/xIcon.svg';
   
 
