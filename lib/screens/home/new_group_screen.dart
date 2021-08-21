@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/photo_uploader.dart';
+import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class NewGroupScreen extends StatefulWidget {
@@ -42,21 +44,18 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
               ),
               _groupPhoto == null
                   ? Center(
-                    child: PhotoUploader.circular(
+                    child: PhotoPicker.circular(
                       radius: MediaQuery.of(context).size.width / 6,
-                      onPhotoUpload: (image) {
+                      onPhotoPicked: (image) {
                         setState(() {
                           _groupPhoto = File(image.path);
                         });
                       }),
                   )
-                  : CircleAvatar(
-                      radius: MediaQuery.of(context).size.width / 6,
-                      backgroundImage: Image.file(
-                        _groupPhoto!,
-                        fit: BoxFit.fill,
-                      ).image,
-                    ),
+                  : ImageViewer.circular(
+                    image: Image.file(_groupPhoto!,fit: BoxFit.cover,),
+                    radius: MediaQuery.of(context).size.width / 6,
+                  ),
               TextBoxWithLabel(
                 controller: _groupNameController,
                 labelText: "Group Name",
@@ -66,7 +65,20 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
                 height: 20,
               ),
               Divider(),
-              Text("Add Participants"),
+              LabelText(labelText: "Add Participants"),
+              Row(
+                children: [
+                  ImageViewer.circular(
+                    image: Image.network("https://thumbs.dreamstime.com/b/fashion-model-wavy-hairstyle-attractive-young-girl-curly-hair-posing-studio-face-beautiful-woman-long-brown-female-196126449.jpg",fit: BoxFit.cover,),
+                    radius: MediaQuery.of(context).size.width / 12,
+                  ),
+                  SizedBox(width: 10,),
+                  ImageViewer.circular(
+                    image: Image.network("https://media.istockphoto.com/photos/red-haired-woman-with-voluminous-shiny-and-curly-hairstyleflying-hair-picture-id849234512?k=6&m=849234512&s=612x612&w=0&h=acnUHhmDmaxjC7laSE1D9C87uLh5-W8X4q7_eX2o69Y=",fit: BoxFit.cover,),
+                    radius: MediaQuery.of(context).size.width / 12,
+                  ),
+                ],
+              ),
               Divider(),
               SizedBox(
                 height: 20,

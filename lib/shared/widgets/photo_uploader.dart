@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:flutter_svg/svg.dart';
@@ -7,25 +6,25 @@ import 'package:image_picker/image_picker.dart';
 
 import '../paths.dart';
 
-class PhotoUploader extends StatefulWidget {
-  PhotoUploader.circular({required radius, required this.onPhotoUpload}) {
-    size = radius*2;
+class PhotoPicker extends StatefulWidget {
+  PhotoPicker.circular({required radius, required this.onPhotoPicked}) {
+    size = radius * 2;
     isCircular = true;
   }
 
-  PhotoUploader.square({required this.size, required this.onPhotoUpload}) {
+  PhotoPicker.square({required this.size, required this.onPhotoPicked}) {
     isCircular = false;
   }
-  
+
   late final double size;
   late final isCircular;
-  final Function(XFile image) onPhotoUpload;
+  final Function(XFile image) onPhotoPicked;
 
   @override
-  _PhotoUploaderState createState() => _PhotoUploaderState();
+  _PhotoPickerState createState() => _PhotoPickerState();
 }
 
-class _PhotoUploaderState extends State<PhotoUploader> {
+class _PhotoPickerState extends State<PhotoPicker> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -33,7 +32,7 @@ class _PhotoUploaderState extends State<PhotoUploader> {
         height: widget.size,
         width: widget.size,
         decoration: BoxDecoration(
-          shape: widget.isCircular? BoxShape.circle : BoxShape.rectangle,
+          shape: widget.isCircular ? BoxShape.circle : BoxShape.rectangle,
           border: Border.all(
             color: ShopColors.primary,
           ),
@@ -48,15 +47,88 @@ class _PhotoUploaderState extends State<PhotoUploader> {
           ),
         )),
       ),
-      onTap: () {
-        getImage(ImageSource.camera);
-      },
+      onTap: () => _onTap()
     );
+  }
+
+  void _onTap() {
+    showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (_) {
+          return Container(
+              decoration: new BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(20.0),
+                      topRight: const Radius.circular(20.0))),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 20, bottom: 10),
+                    child: InkWell(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.file_upload,
+                            size: 26,
+                            color: ShopColors.labelDarkBlue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Upload Photo",
+                            style: TextStyle(
+                                fontSize: 18, color: ShopColors.labelDarkBlue),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        getImage(ImageSource.gallery);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20, top: 10, bottom: 20),
+                    child: InkWell(
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.camera,
+                            size: 26,
+                            color: ShopColors.labelDarkBlue,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Take Photo",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: ShopColors.labelDarkBlue,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onTap: () {
+                        getImage(ImageSource.camera);
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                ],
+              ));
+        });
   }
 
   getImage(ImageSource source) async {
     final _picker = ImagePicker();
     final image = await _picker.pickImage(source: source);
-    if (image != null) widget.onPhotoUpload(image);
+    if (image != null) widget.onPhotoPicked(image);
   }
 }
