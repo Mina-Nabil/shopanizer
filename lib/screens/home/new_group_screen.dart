@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
-import 'package:shopanizer/shared/widgets/photo_uploader.dart';
+import 'package:shopanizer/shared/widgets/photo_picker.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
