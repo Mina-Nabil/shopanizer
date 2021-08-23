@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/dropdown_with_label.dart';
-import 'package:shopanizer/shared/widgets/photo_uploader.dart';
+import 'package:shopanizer/shared/widgets/photo_picker.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shopanizer/shared/widgets/property_tile.dart';
