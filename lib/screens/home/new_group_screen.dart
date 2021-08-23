@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/photo_uploader.dart';
@@ -17,6 +18,10 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
   TextEditingController _groupDescController = new TextEditingController();
 
   File? _groupPhoto;
+
+  addNewGroup(){
+    DatabaseService().addNewGroup(_groupNameController.text, _groupDescController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +43,7 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   DoneButton(
-                    onPressed: () {},
+                    onPressed: addNewGroup,
                   )
                 ],
               ),

@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopanizer/models/group.dart';
+import 'package:shopanizer/screens/home/group_list.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
+import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
@@ -29,7 +33,7 @@ class _HomeTabState extends State<HomeTab> {
       floatingActionButton: EaxpandableFAB(
         widget1: SvgPicture.asset(Paths.addGroupIcon),
         backgroundColor1: ShopColors.blueButton,
-        onPressed1: () => Navigator.push(context, MaterialPageRoute( builder: (BuildContext context) => NewGroupScreen())),
+        onPressed1: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewGroupScreen())),
         widget2: SvgPicture.asset(Paths.addListIcon),
         backgroundColor2: ShopColors.green,
         onPressed2: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewListScreen())),
@@ -72,20 +76,6 @@ class _HomeTabState extends State<HomeTab> {
 
   Widget _buildBody() {
     return Expanded(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                width: MediaQuery.of(context).size.width / 2,
-                height: MediaQuery.of(context).size.width / 2,
-                child: SvgPicture.asset(Paths.emptyHomeIcon)),
-                Text("You have no groups or lists yet!"),
-                Text("Organize your shopping and start now", style: TextStyle(color: ShopColors.primary, fontWeight: FontWeight.bold),),
-              ],
-            ),
-          ),
-        ));
+        child: StreamProvider<List<Group>>(initialData: [], create: (_) => DatabaseService().groups, child: GroupsList()));
   }
 }

@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/dropdown_with_label.dart';
+import 'package:shopanizer/shared/widgets/photo_uploader.dart';
+import 'package:shopanizer/shared/widgets/photo_viewer.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shopanizer/shared/widgets/property_tile.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
@@ -19,6 +24,7 @@ class AddNewItemScreen extends StatefulWidget {
 class _AddNewItemScreenState extends State<AddNewItemScreen> {
   //screen constants
   final int propertyIconBgAlpa = 15;
+  final double photoGridPadding = 2.0;
 
   //form controllers
   TextEditingController _itemNameController = new TextEditingController();
@@ -45,6 +51,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
   List<TextEditingController> _locationEditingControllers = [];
   List<TextEditingController> _fbEditingControllers = [];
   List<TextEditingController> _instagramEditingControllers = [];
+  List<XFile> _itemImages = [];
 
   int _selectedCategory = 1;
 
@@ -72,141 +79,169 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           appBar: AppBar(),
-          body: ListView(
+          body: Padding(
             padding: EdgeInsets.symmetric(horizontal: ShopEdgeInsects.scaffoldPadding),
-            shrinkWrap: true,
-            children: [
-              //title area
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  TitleTV2(
-                    titleText: "Add new Item",
+                  //title area
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      TitleTV2(
+                        titleText: "Add new Item",
+                      ),
+                      DoneButton(
+                        onPressed: submitForm,
+                      ),
+                    ],
                   ),
-                  DoneButton(
-                    onPressed: submitForm,
+                  FormSpacing(),
+                  //item name
+                  TextBoxWithLabel(
+                    labelText: "Item Name",
+                    placeHolder: "Bedroom 1",
+                    controller: _itemNameController,
                   ),
+                  FormSpacing(),
+
+                  DropDownWithLabel(
+                    labelText: "Category",
+                    placeHolder: "Furniture",
+                    value: _selectedCategory,
+                    items: _categoryItems,
+                    onChangedCallback: (index) {
+                      setState(() {
+                        _selectedCategory = index;
+                        print(_selectedCategory);
+                      });
+                    },
+                  ),
+                  FormSpacing(),
+                  Container(
+                    width: double.infinity,
+                    height: (((_itemImages.length) / 4) + 1).toInt() * 85,
+                    child: GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      crossAxisCount: 4,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(photoGridPadding),
+                          child: PhotoPicker.square(
+                              size: 80,
+                              onPhotoPicked: (xfile) {
+                                setState(() {
+                                  _itemImages.add(xfile);
+                                });
+                              }),
+                        )
+                      ]..addAll(_itemImages.map((e) => Padding(
+                            padding: EdgeInsets.all(photoGridPadding),
+                            child: ImageViewer.circular(image: Image.file(File(e.path)), radius: 12),
+                          ))),
+                    ),
+                  ),
+
+                  //list description
+                  FormSpacing(),
+                  TextBoxWithLabel(
+                    labelText: "List Description",
+                    placeHolder: "ay kalam kteerrrrr ",
+                    controller: _listDescriptionController,
+                    maxLines: 5,
+                  ),
+
+                  FormSpacing(),
+                  PropertyTile(
+                    propertyName: "Price",
+                    placeHolder: "40.00",
+                    controllers: _priceEditingControllers,
+                    limit: 3,
+                    mainIconPath: Paths.priceIcon,
+                    mainIconColor: ShopColors.yellow,
+                    mainIconBackgroundColor: ShopColors.primary.withAlpha(propertyIconBgAlpa),
+                    extraIconPath: Paths.emptyPriceIcon,
+                    extraIconColor: ShopColors.primary,
+                    extraIconBackgroundColor: Colors.transparent,
+                    units: _priceUnits,
+                    selectedUnits: _selectedPriceUnit,
+                    textInputType: TextInputType.numberWithOptions(decimal: true),
+                  ),
+
+                  FormSpacing(),
+                  PropertyTile(
+                    propertyName: "Brand",
+                    placeHolder: "Ikea",
+                    controllers: _brandsEditingControllers,
+                    limit: 3,
+                    mainIconPath: Paths.starIcon,
+                    mainIconColor: ShopColors.yellow,
+                    mainIconBackgroundColor: ShopColors.yellow.withAlpha(propertyIconBgAlpa),
+                    extraIconPath: Paths.emptyStarIcon,
+                    extraIconColor: ShopColors.primary,
+                    extraIconBackgroundColor: Colors.transparent,
+                  ),
+
+                  FormSpacing(),
+                  PropertyTile(
+                    propertyName: "URL",
+                    placeHolder: "www.ikea.com/bedrooms/1",
+                    controllers: _urlEditingControllers,
+                    limit: 3,
+                    mainIconPath: Paths.urlIcon,
+                    mainIconColor: ShopColors.yellow,
+                    mainIconBackgroundColor: ShopColors.red.withAlpha(propertyIconBgAlpa),
+                    extraIconPath: Paths.emptyUrlIcon,
+                    extraIconColor: ShopColors.primary,
+                    extraIconBackgroundColor: Colors.transparent,
+                  ),
+
+                  FormSpacing(),
+                  PropertyTile(
+                    propertyName: "Location",
+                    placeHolder: "https://goo.gl/maps/12mklj13k",
+                    controllers: _locationEditingControllers,
+                    limit: 3,
+                    mainIconPath: Paths.locationIcon,
+                    mainIconColor: ShopColors.yellow,
+                    mainIconBackgroundColor: ShopColors.green.withAlpha(propertyIconBgAlpa),
+                    extraIconPath: Paths.emptyLocationIcon,
+                    extraIconColor: ShopColors.primary,
+                    extraIconBackgroundColor: Colors.transparent,
+                  ),
+                  FormSpacing(),
+                  PropertyTile(
+                    propertyName: "Facebook",
+                    placeHolder: "https://fb.com/my_profile_id",
+                    controllers: _fbEditingControllers,
+                    limit: 3,
+                    mainIconPath: Paths.fbIcon,
+                    mainIconColor: ShopColors.yellow,
+                    mainIconBackgroundColor: ShopColors.blue.withAlpha(propertyIconBgAlpa),
+                    extraIconPath: Paths.emptyFbIcon,
+                    extraIconColor: ShopColors.primary,
+                    extraIconBackgroundColor: Colors.transparent,
+                  ),
+                  FormSpacing(),
+                  PropertyTile(
+                    propertyName: "Instagram",
+                    placeHolder: "https://instagram.com/my_profile_id",
+                    controllers: _instagramEditingControllers,
+                    limit: 3,
+                    mainIconPath: Paths.instagramIcon,
+                    mainIconColor: ShopColors.yellow,
+                    mainIconBackgroundColor: ShopColors.primary.withAlpha(propertyIconBgAlpa),
+                    extraIconPath: Paths.emptyInstagramIcon,
+                    extraIconColor: ShopColors.primary,
+                    extraIconBackgroundColor: Colors.transparent,
+                  ),
+
+                  FormSpacing(),
                 ],
               ),
-              FormSpacing(),
-              //item name
-              TextBoxWithLabel(
-                labelText: "Item Name",
-                placeHolder: "Bedroom 1",
-                controller: _itemNameController,
-              ),
-              FormSpacing(),
-
-              DropDownWithLabel(
-                labelText: "Category",
-                placeHolder: "Furniture",
-                value: _selectedCategory,
-                items: _categoryItems,
-                onChangedCallback: (index) {
-                  setState(() {
-                    _selectedCategory = index;
-                    print(_selectedCategory);
-                  });
-                },
-              ),
-
-              //list description
-              FormSpacing(),
-              TextBoxWithLabel(
-                labelText: "List Description",
-                placeHolder: "ay kalam kteerrrrr ",
-                controller: _listDescriptionController,
-                maxLines: 5,
-              ),
-
-              FormSpacing(),
-              PropertyTile(
-                propertyName: "Price",
-                placeHolder: "40.00",
-                controllers: _priceEditingControllers,
-                limit: 3,
-                mainIconPath: Paths.priceIcon,
-                mainIconColor: ShopColors.yellow,
-                mainIconBackgroundColor: ShopColors.primary.withAlpha(propertyIconBgAlpa),
-                extraIconPath: Paths.emptyPriceIcon,
-                extraIconColor: ShopColors.primary,
-                extraIconBackgroundColor: Colors.transparent,
-                units: _priceUnits,
-                selectedUnits: _selectedPriceUnit,
-                textInputType: TextInputType.numberWithOptions(decimal: true),
-              ),
-
-              FormSpacing(),
-              PropertyTile(
-                propertyName: "Brand",
-                placeHolder: "Ikea",
-                controllers: _brandsEditingControllers,
-                limit: 3,
-                mainIconPath: Paths.starIcon,
-                mainIconColor: ShopColors.yellow,
-                mainIconBackgroundColor: ShopColors.yellow.withAlpha(propertyIconBgAlpa),
-                extraIconPath: Paths.emptyStarIcon,
-                extraIconColor: ShopColors.primary,
-                extraIconBackgroundColor: Colors.transparent,
-              ),
-
-              FormSpacing(),
-              PropertyTile(
-                propertyName: "URL",
-                placeHolder: "www.ikea.com/bedrooms/1",
-                controllers: _urlEditingControllers,
-                limit: 3,
-                mainIconPath: Paths.urlIcon,
-                mainIconColor: ShopColors.yellow,
-                mainIconBackgroundColor: ShopColors.red.withAlpha(propertyIconBgAlpa),
-                extraIconPath: Paths.emptyUrlIcon,
-                extraIconColor: ShopColors.primary,
-                extraIconBackgroundColor: Colors.transparent,
-              ),
-
-              FormSpacing(),
-              PropertyTile(
-                propertyName: "Location",
-                placeHolder: "https://goo.gl/maps/12mklj13k",
-                controllers: _locationEditingControllers,
-                limit: 3,
-                mainIconPath: Paths.locationIcon,
-                mainIconColor: ShopColors.yellow,
-                mainIconBackgroundColor: ShopColors.green.withAlpha(propertyIconBgAlpa),
-                extraIconPath: Paths.emptyLocationIcon,
-                extraIconColor: ShopColors.primary,
-                extraIconBackgroundColor: Colors.transparent,
-              ),
-              FormSpacing(),
-              PropertyTile(
-                propertyName: "Facebook",
-                placeHolder: "https://fb.com/my_profile_id",
-                controllers: _fbEditingControllers,
-                limit: 3,
-                mainIconPath: Paths.fbIcon,
-                mainIconColor: ShopColors.yellow,
-                mainIconBackgroundColor: ShopColors.blue.withAlpha(propertyIconBgAlpa),
-                extraIconPath: Paths.emptyFbIcon,
-                extraIconColor: ShopColors.primary,
-                extraIconBackgroundColor: Colors.transparent,
-              ),
-              FormSpacing(),
-              PropertyTile(
-                propertyName: "Instagram",
-                placeHolder: "https://instagram.com/my_profile_id",
-                controllers: _instagramEditingControllers,
-                limit: 3,
-                mainIconPath: Paths.instagramIcon,
-                mainIconColor: ShopColors.yellow,
-                mainIconBackgroundColor: ShopColors.primary.withAlpha(propertyIconBgAlpa),
-                extraIconPath: Paths.emptyInstagramIcon,
-                extraIconColor: ShopColors.primary,
-                extraIconBackgroundColor: Colors.transparent,
-              ),
-
-              FormSpacing(),
-            ],
+            ),
           ),
         ));
   }
