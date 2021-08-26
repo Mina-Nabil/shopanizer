@@ -6,6 +6,7 @@ import 'package:shopanizer/screens/home/group_list.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/services/DatabaseService.dart';
+import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
@@ -76,6 +77,6 @@ class _HomeTabState extends State<HomeTab> {
 
   Widget _buildBody() {
     return Expanded(
-        child: StreamProvider<List<Group>>(initialData: [], create: (_) => DatabaseService().groups, child: GroupsList()));
+        child: StreamProvider<List<Group>>(initialData: [], create: (_) => GroupsDBService().groups, child: GroupsList()));
   }
 }

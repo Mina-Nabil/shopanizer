@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:shopanizer/models/category.dart';
+import 'package:shopanizer/services/ItemsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/dropdown_with_label.dart';
@@ -55,6 +57,13 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
 
   int _selectedCategory = 1;
 
+  DropdownMenuItem<int> mapCategoryCollectionToDropDownItems(Category c) {
+    return DropdownMenuItem(
+      child: Text(c.name),
+      value: c.value,
+    );
+  }
+
   submitForm() {
     print("Name: " + _itemNameController.text);
     print("Category: " + _selectedCategory.toString());
@@ -106,17 +115,20 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   ),
                   FormSpacing(),
 
-                  DropDownWithLabel(
-                    labelText: "Category",
-                    placeHolder: "Furniture",
-                    value: _selectedCategory,
-                    items: _categoryItems,
-                    onChangedCallback: (index) {
-                      setState(() {
-                        _selectedCategory = index;
-                        print(_selectedCategory);
-                      });
-                    },
+                  FutureBuilder<List<Category>>(
+                    future: ItemsDBService().categories,
+                    builder: (ctxt, items) => DropDownWithLabel(
+                      labelText: "Category",
+                      placeHolder: "Furniture",
+                      value: _selectedCategory,
+                      items: (items.data==null) ? [] : items.data!.map(mapCategoryCollectionToDropDownItems).toList(),
+                      onChangedCallback: (index) {
+                        setState(() {
+                          _selectedCategory = index;
+                          print(_selectedCategory);
+                        });
+                      },
+                    ),
                   ),
                   FormSpacing(),
                   Container(

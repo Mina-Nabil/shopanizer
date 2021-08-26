@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:shopanizer/services/DatabaseService.dart';
+import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/photo_picker.dart';
@@ -20,7 +21,7 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
   File? _groupPhoto;
 
   addNewGroup(){
-    DatabaseService().addNewGroup(_groupNameController.text, _groupDescController.text);
+    GroupsDBService().addNewGroup(_groupNameController.text, _groupDescController.text);
   }
 
   @override
