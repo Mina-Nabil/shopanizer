@@ -48,6 +48,8 @@ class ShopColors {
   ///#3D4596 , 3%
   static Color primary3Precent = primary.withAlpha(7); // alpha 3%
 
+  static Color photopickerBG = primary.withAlpha(11); // alpha 5%
+
 }
 
 class ShopEdgeInsects {

@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
 
 class ImageViewer extends StatelessWidget {
-  ImageViewer.circular({required this.image, required this.radius});
+  ImageViewer.circular({required this.image, radius}) {
+    size = radius * 2;
+    isCircular = true;
+  }
+
+  ImageViewer.square({required this.image, this.size}) {
+    isCircular = false;
+  }
+
+  late final isCircular;
   final Image image;
-  final double radius;
+  late final double? size;
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: radius,
-      child: AspectRatio(
-        aspectRatio: 1,
-        child: ClipOval(
-          child: image,
-        ),
+    return Container(
+      height: size,
+      width: size,
+      decoration: BoxDecoration(
+        shape: isCircular ? BoxShape.circle : BoxShape.rectangle,
       ),
+      child: isCircular ? ClipOval(child: image) : image,
     );
   }
 }

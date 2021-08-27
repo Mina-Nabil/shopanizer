@@ -132,8 +132,6 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   ),
                   FormSpacing(),
                   Container(
-                    width: double.infinity,
-                    height: (((_itemImages.length) / 4) + 1).toInt() * 85,
                     child: GridView.count(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
@@ -142,7 +140,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                         Padding(
                           padding: EdgeInsets.all(photoGridPadding),
                           child: PhotoPicker.square(
-                              size: 80,
+                              hasBorder: false,
                               onPhotoPicked: (xfile) {
                                 setState(() {
                                   _itemImages.add(xfile);
@@ -151,7 +149,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                         )
                       ]..addAll(_itemImages.map((e) => Padding(
                             padding: EdgeInsets.all(photoGridPadding),
-                            child: ImageViewer.circular(image: Image.file(File(e.path)), radius: 12),
+                            child: ImageViewer.square(image: Image.file(File(e.path), fit: BoxFit.cover,),),
                           ))),
                     ),
                   ),

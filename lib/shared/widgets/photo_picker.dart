@@ -7,17 +7,18 @@ import 'package:image_picker/image_picker.dart';
 import '../paths.dart';
 
 class PhotoPicker extends StatefulWidget {
-  PhotoPicker.circular({required radius, required this.onPhotoPicked}) {
+  PhotoPicker.circular({radius, required this.onPhotoPicked, this.hasBorder = true}) {
     size = radius * 2;
     isCircular = true;
   }
 
-  PhotoPicker.square({required this.size, required this.onPhotoPicked}) {
+  PhotoPicker.square({this.size, required this.onPhotoPicked, this.hasBorder = true}) {
     isCircular = false;
   }
 
-  late final double size;
+  late final double? size;
   late final isCircular;
+  final bool hasBorder;
   final Function(XFile image) onPhotoPicked;
 
   @override
@@ -33,9 +34,10 @@ class _PhotoPickerState extends State<PhotoPicker> {
         width: widget.size,
         decoration: BoxDecoration(
           shape: widget.isCircular ? BoxShape.circle : BoxShape.rectangle,
-          border: Border.all(
+          color: ShopColors.photopickerBG,
+          border: widget.hasBorder? Border.all(
             color: ShopColors.primary,
-          ),
+          ) : null,
         ),
         child: ClipOval(
             child: AspectRatio(
