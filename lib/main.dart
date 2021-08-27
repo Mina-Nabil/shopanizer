@@ -10,6 +10,12 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  //Theme constant values
+
+  final double inputBorderFocuedWidth = 0.5;
+  final double inputBorderEnabledWidth = 0.2;
+
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -40,11 +46,19 @@ class _MyAppState extends State<MyApp> {
                 hintStyle: TextStyle(color: ShopColors.hintColor),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(width: 0.2, color: ShopColors.textFieldBorder, style: BorderStyle.solid),
+                  borderSide: BorderSide(width: widget.inputBorderEnabledWidth, color: ShopColors.textFieldBorder, style: BorderStyle.solid),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(width: widget.inputBorderEnabledWidth, color: ShopColors.red, style: BorderStyle.solid),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                  borderSide: BorderSide(width: widget.inputBorderFocuedWidth, color: ShopColors.red, style: BorderStyle.solid),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(width: 0.5, color: ShopColors.textFieldBorder, style: BorderStyle.solid),
+                  borderSide: BorderSide(width: widget.inputBorderFocuedWidth, color: ShopColors.textFieldBorder, style: BorderStyle.solid),
                 ))),
         home: FutureBuilder(
             future: _initialization,

@@ -9,12 +9,14 @@ class TextBoxWithLabel extends StatelessWidget {
   final String _labelText;
   final String _placeHolder;
   final TextEditingController _controller;
+  final String? Function(String? input)? validatorFunc;
   final int maxLines;
 
   TextBoxWithLabel(
       {required String labelText,
       required String placeHolder,
       required TextEditingController controller,
+      this.validatorFunc,
       this.maxLines = 1})
       : this._labelText = labelText,
         this._controller = controller,
@@ -37,9 +39,10 @@ class TextBoxWithLabel extends StatelessWidget {
             height: labelSpacing,
             width: double.infinity,
           ),
-          TextField(
+          TextFormField(
             controller: _controller,
             maxLines: maxLines,
+            validator: validatorFunc,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: _placeHolder,
