@@ -5,7 +5,6 @@ import 'package:shopanizer/models/group.dart';
 import 'package:shopanizer/screens/home/group_list.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
-import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
