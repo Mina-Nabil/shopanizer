@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "13230092550",
+    "project_id": "shopanizer-fd19c",
+    "storage_bucket": "shopanizer-fd19c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13230092550:android:891a3c96653a819fcc6e87",
+        "android_client_info": {
+          "package_name": "app.msquare.shopanizer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13230092550-pe5vahpjk2c0mh82ao3kpnh8h09uqpgc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtY2Yp0LAp6gXYrEWIsqKphUx27dsi2Nw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "13230092550-pe5vahpjk2c0mh82ao3kpnh8h09uqpgc.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "13230092550-ht5g3lkvjpkncgk9js0htm17lf3v4mni.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.msquare.shopanizer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
