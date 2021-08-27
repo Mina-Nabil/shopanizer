@@ -123,8 +123,6 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                 ),
                 FormSpacing(),
                 Container(
-                  width: double.infinity,
-                  height: (((_itemImages.length) / 4) + 1).toInt() * 85,
                   child: GridView.count(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
