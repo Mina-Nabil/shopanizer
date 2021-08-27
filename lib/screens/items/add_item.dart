@@ -247,7 +247,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
   List<Widget> buildImagesList() {
     var imagesWidgetList = _itemImages.map((e) => Padding(
           padding: EdgeInsets.all(photoGridPadding),
-          child: ImageViewer.square(image: Image.file(File(e.path),fit: BoxFit.cover,)),
+          child: PhotoViewer.square(image: Image.file(File(e.path),fit: BoxFit.cover,)),
         ));
     List<Widget> ret = [];
 
