@@ -81,7 +81,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
       print(element.text);
     });
   }
-
+//bokra eshta3'al fel form validations w submitting to the BE
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
