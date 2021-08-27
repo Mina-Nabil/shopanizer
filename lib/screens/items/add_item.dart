@@ -255,6 +255,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
       ret.add(Padding(
         padding: EdgeInsets.all(photoGridPadding),
         child: PhotoPicker.square(
+          hasBorder: false,
             onPhotoPicked: (xfile) {
               setState(() {
                 _itemImages.add(xfile);
