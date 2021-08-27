@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ImageViewer extends StatelessWidget {
   ImageViewer.circular({required this.image, radius}) {
-    size = radius * 2;
+    size = (radius != null)? radius*2 : null;
     isCircular = true;
   }
 
