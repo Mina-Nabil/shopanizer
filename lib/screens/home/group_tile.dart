@@ -23,6 +23,9 @@ class GroupTile extends StatelessWidget {
           TileSubtitleTV(text: "28/8/2021")
         ],
       ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
     );
   }
 }
