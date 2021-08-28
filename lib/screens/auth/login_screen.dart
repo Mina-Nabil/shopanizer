@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -7,23 +8,34 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController _firstNameController = new TextEditingController();
+  TextEditingController _emailController = new TextEditingController();
+  TextEditingController _passwordController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.all(10),
-        child: Center(
-          child: Text(
-            "",
-            style: ShopTextStyles.s_r_1,
+        padding: EdgeInsets.only(left: 20, right: 20, top: 50),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextBoxWithLabel(
+                labelText: "Email",
+                placeHolder: "Email",
+                controller: _emailController,
+              ),
+              Container(
+                width: double.infinity,
+                height: 10,
+              ),
+              TextBoxWithLabel(
+                labelText: "Password",
+                placeHolder: "Password",
+                controller: _passwordController,
+              ),
+            ],
           ),
-          // child: TextBoxWithLabel(
-          //   controller: _firstNameController,
-          //   labelText: 'First Name',
-          //   placeHolder: 'First Name',
-          // ),
         ),
       ),
     );
