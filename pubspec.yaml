@@ -77,11 +77,17 @@ flutter:
     - assets/icons/phone.svg
     - assets/icons/emptyPhone.svg
     - assets/icons/cross.svg
+    - assets/icons/gridIcon.svg
+    - assets/icons/listIcon.svg
     - assets/icons/xIcon.svg
     - assets/icons/tab_bar/home.svg
     - assets/icons/tab_bar/notifications.svg
     - assets/icons/tab_bar/person.svg
     - assets/images/empty_home.svg
+    - assets/icons/logo.svg
+    - assets/icons/fb_icon_bluebg.svg
+    - assets/icons/gmail_plus_redbg.svg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

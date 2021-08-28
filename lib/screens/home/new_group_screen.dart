@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
@@ -20,8 +19,9 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
 
   File? _groupPhoto;
 
-  addNewGroup(){
-    GroupsDBService().addNewGroup(_groupNameController.text, _groupDescController.text);
+  addNewGroup() {
+    GroupsDBService()
+        .addNewGroup(_groupNameController.text, _groupDescController.text);
   }
 
   @override
@@ -34,7 +34,7 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
         ),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -48,20 +48,22 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
                   )
                 ],
               ),
-              _groupPhoto == null
-                  ? Center(
-                    child: PhotoPicker.circular(
-                      radius: MediaQuery.of(context).size.width / 6,
-                      onPhotoPicked: (image) {
-                        setState(() {
-                          _groupPhoto = File(image.path);
-                        });
-                      }),
-                  )
-                  : ImageViewer.circular(
-                    image: Image.file(_groupPhoto!,fit: BoxFit.cover,),
-                    radius: MediaQuery.of(context).size.width / 6,
-                  ),
+              Center(
+                  child: _groupPhoto == null
+                      ? PhotoPicker.circular(
+                          radius: MediaQuery.of(context).size.width / 6,
+                          onPhotoPicked: (image) {
+                            setState(() {
+                              _groupPhoto = File(image.path);
+                            });
+                          })
+                      : PhotoViewer.circular(
+                          image: Image.file(
+                            _groupPhoto!,
+                            fit: BoxFit.cover,
+                          ),
+                          radius: MediaQuery.of(context).size.width / 6,
+                        )),
               TextBoxWithLabel(
                 controller: _groupNameController,
                 labelText: "Group Name",
@@ -71,16 +73,24 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
                 height: 20,
               ),
               Divider(),
-              LabelText(labelText: "Add Participants"),
+              LabelTV1(text: "Add Participants"),
               Row(
                 children: [
-                  ImageViewer.circular(
-                    image: Image.network("https://thumbs.dreamstime.com/b/fashion-model-wavy-hairstyle-attractive-young-girl-curly-hair-posing-studio-face-beautiful-woman-long-brown-female-196126449.jpg",fit: BoxFit.cover,),
+                  PhotoViewer.circular(
+                    image: Image.network(
+                      "https://thumbs.dreamstime.com/b/fashion-model-wavy-hairstyle-attractive-young-girl-curly-hair-posing-studio-face-beautiful-woman-long-brown-female-196126449.jpg",
+                      fit: BoxFit.cover,
+                    ),
                     radius: MediaQuery.of(context).size.width / 12,
                   ),
-                  SizedBox(width: 10,),
-                  ImageViewer.circular(
-                    image: Image.network("https://media.istockphoto.com/photos/red-haired-woman-with-voluminous-shiny-and-curly-hairstyleflying-hair-picture-id849234512?k=6&m=849234512&s=612x612&w=0&h=acnUHhmDmaxjC7laSE1D9C87uLh5-W8X4q7_eX2o69Y=",fit: BoxFit.cover,),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  PhotoViewer.circular(
+                    image: Image.network(
+                      "https://media.istockphoto.com/photos/red-haired-woman-with-voluminous-shiny-and-curly-hairstyleflying-hair-picture-id849234512?k=6&m=849234512&s=612x612&w=0&h=acnUHhmDmaxjC7laSE1D9C87uLh5-W8X4q7_eX2o69Y=",
+                      fit: BoxFit.cover,
+                    ),
                     radius: MediaQuery.of(context).size.width / 12,
                   ),
                 ],

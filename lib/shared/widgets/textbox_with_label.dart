@@ -4,7 +4,7 @@ import 'package:shopanizer/shared/widgets/TextViews.dart';
 class TextBoxWithLabel extends StatelessWidget {
   //default dimensions
   final labelFontSize = 14.0;
-  final labelSpacing = 10.0;
+  final space = 10.0;
 
   final String _labelText;
   final String _placeHolder;
@@ -31,12 +31,12 @@ class TextBoxWithLabel extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            child: LabelText(
-              labelText: _labelText,
+            child: LabelTV1(
+              text: _labelText,
             ),
           ),
           Container(
-            height: labelSpacing,
+            height: space,
             width: double.infinity,
           ),
           TextFormField(

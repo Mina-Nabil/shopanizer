@@ -1,4 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:shopanizer/shared/widgets/buttons.dart';
+import 'package:shopanizer/shared/widgets/photo_picker.dart';
+import 'package:shopanizer/shared/widgets/photo_viewer.dart';
+import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class NewListScreen extends StatefulWidget {
   @override
@@ -6,21 +12,68 @@ class NewListScreen extends StatefulWidget {
 }
 
 class _NewListScreenState extends State<NewListScreen> {
+  TextEditingController _listNameController = new TextEditingController();
+  TextEditingController _listDescController = new TextEditingController();
+  File? _listPhoto;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20,),
+        padding: EdgeInsets.symmetric(
+          horizontal: 20,
+        ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Add new list",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Add new list",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                DoneButton(
+                  onPressed: () {},
+                )
+              ],
+            ),
+            Center(child: listPhoto()),
+            TextBoxWithLabel(
+              controller: _listNameController,
+              labelText: "List Name",
+              placeHolder: "List Name",
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextBoxWithLabel(
+                controller: _listDescController,
+                labelText: "List Description",
+                placeHolder: "List Description",
+                maxLines: 3,
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget listPhoto() {
+    return _listPhoto == null
+        ? PhotoPicker.circular(
+            radius: MediaQuery.of(context).size.width / 6,
+            onPhotoPicked: (image) {
+              setState(() {
+                _listPhoto = File(image.path);
+              });
+            })
+        : PhotoViewer.circular(
+            image: Image.file(
+              _listPhoto!,
+              fit: BoxFit.cover,
+            ),
+            radius: MediaQuery.of(context).size.width / 6,
+          );
   }
 }

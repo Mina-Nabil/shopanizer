@@ -41,9 +41,12 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
   //form controllers
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   TextEditingController _itemNameController = new TextEditingController();
-  TextEditingController _listDescriptionController = new TextEditingController();
+  TextEditingController _listDescriptionController =
+      new TextEditingController();
 
-  List<TextEditingController> _priceEditingControllers = [new TextEditingController(text: "40")];
+  List<TextEditingController> _priceEditingControllers = [
+    new TextEditingController(text: "40")
+  ];
   Map<String, String> _priceUnits = {"EGP": "EGP", "USD": "USD"};
   List<ValueNotifier<String?>> _selectedPriceUnit = [new ValueNotifier("USD")];
   List<TextEditingController> _brandsEditingControllers = [];
@@ -80,7 +83,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: ShopEdgeInsects.scaffoldPadding),
+        padding:
+            EdgeInsets.symmetric(horizontal: ShopEdgeInsects.scaffoldPadding),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -92,7 +96,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TitleTV2(
-                      titleText: "Add new Item",
+                      text: "Add new Item",
                     ),
                     DoneButton(
                       onPressed: submitForm,
@@ -138,7 +142,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   limit: 3,
                   mainIconPath: Paths.priceIcon,
                   mainIconColor: ShopColors.yellow,
-                  mainIconBackgroundColor: ShopColors.primary.withAlpha(propertyIconBgAlpa),
+                  mainIconBackgroundColor:
+                      ShopColors.primary.withAlpha(propertyIconBgAlpa),
                   extraIconPath: Paths.emptyPriceIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
@@ -156,7 +161,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   limit: 3,
                   mainIconPath: Paths.starIcon,
                   mainIconColor: ShopColors.yellow,
-                  mainIconBackgroundColor: ShopColors.yellow.withAlpha(propertyIconBgAlpa),
+                  mainIconBackgroundColor:
+                      ShopColors.yellow.withAlpha(propertyIconBgAlpa),
                   extraIconPath: Paths.emptyStarIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
@@ -171,7 +177,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   limit: 3,
                   mainIconPath: Paths.urlIcon,
                   mainIconColor: ShopColors.yellow,
-                  mainIconBackgroundColor: ShopColors.red.withAlpha(propertyIconBgAlpa),
+                  mainIconBackgroundColor:
+                      ShopColors.red.withAlpha(propertyIconBgAlpa),
                   extraIconPath: Paths.emptyUrlIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
@@ -186,7 +193,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   limit: 3,
                   mainIconPath: Paths.locationIcon,
                   mainIconColor: ShopColors.yellow,
-                  mainIconBackgroundColor: ShopColors.green.withAlpha(propertyIconBgAlpa),
+                  mainIconBackgroundColor:
+                      ShopColors.green.withAlpha(propertyIconBgAlpa),
                   extraIconPath: Paths.emptyLocationIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
@@ -200,7 +208,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   limit: 3,
                   mainIconPath: Paths.fbIcon,
                   mainIconColor: ShopColors.yellow,
-                  mainIconBackgroundColor: ShopColors.blue.withAlpha(propertyIconBgAlpa),
+                  mainIconBackgroundColor:
+                      ShopColors.blue.withAlpha(propertyIconBgAlpa),
                   extraIconPath: Paths.emptyFbIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
@@ -214,7 +223,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   limit: 3,
                   mainIconPath: Paths.instagramIcon,
                   mainIconColor: ShopColors.yellow,
-                  mainIconBackgroundColor: ShopColors.primary.withAlpha(propertyIconBgAlpa),
+                  mainIconBackgroundColor:
+                      ShopColors.primary.withAlpha(propertyIconBgAlpa),
                   extraIconPath: Paths.emptyInstagramIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
@@ -235,7 +245,11 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
   List<Widget> buildImagesList() {
     var imagesWidgetList = _itemImages.map((e) => Padding(
           padding: EdgeInsets.all(photoGridPadding),
-          child: ImageViewer.square(image: Image.file(File(e.path),fit: BoxFit.cover,)),
+          child: PhotoViewer.square(
+              image: Image.file(
+            File(e.path),
+            fit: BoxFit.cover,
+          )),
         ));
     List<Widget> ret = [];
 
@@ -243,7 +257,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
       ret.add(Padding(
         padding: EdgeInsets.all(photoGridPadding),
         child: PhotoPicker.square(
-          hasBorder: false,
+            hasBorder: false,
             onPhotoPicked: (xfile) {
               setState(() {
                 _itemImages.add(xfile);
@@ -258,19 +272,28 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
 
   //validators
   String? nameFieldValidator(input) {
-    if (input == null || input.isEmpty) return "Item will be lost without a Name !";
+    if (input == null || input.isEmpty)
+      return "Item will be lost without a Name !";
     if (input.length < widget.nameMinLength)
-      return "Very short Name :/ Please add " + (widget.nameMinLength - input.length).toString() + " characters";
+      return "Very short Name :/ Please add " +
+          (widget.nameMinLength - input.length).toString() +
+          " characters";
     if (input.length > widget.nameMaxLength)
-      return "Very long Name ! Please remove " + (input.length - widget.nameMaxLength).toString() + " characters";
+      return "Very long Name ! Please remove " +
+          (input.length - widget.nameMaxLength).toString() +
+          " characters";
   }
 
   String? descFieldValidator(input) {
     if (input == null || input.isEmpty) return null;
     if (input.length < widget.descMinLimit)
-      return "Very short Description :/ Please add " + (widget.descMinLimit - input.length).toString() + " characters";
+      return "Very short Description :/ Please add " +
+          (widget.descMinLimit - input.length).toString() +
+          " characters";
     if (input.length > widget.descMaxLimit)
-      return "Very long Description ! Please remove " + (input.length - widget.descMaxLimit).toString() + " characters";
+      return "Very long Description ! Please remove " +
+          (input.length - widget.descMaxLimit).toString() +
+          " characters";
   }
 
   String? brandFieldValidator(input) {
