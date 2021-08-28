@@ -5,9 +5,13 @@ import 'package:shopanizer/shared/widgets/circular_icon.dart';
 class SingleTile extends StatefulWidget {
   static const leadingIconToLabelPadding = 12.0;
   static const leadingIconHorizontalMargin = 12.0;
-  static const textEditingFieldPadding = 12.0;
+  static const rowPadding = 6.0;
+  static const textRowsPadding = 4.0;
+  static const textEditingBottomFieldPadding = 5.0; // used for better showing of error messages
   static const trailingIconHorizontalMargin = 12.0;
   static const singleTileHeight = 37.5;
+  static const valuesBorderWidth = 0.5;
+  static const unitsDropdownPadding = 4.0;
 
   final String? tileText;
   final TextEditingController? tileTextEditingController;
@@ -23,7 +27,8 @@ class SingleTile extends StatefulWidget {
   final double? trailingIconPadding;
   final TextInputType textInputType;
   final Map<dynamic, String>? units;
-  ValueNotifier<String?>? selectedUnit;
+  final String? Function(String? input)? validatorFunc;
+  final ValueNotifier<String?>? selectedUnit;
   final int tileIndex;
 
   SingleTile({
@@ -42,7 +47,8 @@ class SingleTile extends StatefulWidget {
     this.trailingIconPadding,
     this.units,
     this.selectedUnit,
-    this.textInputType=TextInputType.text,
+    this.validatorFunc,
+    this.textInputType = TextInputType.text,
   }) {
     assert(tileText != null || tileTextEditingController != null,
         "Make sure to supply either tileText or tileTextEditingController");
@@ -60,9 +66,7 @@ class SingleTile extends StatefulWidget {
 }
 
 class _SingleTileState extends State<SingleTile> {
-  final double valuesBorderWidth = 0.5;
 
-  final double unitsDropdownPadding = 5.0;
 
   final textStyle = TextStyle(
     color: ShopColors.labelDarkBlue,
@@ -86,91 +90,105 @@ class _SingleTileState extends State<SingleTile> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: SingleTile.singleTileHeight,
+      constraints: BoxConstraints(minHeight: SingleTile.singleTileHeight),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(horizontal: SingleTile.leadingIconHorizontalMargin),
-      decoration: BoxDecoration(color: ShopColors.primary3Precent),
-      child: Row(
-        children: [
-          if (widget.leadingIconPath != null)
-            Container(
-                margin: EdgeInsets.only(right: SingleTile.leadingIconToLabelPadding),
-                child: CircularIcon(
-                    iconColor: widget.leadingIconColor!,
-                    backgroundColor: widget.leadingIconBackgroundColor!,
-                    iconPath: widget.leadingIconPath!)),
-          Flexible(
-            fit: FlexFit.tight,
-            child: widget.tileText != null
-                ? Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Text(
-                      widget.tileText!,
-                      textAlign: TextAlign.left,
-                      style: textStyle,
-                    ),
-                  )
-                : Container(
-                    child: TextFormField(
-                    controller: widget.tileTextEditingController,
-                    keyboardType: widget.textInputType,
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(bottom: SingleTile.textEditingFieldPadding),
-                        hintText: widget.tileTextEditingPlaceholder,
-                        fillColor: Colors.transparent,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        border: InputBorder.none),
-                    style: textStyle,
-                  )),
-          ),
-          if (widget.units != null && widget.units!.length > 0)
+      decoration: BoxDecoration(
+        color: ShopColors.primary3Precent,
+      ),
+      child: Padding(
+        padding: EdgeInsets.only(top: SingleTile.rowPadding),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (widget.leadingIconPath != null)
+              Container(
+                  margin: EdgeInsets.only(right: SingleTile.leadingIconToLabelPadding),
+                  child: CircularIcon(
+                      iconColor: widget.leadingIconColor!,
+                      backgroundColor: widget.leadingIconBackgroundColor!,
+                      iconPath: widget.leadingIconPath!)),
             Flexible(
               fit: FlexFit.tight,
-              child: Row(
-                children: [
-                  Container(
-                    width: valuesBorderWidth,
-                    color: ShopColors.primary.withAlpha(60),
-                  ),
-                  Expanded(
-                    child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: unitsDropdownPadding),
-                        child: DropdownButton(
-                          isExpanded: true,
-                          underline: Container(),
-                          iconEnabledColor: ShopColors.primary,
-                          items: getMenuItemsFromMap(widget.units!),
-                          value: widget.selectedUnit!.value,
+              child: widget.tileText != null
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(vertical: SingleTile.textRowsPadding), //must use the same padding as down there
+                      child: Text(
+                        widget.tileText!,
+                        textAlign: TextAlign.left,
+                        style: textStyle,
+                      ),
+                    )
+                  : Container(
+                      child: Container(
+                        padding: EdgeInsets.only(bottom: SingleTile.textEditingBottomFieldPadding),
+                        child: TextFormField(
+                          controller: widget.tileTextEditingController,
+                          keyboardType: widget.textInputType,
+                          validator: widget.validatorFunc,
+                          decoration: InputDecoration(
+                              isDense: true,
+                              contentPadding: EdgeInsets.only(top: SingleTile.textRowsPadding), //same padding as up there
+                              hintText: widget.tileTextEditingPlaceholder,
+                              errorMaxLines: 3,
+                              fillColor: Colors.transparent,
+                              focusedBorder: InputBorder.none,
+                              focusedErrorBorder: InputBorder.none,
+                              enabledBorder: InputBorder.none,
+                              errorBorder: InputBorder.none,
+                              disabledBorder: InputBorder.none,
+                              border: InputBorder.none),
                           style: textStyle,
-                          onChanged: (dynamic newValue) {
-                            setState(() {
-                              widget.selectedUnit!.value = newValue;
-                            });
-                          },
-                        )),
-                  )
-                ],
-              ),
+                        ),
+                      )),
             ),
-          if (widget.trailingIconPath != null)
-            GestureDetector(
-              onTap: () => widget.trailingIconOnPressCallback!(widget.tileIndex),
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: SingleTile.trailingIconHorizontalMargin),
-                alignment: Alignment.center,
-                child: CircularIcon(
-                  iconPath: widget.trailingIconPath!,
-                  iconColor: widget.trailingIconColor!,
-                  backgroundColor: widget.trailingIconBackgroundColor!,
-                  radius: widget.trailingIconRadius ?? CircularIcon.defaultRadius,
-                  padding: widget.trailingIconPadding ?? CircularIcon.defaultPadding,
+            if (widget.units != null && widget.units!.length > 0)
+              Flexible(
+                fit: FlexFit.tight,
+                child: Row(
+                  children: [
+                    Container(
+                      width: SingleTile.valuesBorderWidth,
+                      color: ShopColors.primary.withAlpha(60),
+                    ),
+                    Expanded(
+                      child: Container(
+                          padding: EdgeInsets.symmetric(horizontal: SingleTile.unitsDropdownPadding),
+                          child: DropdownButton(
+                            isDense: true,
+                            isExpanded: true,
+                            underline: Container(),
+                            iconEnabledColor: ShopColors.primary,
+                            items: getMenuItemsFromMap(widget.units!),
+                            value: widget.selectedUnit!.value,
+                            style: textStyle,
+                            onChanged: (dynamic newValue) {
+                              setState(() {
+                                widget.selectedUnit!.value = newValue;
+                              });
+                            },
+                          )),
+                    )
+                  ],
                 ),
               ),
-            ),
-        ],
+            if (widget.trailingIconPath != null)
+              GestureDetector(
+                onTap: () => widget.trailingIconOnPressCallback!(widget.tileIndex),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: SingleTile.trailingIconHorizontalMargin),
+                  alignment: Alignment.center,
+                  child: CircularIcon(
+                    iconPath: widget.trailingIconPath!,
+                    iconColor: widget.trailingIconColor!,
+                    backgroundColor: widget.trailingIconBackgroundColor!,
+                    radius: widget.trailingIconRadius ?? CircularIcon.defaultRadius,
+                    padding: widget.trailingIconPadding ?? CircularIcon.defaultPadding,
+                  ),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

@@ -13,6 +13,7 @@ import 'package:shopanizer/shared/widgets/property_tile.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
+import 'package:validators/validators.dart';
 
 class AddNewItemScreen extends StatefulWidget {
   //form Limits
@@ -22,6 +23,8 @@ class AddNewItemScreen extends StatefulWidget {
 
   final int descMinLimit = 2;
   final int descMaxLimit = 255;
+
+  final int brandMaxLimit = 55;
 
   static final screenName = "AddNewItem";
 
@@ -156,6 +159,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   units: _priceUnits,
                   selectedUnits: _selectedPriceUnit,
                   textInputType: TextInputType.numberWithOptions(decimal: true),
+                  validatorFunc: priceFieldValidator,
                 ),
 
                 FormSpacing(),
@@ -170,6 +174,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   extraIconPath: Paths.emptyStarIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
+                  validatorFunc: brandFieldValidator,
                 ),
 
                 FormSpacing(),
@@ -184,6 +189,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   extraIconPath: Paths.emptyUrlIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
+                  validatorFunc: urlFieldValidator,
                 ),
 
                 FormSpacing(),
@@ -198,6 +204,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   extraIconPath: Paths.emptyLocationIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
+                  validatorFunc: emptyFieldValidator,
                 ),
                 FormSpacing(),
                 PropertyTile(
@@ -211,6 +218,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   extraIconPath: Paths.emptyFbIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
+                  validatorFunc: emptyFieldValidator,
                 ),
                 FormSpacing(),
                 PropertyTile(
@@ -224,6 +232,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                   extraIconPath: Paths.emptyInstagramIcon,
                   extraIconColor: ShopColors.primary,
                   extraIconBackgroundColor: Colors.transparent,
+                  validatorFunc: emptyFieldValidator,
                 ),
 
                 FormSpacing(),
@@ -284,6 +293,29 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
     if (input.length > widget.descMaxLimit)
       return "Very long Description ! Please remove " + (input.length - widget.descMaxLimit).toString() + " characters";
   }
+
+  String? brandFieldValidator(input) {
+    if (input == null || input.isEmpty) return "Please enter a brand name !";
+    if (input.length > widget.brandMaxLimit)
+      return "Very long Brand Name ! Please remove " + (input.length - widget.brandMaxLimit).toString() + " characters";
+  }
+
+  String? priceFieldValidator(input) {
+    if (input == null || input.isEmpty) return "Please enter a price ";
+    if (!isNumeric(input))
+      return "Please enter a valid numeric value";
+  }
+
+  String? urlFieldValidator(input) {
+    if (input == null || input.isEmpty) return "Please enter a Url ";
+    if (!isURL(input))
+      return "Please enter a valid Url";
+  }
+
+  String? emptyFieldValidator(input) {
+    if (input == null || input.isEmpty) return "Please enter a Value ";
+  }
+
 }
 
 class FormSpacing extends StatelessWidget {

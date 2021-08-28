@@ -24,6 +24,7 @@ class PropertyTile extends StatefulWidget {
   final Map<dynamic, String>? units;
   final List<ValueNotifier<String?>>? selectedUnits;
   final TextInputType textInputType;
+  final String? Function(String? input)? validatorFunc;
 
   PropertyTile(
       {required this.propertyName,
@@ -37,6 +38,7 @@ class PropertyTile extends StatefulWidget {
       this.extraIconColor,
       this.extraIconBackgroundColor,
       this.units,
+      this.validatorFunc,
       this.textInputType=TextInputType.text,
       this.selectedUnits}) {
     assert(mainIconPath == null || (mainIconBackgroundColor != null && mainIconColor != null), "Please supply mainIconBackgroundColor & mainIconColor with the mainIconPath");
@@ -108,6 +110,7 @@ class _PropertyTileState extends State<PropertyTile> {
               trailingIconPadding: 4,
               trailingIconOnPressCallback: (index) => removeController(index),
               units: widget.units,
+              validatorFunc: widget.validatorFunc,
               selectedUnit: widget.selectedUnits?[i],
               textInputType: widget.textInputType,),
         ],
