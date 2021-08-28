@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Category {
+class ShoppingCategory {
 
   static const String documentKey = "categories" ; 
   static const String nameKey = "name" ; 
@@ -12,9 +12,9 @@ class Category {
   String id;
   int value;
 
-  Category(this.id, this.name, this.desc, this.value) ;
+  ShoppingCategory(this.id, this.name, this.desc, this.value) ;
 
-  Category.fromSnapshot(QueryDocumentSnapshot qds) :
+  ShoppingCategory.fromSnapshot(QueryDocumentSnapshot qds) :
     this.id = qds.id,
     this.name = qds[nameKey],
     this.desc = qds[descKey],

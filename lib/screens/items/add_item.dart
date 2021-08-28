@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:shopanizer/models/category.dart';
-import 'package:shopanizer/services/ItemsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
-import 'package:shopanizer/shared/widgets/dropdown_with_label.dart';
+import 'package:shopanizer/shared/widgets/categories_list.dart';
 import 'package:shopanizer/shared/widgets/photo_picker.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:image_picker/image_picker.dart';
@@ -54,7 +53,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
   List<TextEditingController> _instagramEditingControllers = [];
   List<XFile> _itemImages = [];
 
-  int _selectedCategory = 1;
+  ValueNotifier<int> _selectedCategory = new ValueNotifier(1);
 
   submitForm() {
     _formKey.currentState?.validate();
@@ -110,20 +109,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
                 ),
                 FormSpacing(),
 
-                FutureBuilder<List<Category>>(
-                  future: ItemsDBService().categories,
-                  builder: (ctxt, items) => DropDownWithLabel(
-                    labelText: "Category",
-                    placeHolder: "Furniture",
-                    value: _selectedCategory,
-                    items: (items.data == null) ? [] : items.data!.map(mapCategoryCollectionToDropDownItems).toList(),
-                    onChangedCallback: (index) {
-                      setState(() {
-                        _selectedCategory = index;
-                      });
-                    },
-                  ),
-                ),
+                CategoriesDropDownList(_selectedCategory),
                 FormSpacing(),
                 Container(
                   child: GridView.count(
@@ -244,14 +230,7 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
     );
   }
 
-//item builders
 
-  DropdownMenuItem<int> mapCategoryCollectionToDropDownItems(Category c) {
-    return DropdownMenuItem(
-      child: Text(c.name),
-      value: c.value,
-    );
-  }
 
   List<Widget> buildImagesList() {
     var imagesWidgetList = _itemImages.map((e) => Padding(

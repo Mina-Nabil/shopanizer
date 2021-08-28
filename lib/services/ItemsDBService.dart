@@ -10,14 +10,14 @@ class ItemsDBService extends DatabaseService {
       FirebaseFirestore.instance.collection(ShoppingItem.documentKey); //.where('userID',?)
 
   final CollectionReference categoriesCollection =
-      FirebaseFirestore.instance.collection(Category.documentKey);
+      FirebaseFirestore.instance.collection(ShoppingCategory.documentKey);
 
   Stream<List<ShoppingItem>> get items {
     return itemsCollection.snapshots().map(_itemsFromSnapshot);
   }
 
-  Future<List<Category>> get categories async {
-    return await categoriesCollection.get().then((qs) => qs.docs.map((e) => Category.fromSnapshot(e)).toList());
+  Future<List<ShoppingCategory>> get categories async {
+    return await categoriesCollection.get().then((qs) => qs.docs.map((e) => ShoppingCategory.fromSnapshot(e)).toList());
   }
 
   List<ShoppingItem> _itemsFromSnapshot(QuerySnapshot qs) {
