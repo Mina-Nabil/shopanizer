@@ -73,7 +73,7 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
                 height: 20,
               ),
               Divider(),
-              LabelText(labelText: "Add Participants"),
+              LabelTV1(text: "Add Participants"),
               Row(
                 children: [
                   PhotoViewer.circular(

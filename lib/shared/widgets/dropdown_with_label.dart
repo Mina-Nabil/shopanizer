@@ -11,15 +11,13 @@ class DropDownWithLabel extends StatelessWidget {
   final Function? _onChangedCallback;
   final int _value;
 
-
-
-  DropDownWithLabel(
-      {required String labelText,
-      required String placeHolder,
-      required List<DropdownMenuItem<int>> items,
-      required Function? onChangedCallback,
-      required int value,})
-      : this._labelText = labelText,
+  DropDownWithLabel({
+    required String labelText,
+    required String placeHolder,
+    required List<DropdownMenuItem<int>> items,
+    required Function? onChangedCallback,
+    required int value,
+  })  : this._labelText = labelText,
         this._items = items,
         this._onChangedCallback = onChangedCallback,
         this._value = value;
@@ -33,7 +31,7 @@ class DropDownWithLabel extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            child: LabelText(labelText: _labelText),
+            child: LabelTV1(text: _labelText),
           ),
           Container(
             height: 10,

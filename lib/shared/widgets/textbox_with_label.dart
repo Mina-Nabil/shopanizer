@@ -31,8 +31,8 @@ class TextBoxWithLabel extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            child: LabelText(
-              labelText: _labelText,
+            child: LabelTV1(
+              text: _labelText,
             ),
           ),
           Container(

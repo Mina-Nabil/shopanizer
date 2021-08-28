@@ -1,17 +1,17 @@
 class Paths {
-
   //Navigation Bar Icons
   static final String homePageNavBarIcon = 'assets/icons/tab_bar/home.svg';
-  static final String notificationPageNavBarIcon = 'assets/icons/tab_bar/notifications.svg';
+  static final String notificationPageNavBarIcon =
+      'assets/icons/tab_bar/notifications.svg';
   static final String profilePageNavBarIcon = 'assets/icons/tab_bar/person.svg';
-  
+
   //Home Floating button
   static final String addGroupIcon = 'assets/icons/group.svg';
   static final String addListIcon = 'assets/icons/list.svg';
 
   //ButtonIcons
   static final String checkIcon = 'assets/icons/check.svg';
-  
+
   //Large Colored 'Icons'
   static final String emptyHomeIcon = 'assets/images/empty_home.svg';
 
@@ -32,7 +32,9 @@ class Paths {
   static final String emptyPhoneIcon = 'assets/icons/emptyPhone.svg';
   static final String crossIcon = 'assets/icons/cross.svg';
   static final String xIcon = 'assets/icons/xIcon.svg';
-  
+  static final String logoIcon = 'assets/icons/logo.svg';
+  static final String fbBlueBGIcon = 'assets/icons/fb_icon_bluebg.svg';
+  static final String gmailRedBGIcon = 'assets/icons/gmail_plus_redbg.svg';
 
   static final String camera = "assets/icons/camera.svg";
 }
