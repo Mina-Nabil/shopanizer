@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shopanizer/screens/home/main_screen.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
@@ -81,7 +80,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   CircularButton(
                     child: SvgPicture.asset(Paths.fbBlueBGIcon),
                     backgroundColor: Colors.transparent,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => MainScreen()));
+                    },
                     radius: 20,
                   ),
                   CircularButton(
