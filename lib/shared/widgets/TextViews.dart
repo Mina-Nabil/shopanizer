@@ -67,3 +67,25 @@ class LogoTV1 extends StatelessWidget {
         style: ShopTextStyles.m_m_1.copyWith(color: ShopColors.primary));
   }
 }
+
+class TileTitleTV extends StatelessWidget {
+  final String text;
+  TileTitleTV({required this.text});
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        textAlign: TextAlign.left,
+        style: ShopTextStyles.m_m_1.copyWith(color: ShopColors.labelDarkBlue));
+  }
+}
+
+class TileSubtitleTV extends StatelessWidget {
+  final String text;
+  TileSubtitleTV({required this.text});
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        textAlign: TextAlign.left,
+        style: ShopTextStyles.s_r_3.copyWith(color: ShopColors.labelDarkBlue));
+  }
+}

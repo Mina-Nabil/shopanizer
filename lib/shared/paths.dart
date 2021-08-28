@@ -37,4 +37,8 @@ class Paths {
   static final String gmailRedBGIcon = 'assets/icons/gmail_plus_redbg.svg';
 
   static final String camera = "assets/icons/camera.svg";
+
+
+  static final String list = "assets/icons/listIcon.svg";
+  static final String grid = "assets/icons/gridIcon.svg";
 }

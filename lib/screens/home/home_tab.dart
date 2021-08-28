@@ -8,6 +8,7 @@ import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -27,7 +28,20 @@ class _HomeTabState extends State<HomeTab> {
         padding: EdgeInsets.only(left: 20, right: 20, top: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [_buildHeader(), _buildBody()],
+          children: [
+            _buildHeader(),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                CircularButton(child: SvgPicture.asset(Paths.grid, width: 20,), backgroundColor: Colors.transparent, onPressed: null),
+                SizedBox(width: 15,),
+                CircularButton(child: SvgPicture.asset(Paths.list, width: 20,), backgroundColor: Colors.transparent, onPressed: null),
+              ],
+            ),
+            Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
+            _buildBody()
+          ],
         ),
       ),
       floatingActionButton: EaxpandableFAB(

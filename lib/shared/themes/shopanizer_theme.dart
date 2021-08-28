@@ -50,6 +50,8 @@ class ShopColors {
 
   static Color photopickerBG = primary.withAlpha(11); // alpha 5%
 
+  static Color groupTileBG = blue.withAlpha(17); //8%
+
 }
 
 class ShopEdgeInsects {

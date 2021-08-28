@@ -26,7 +26,10 @@ class _GroupsListState extends State<GroupsList> {
     return (_groups.length == 0)
         ? EmptyHomeWidget()
         : ListView(
-            children: _groups.map((e) => GroupTile(e)).toList(),
+            children: _groups.map((e) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: GroupTile(e),
+            )).toList(),
           );
   }
 }

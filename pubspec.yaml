@@ -77,6 +77,8 @@ flutter:
     - assets/icons/phone.svg
     - assets/icons/emptyPhone.svg
     - assets/icons/cross.svg
+    - assets/icons/gridIcon.svg
+    - assets/icons/listIcon.svg
     - assets/icons/xIcon.svg
     - assets/icons/tab_bar/home.svg
     - assets/icons/tab_bar/notifications.svg
