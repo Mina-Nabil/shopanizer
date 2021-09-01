@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopanizer/models/group.dart';
-import 'package:shopanizer/screens/home/empty_home.dart';
-import 'package:shopanizer/screens/home/group_tile.dart';
+import 'package:shopanizer/shared/widgets/empty_home.dart';
+import 'package:shopanizer/shared/widgets/group_tile.dart';
 
 
 class GroupsList extends StatefulWidget {

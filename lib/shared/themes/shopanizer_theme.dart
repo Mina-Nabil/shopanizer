@@ -51,6 +51,7 @@ class ShopColors {
   static Color photopickerBG = primary.withAlpha(11); // alpha 5%
 
   static Color groupTileBG = blue.withAlpha(17); //8%
+  static Color listTileBG  = green.withAlpha(17); //8%
 
 }
 
@@ -98,6 +99,10 @@ class ShopTextStyles {
   /// Font Size : 22  ,  Font Weight : Bold
   static const TextStyle l_b_2 =
       TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold);
+
+  /// Font Size : 22  ,  Font Weight : Bold
+  static const TextStyle l_extraBold_2 =
+      TextStyle(fontSize: 22.0, fontWeight: FontWeight.w800);
 
   /// Font Size : 24  ,  Font Weight : Regular
   static const TextStyle l_r_3 =
