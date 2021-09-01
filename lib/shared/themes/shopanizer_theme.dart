@@ -41,6 +41,7 @@ class ShopColors {
 
   ///#3BF2A3 , 100%
   static const Color greenButton = Color(0xFF3BF2A3);
+  static const Color lightGreenButton = Color(0xFF94EF60);
 
   ///#37CCF4 , 100%
   static const Color blueButton = blue;
@@ -52,6 +53,7 @@ class ShopColors {
 
   static Color groupTileBG = blue.withAlpha(17); //8%
   static Color listTileBG  = green.withAlpha(17); //8%
+  static Color itemTileBG  = Color(0xFF3BF2A3).withAlpha(17); //8%
 
 }
 
