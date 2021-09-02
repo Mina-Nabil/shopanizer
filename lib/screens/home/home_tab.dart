@@ -8,6 +8,7 @@ import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
+import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:flutter_svg/svg.dart';
@@ -63,10 +64,7 @@ class _HomeTabState extends State<HomeTab> {
             style: TextStyle(
               fontWeight: FontWeight.w500,
             )),
-        Text(
-          "My Shopanizer",
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-        ),
+        TitleTV3(text: "My Shopanizer",),
         SizedBox(
           height: 5,
         ),

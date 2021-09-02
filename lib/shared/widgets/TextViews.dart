@@ -56,7 +56,16 @@ class TitleTV2 extends StatelessWidget {
         style: ShopTextStyles.l_b_2.copyWith(color: ShopColors.labelDarkBlue));
   }
 }
-
+class TitleTV3 extends StatelessWidget {
+  final String text;
+  TitleTV3({required this.text});
+  @override
+  Widget build(BuildContext context) {
+    return Text(text,
+        textAlign: TextAlign.left,
+        style: ShopTextStyles.l_extraBold_2.copyWith(color: ShopColors.labelDarkBlue));
+  }
+}
 class LogoTV1 extends StatelessWidget {
   final String text;
   LogoTV1({required this.text});

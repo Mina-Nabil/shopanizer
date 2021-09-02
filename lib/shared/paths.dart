@@ -8,6 +8,7 @@ class Paths {
   //Home Floating button
   static final String addGroupIcon = 'assets/icons/group.svg';
   static final String addListIcon = 'assets/icons/list.svg';
+  static final String addItemIcon = 'assets/icons/item.svg';
 
   //ButtonIcons
   static final String checkIcon = 'assets/icons/check.svg';

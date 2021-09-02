@@ -41,6 +41,7 @@ class ShopColors {
 
   ///#3BF2A3 , 100%
   static const Color greenButton = Color(0xFF3BF2A3);
+  static const Color lightGreenButton = Color(0xFF94EF60);
 
   ///#37CCF4 , 100%
   static const Color blueButton = blue;
@@ -51,6 +52,8 @@ class ShopColors {
   static Color photopickerBG = primary.withAlpha(11); // alpha 5%
 
   static Color groupTileBG = blue.withAlpha(17); //8%
+  static Color listTileBG  = green.withAlpha(17); //8%
+  static Color itemTileBG  = Color(0xFF3BF2A3).withAlpha(17); //8%
 
 }
 
@@ -98,6 +101,10 @@ class ShopTextStyles {
   /// Font Size : 22  ,  Font Weight : Bold
   static const TextStyle l_b_2 =
       TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold);
+
+  /// Font Size : 22  ,  Font Weight : Bold
+  static const TextStyle l_extraBold_2 =
+      TextStyle(fontSize: 22.0, fontWeight: FontWeight.w800);
 
   /// Font Size : 24  ,  Font Weight : Regular
   static const TextStyle l_r_3 =
