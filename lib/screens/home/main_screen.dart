@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shopanizer/screens/home/home_tab.dart';
 import 'package:shopanizer/screens/home/tab_nav.dart';
-import 'package:shopanizer/screens/items/add_item.dart';
+import 'package:shopanizer/screens/items/item_screen.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 
@@ -21,11 +21,11 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
   int _selectedIndex = 0;
   late String _currentPage = HomeTab.screenName;
-  final List<String> pageKeys = [HomeTab.screenName, "Notifications", AddNewItemScreen.screenName];
+  final List<String> pageKeys = [HomeTab.screenName, "Notifications", ItemScreen.screenName];
   final Map<String, GlobalKey<NavigatorState>> _navigatorKeys = {
     HomeTab.screenName: GlobalKey<NavigatorState>(),
     "Notifications": GlobalKey<NavigatorState>(),
-    AddNewItemScreen.screenName: GlobalKey<NavigatorState>(),
+    ItemScreen.screenName: GlobalKey<NavigatorState>(),
   };
 
   late final TabController _tabController;
@@ -57,7 +57,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                 children: [
                   _buildOffStageWidget(HomeTab.screenName),
                   _buildOffStageWidget("Notifications"),
-                  _buildOffStageWidget(AddNewItemScreen.screenName),
+                  _buildOffStageWidget(ItemScreen.screenName),
                 ],
               ),
               bottomNavigationBar: Container(

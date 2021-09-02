@@ -16,47 +16,89 @@ class ShoppingItem {
   String _name;
   String _catgID;
   String? _desc;
-  double? _price;
-  String? _brand;
-  List<String> _images;
-  List<String> _urls;
-  List<String> _locations;
-  List<String> _fbs;
-  List<String> _instas;
+  late List<double> _price;
+  late List<String> _brand;
+  late List<String> _images;
+  late List<String> _urls;
+  late List<String> _locations;
+  late List<String> _fbs;
+  late List<String> _instas;
+  String? _groupName;
+  String? _listName;
 
-  ShoppingItem(
-      {required String name,
-      required String categoryID,
-      String? desc,
-      double? price,
-      String? brand,
-      List<String>? images,
-      List<String>? urls,
-      List<String>? locations,
-      List<String>? fbs,
-      List<String>? instas})
-      : _name = name,
+  ShoppingItem({
+    required String name,
+    required String categoryID,
+    String? desc,
+    List<double>? price,
+    List<String>? brand,
+    List<String>? images,
+    List<String>? urls,
+    List<String>? locations,
+    List<String>? fbs,
+    List<String>? instas,
+    String? groupName,
+    String? listName,
+  })  : _name = name,
         _catgID = categoryID,
         _desc = desc,
-        _price = price,
-        _brand = brand,
+        _price = price ?? [],
+        _brand = brand ?? [],
         _images = images ?? [],
         _urls = urls ?? [],
         _locations = locations ?? [],
         _fbs = fbs ?? [],
-        _instas = instas ?? [];
+        _instas = instas ?? [],
+        _groupName = groupName,
+        _listName = listName;
 
-  ShoppingItem.fromQuerySnapshots(QueryDocumentSnapshot qds)
+  ShoppingItem.fromSnapshot(DocumentSnapshot qds)
       : _name = qds[nameKey],
         _catgID = qds[categoryIDKey],
-        _desc = qds[descKey],
-        _price = qds[priceKey],
-        _brand = qds[brandKey],
-        _images = qds[imagesListKey] ?? [],
-        _urls = qds[urlsListKey] ?? [],
-        _locations = qds[locationListKey] ?? [],
-        _fbs = qds[facebookListKey] ?? [],
-        _instas = qds[instagramListKey] ?? [];
+        _desc = qds[descKey] {
+    try {
+      _desc = qds[descKey];
+    } catch (e) {
+      _desc = null;
+    }
+    try {
+      _brand = qds[brandKey].cast<String>();
+    } catch (e) {
+      _brand = [];
+    }
+    try {
+      _price = qds[priceKey].cast<double>() ?? [];
+    } catch (e) {
+      _price = [];
+    }
+    try {
+      _images = qds[imagesListKey].cast<String>() ?? [];
+    } catch (e) {
+      _images = [];
+    }
+    try {
+      _urls = qds[urlsListKey].cast<String>() ?? [];
+    } catch (e) {
+      _urls = [];
+    }
+    try {
+      _locations = qds[locationListKey].cast<String>() ?? [];
+    } catch (e) {
+      _locations = [];
+    }
+    try {
+      _fbs = qds[facebookListKey].cast<String>() ?? [];
+    } catch (e) {
+      _fbs = [];
+    }
+    try {
+      _instas = qds[instagramListKey].cast<String>() ?? [];
+    } catch (e) {
+      _instas = [];
+    }
+    _listName = "Hamada";
+    _groupName = "3zo";
+  }
 
   String get name {
     return _name;
@@ -70,11 +112,19 @@ class ShoppingItem {
     return _desc;
   }
 
-  double? get price {
+  String? get groupName {
+    return _groupName;
+  }
+
+  String? get listName {
+    return _listName;
+  }
+
+  List<double> get price {
     return _price;
   }
 
-  String? get brand {
+  List<String> get brand {
     return _brand;
   }
 

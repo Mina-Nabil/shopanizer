@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shopanizer/models/item.dart';
 import 'package:shopanizer/screens/home/home_tab.dart';
-import 'package:shopanizer/screens/items/add_item.dart';
+import 'package:shopanizer/screens/items/item_screen.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -8,6 +9,9 @@ class TabNavigatorRoutes {
 }
 
 class TabNavigator extends StatelessWidget {
+
+  final ShoppingItem item = ShoppingItem(name: "Talga LG", categoryID: "1", brand: ["Ikea"], fbs: ["www.fb.com/ikea", "www.fb.com/ikeaaa", "ww.fb.com"], desc: "Testing Shopping Item", price: [40.0], instas: ["www.inta.com", "www.insta.git"]);
+
   TabNavigator({required this.navigatorKey, required this.tabItem});
   final GlobalKey<NavigatorState> navigatorKey;
   final String tabItem;
@@ -25,7 +29,7 @@ class TabNavigator extends StatelessWidget {
           child: Text("Notifications"),
         ),
       ));
-    else if (tabItem == AddNewItemScreen.screenName) child = SafeArea(child: AddNewItemScreen());
+    else if (tabItem == ItemScreen.screenName) child = SafeArea(child: ItemScreen("VJLooiV43woewB9il70o"));
 
     return Navigator(
       key: navigatorKey,
