@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopanizer/screens/items/item_screen.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 
@@ -23,7 +24,7 @@ class ItemTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
 
-      //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ListScreen())),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ItemScreen("1"))),
     );
   }
 }

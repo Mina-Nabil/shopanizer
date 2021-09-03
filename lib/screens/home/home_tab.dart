@@ -12,6 +12,7 @@ import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shopanizer/shared/widgets/search_field.dart';
 
 class HomeTab extends StatefulWidget {
   static final screenName = "Home";
@@ -68,20 +69,7 @@ class _HomeTabState extends State<HomeTab> {
         SizedBox(
           height: 5,
         ),
-        TextField(
-          style: TextStyle(),
-          decoration: InputDecoration(
-              isDense: true,
-              prefixIcon: Icon(
-                Icons.search,
-                color: ShopColors.hintColor,
-              ),
-              hintStyle: TextStyle(
-                color: ShopColors.hintColor,
-              ),
-              contentPadding: EdgeInsets.all(10),
-              hintText: "Search"),
-        ),
+        SearchField(),
       ],
     );
   }

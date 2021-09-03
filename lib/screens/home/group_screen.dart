@@ -6,6 +6,7 @@ import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
+import 'package:shopanizer/shared/widgets/search_field.dart';
 import 'package:shopanizer/shared/widgets/shop_list_tile.dart';
 
 import 'new_list_screen.dart';
@@ -36,6 +37,8 @@ class GroupScreen extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(height: 10,),
+            SearchField(),
             SizedBox(height: 10,),
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 

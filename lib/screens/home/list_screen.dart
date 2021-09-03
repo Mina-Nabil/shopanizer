@@ -9,6 +9,7 @@ import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
 import 'package:shopanizer/shared/widgets/item_tile.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
+import 'package:shopanizer/shared/widgets/search_field.dart';
 class ListScreen extends StatelessWidget {
 
   @override
@@ -36,6 +37,8 @@ class ListScreen extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(height: 10,),
+            SearchField(),
             SizedBox(height: 10,),
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 
