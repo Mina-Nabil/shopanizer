@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopanizer/models/group.dart';
+import 'package:shopanizer/screens/home/group_screen.dart';
 import 'package:shopanizer/shared/widgets/empty_home.dart';
-import 'package:shopanizer/shared/widgets/group_tile.dart';
+import 'package:shopanizer/shared/widgets/shopanizer_tile.dart';
 
 
 class GroupsList extends StatefulWidget {
@@ -28,7 +29,8 @@ class _GroupsListState extends State<GroupsList> {
         : ListView(
             children: _groups.map((e) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
-              child: GroupTile(e),
+              child:  ShopanizerTile.group(e,
+                onPressed: () =>Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => GroupScreen()))),
             )).toList(),
           );
   }

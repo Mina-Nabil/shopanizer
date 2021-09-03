@@ -3,11 +3,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:shopanizer/models/item.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/screens/items/add_item.dart';
+import 'package:shopanizer/screens/items/item_screen.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
-import 'package:shopanizer/shared/widgets/item_tile.dart';
+import 'package:shopanizer/shared/widgets/shopanizer_tile.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:shopanizer/shared/widgets/search_field.dart';
 class ListScreen extends StatelessWidget {
@@ -42,7 +43,7 @@ class ListScreen extends StatelessWidget {
             SizedBox(height: 10,),
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 
-            Expanded(child: itemsList())
+            Expanded(child: itemsList(context))
           ],
         ),
       ),
@@ -57,7 +58,7 @@ class ListScreen extends StatelessWidget {
     );
   }
 
-  Widget itemsList() {
+  Widget itemsList(context) {
     List<ShoppingItem> _lists = [
       ShoppingItem(name: "Bedroom 1", categoryID: "1"),
       ShoppingItem(name: "Bedroom 2", categoryID: "1"),
@@ -65,7 +66,7 @@ class ListScreen extends StatelessWidget {
     return ListView(
       children: _lists.map((e) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
-              child: ItemTile(),
+              child: ShopanizerTile.item(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ItemScreen("1")))),
             )).toList(),
     );
   }

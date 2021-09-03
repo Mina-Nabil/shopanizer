@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shopanizer/models/list_model.dart';
+import 'package:shopanizer/screens/home/list_screen.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
+import 'package:shopanizer/shared/widgets/shopanizer_tile.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:shopanizer/shared/widgets/search_field.dart';
-import 'package:shopanizer/shared/widgets/shop_list_tile.dart';
 
 import 'new_list_screen.dart';
 
@@ -42,7 +43,7 @@ class GroupScreen extends StatelessWidget {
             SizedBox(height: 10,),
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 
-            Expanded(child: listsList())
+            Expanded(child: listsList(context))
           ],
         ),
       ),
@@ -54,7 +55,7 @@ class GroupScreen extends StatelessWidget {
     );
   }
 
-  Widget listsList() {
+  Widget listsList(context) {
     List<ListModel> _lists = [
       ListModel(id: "1", name: "Grocery", desc: ""),
       ListModel(id: "1", name: "Grocery", desc: ""),
@@ -62,7 +63,7 @@ class GroupScreen extends StatelessWidget {
     return ListView(
       children: _lists.map((e) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
-              child: ShopListTile(),
+              child: ShopanizerTile.list(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ListScreen())),),
             )).toList(),
     );
   }

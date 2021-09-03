@@ -37,102 +37,105 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: WillPopScope(
-            onWillPop: () async {
-              final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
-              if (isFirstRouteInCurrentTab) {
-                if (_currentPage != HomeTab.screenName) {
-                  _selectTab(0);
-                  return false;
+    return SafeArea(
+      top: false,
+      child: GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: WillPopScope(
+              onWillPop: () async {
+                final isFirstRouteInCurrentTab = !await _navigatorKeys[_currentPage]!.currentState!.maybePop();
+                if (isFirstRouteInCurrentTab) {
+                  if (_currentPage != HomeTab.screenName) {
+                    _selectTab(0);
+                    return false;
+                  }
                 }
-              }
-              // let system handle back button if we're on the first route
-              return isFirstRouteInCurrentTab;
-            },
-            child: Scaffold(
-              backgroundColor: Colors.white,
-              body: Stack(
-                children: [
-                  _buildOffStageWidget(HomeTab.screenName),
-                  _buildOffStageWidget("Notifications"),
-                  _buildOffStageWidget(ItemScreen.screenName),
-                ],
-              ),
-              bottomNavigationBar: Container(
-                decoration: BoxDecoration(
-                    color: ShopColors.tabBarBG, border: Border(top: BorderSide(width: 0.25, color: ShopColors.tabBarBorder))),
-                child: TabBar(
-                  indicatorColor: Colors.transparent,
-                  controller: _tabController,
-                  onTap: _selectTab,
-                  tabs: [
-                    Tab(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.only(top: navBarTopMargin),
-                            child: SvgPicture.asset(
-                              Paths.homePageNavBarIcon,
-                              color: _selectedIndex == 0 ? ShopColors.primary : ShopColors.unSelectedTab,
-                              width: navBarIconSize,
-                            ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: _selectedIndex == 0 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
-                            width: navBarHighlightCircleRadius,
-                            height: navBarHighlightCircleRadius,
-                          )
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                              margin: EdgeInsets.only(top: navBarTopMargin),
-                              child: SvgPicture.asset(
-                                Paths.notificationPageNavBarIcon,
-                                color: _selectedIndex == 1 ? ShopColors.primary : ShopColors.unSelectedTab,
-                                width: navBarIconSize,
-                              )),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: _selectedIndex == 1 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
-                            width: navBarHighlightCircleRadius,
-                            height: navBarHighlightCircleRadius,
-                          )
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Container(
-                              margin: EdgeInsets.only(top: navBarTopMargin),
-                              child: SvgPicture.asset(
-                                Paths.profilePageNavBarIcon,
-                                color: _selectedIndex == 2 ? ShopColors.primary : ShopColors.unSelectedTab,
-                                width: navBarIconSize,
-                              )),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: _selectedIndex == 2 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
-                            width: navBarHighlightCircleRadius,
-                            height: navBarHighlightCircleRadius,
-                          )
-                        ],
-                      ),
-                    ),
+                // let system handle back button if we're on the first route
+                return isFirstRouteInCurrentTab;
+              },
+              child: Scaffold(
+                backgroundColor: Colors.white,
+                body: Stack(
+                  children: [
+                    _buildOffStageWidget(HomeTab.screenName),
+                    _buildOffStageWidget("Notifications"),
+                    _buildOffStageWidget(ItemScreen.screenName),
                   ],
                 ),
-              ),
-            )));
+                bottomNavigationBar: Container(
+                  decoration: BoxDecoration(
+                      color: ShopColors.tabBarBG, border: Border(top: BorderSide(width: 0.25, color: ShopColors.tabBarBorder))),
+                  child: TabBar(
+                    indicatorColor: Colors.transparent,
+                    controller: _tabController,
+                    onTap: _selectTab,
+                    tabs: [
+                      Tab(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: navBarTopMargin),
+                              child: SvgPicture.asset(
+                                Paths.homePageNavBarIcon,
+                                color: _selectedIndex == 0 ? ShopColors.primary : ShopColors.unSelectedTab,
+                                width: navBarIconSize,
+                              ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: _selectedIndex == 0 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
+                              width: navBarHighlightCircleRadius,
+                              height: navBarHighlightCircleRadius,
+                            )
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(top: navBarTopMargin),
+                                child: SvgPicture.asset(
+                                  Paths.notificationPageNavBarIcon,
+                                  color: _selectedIndex == 1 ? ShopColors.primary : ShopColors.unSelectedTab,
+                                  width: navBarIconSize,
+                                )),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: _selectedIndex == 1 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
+                              width: navBarHighlightCircleRadius,
+                              height: navBarHighlightCircleRadius,
+                            )
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                                margin: EdgeInsets.only(top: navBarTopMargin),
+                                child: SvgPicture.asset(
+                                  Paths.profilePageNavBarIcon,
+                                  color: _selectedIndex == 2 ? ShopColors.primary : ShopColors.unSelectedTab,
+                                  width: navBarIconSize,
+                                )),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: _selectedIndex == 2 ? ShopColors.blueButton : Colors.transparent, shape: BoxShape.circle),
+                              width: navBarHighlightCircleRadius,
+                              height: navBarHighlightCircleRadius,
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ))),
+    );
   }
 
   void _selectTab(int index) {
