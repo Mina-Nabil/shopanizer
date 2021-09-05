@@ -33,7 +33,7 @@ class _ItemScreenState extends State<ItemScreen> {
       } catch (e) {
         item = null;
       }
-      setState(() {});
+      if (this.mounted) setState(() {});
     });
     super.initState();
   }
