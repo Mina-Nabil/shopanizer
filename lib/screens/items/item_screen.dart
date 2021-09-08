@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/models/item.dart';
 import 'package:shopanizer/services/ItemsDBService.dart';
-import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
+import 'package:shopanizer/shared/widgets/bread_crumbs.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:flutter_placeholder_textlines/placeholder_lines.dart';
 import 'package:shopanizer/shared/widgets/category_label.dart';
-import 'package:shopanizer/shared/widgets/circular_icon.dart';
+import 'package:shopanizer/shared/widgets/horizontal_images_list.dart';
+import 'package:shopanizer/shared/widgets/shop_image_placeholder.dart';
 
 class ItemScreen extends StatefulWidget {
   static const String screenName = "ShowScreen";
@@ -22,6 +23,7 @@ class _ItemScreenState extends State<ItemScreen> {
   //Screen dimensions
   static const double _titlePlaceholderWidthRatio = 2.5;
   static const double _breadCrumbsPlaceholderWidthRatio = _titlePlaceholderWidthRatio / 1.2;
+  static const double _horizontalImagesListHeight = 135;
 
   ShoppingItem? item;
 
@@ -52,6 +54,8 @@ class _ItemScreenState extends State<ItemScreen> {
         children: [
           buildTitleWidget(),
           buildBreadCrumbs(),
+          ItemScreenSpacing(),
+          buildHorizontalImagesList(),
         ],
       ),
     );
@@ -79,9 +83,8 @@ class _ItemScreenState extends State<ItemScreen> {
   }
 
   Widget buildBreadCrumbs() {
-    List<Widget> breadCrumbs = [];
     if (item == null) {
-      return Center(
+      var breadCrumbPlacholder = Center(
           child: Container(
               width: MediaQuery.of(context).size.width / _breadCrumbsPlaceholderWidthRatio,
               margin: EdgeInsets.all(12),
@@ -94,45 +97,42 @@ class _ItemScreenState extends State<ItemScreen> {
                 align: TextAlign.center,
                 color: ShopColors.blue,
               )));
+      return breadCrumbPlacholder;
     } else {
-      if (item!.listName != null) {
-        breadCrumbs.add(Container(
-            margin: EdgeInsets.symmetric(horizontal: 6),
-            child: CircularIcon(
-                iconPath: Paths.addListIcon,
-                iconColor: ShopColors.green,
-                backgroundColor: ShopColors.green.withAlpha((.3 * 255).toInt()))));
-        breadCrumbs.add(Text(item!.listName!));
-        if (item!.groupName != null) {
-          breadCrumbs.add(Text(" |"));
-        }
-      }
-      if (item!.groupName != null) {
-        breadCrumbs.add(Container(
-            margin: EdgeInsets.symmetric(horizontal: 6),
-            child: CircularIcon(
-                iconPath: Paths.addGroupIcon,
-                iconColor: ShopColors.blue,
-                backgroundColor: ShopColors.blue.withAlpha((.3 * 255).toInt()))));
-        breadCrumbs.add(Text(item!.groupName!));
-      }
-
       return Column(
         children: [
-          Container(
-              margin: EdgeInsets.all(2),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: breadCrumbs,
-              )),
+          ShopanizerBreadCrumbs.fromItem(item!),
           Container(
               margin: EdgeInsets.all(2),
               child: CategoryLabel(
                 text: "Hamada",
-                bgColor: Colors.greenAccent,
+                bgColor: ShopColors.listTileBG,
               )),
         ],
       );
     }
+  }
+
+  Widget buildHorizontalImagesList() {
+    if (item != null) {
+      return ShopHorizontalImagesList(height: _horizontalImagesListHeight, item: item);
+    } else {
+      return Container(
+          height: _horizontalImagesListHeight,
+          child: ListView(scrollDirection: Axis.horizontal, children: [
+            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: MediaQuery.of(context).size.width / 3),
+            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: MediaQuery.of(context).size.width / 3),
+            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: MediaQuery.of(context).size.width / 3),
+          ]));
+    }
+  }
+}
+
+
+class ItemScreenSpacing extends StatelessWidget {
+  Widget build(context) {
+    return Container(
+      height: 20,
+    );
   }
 }
