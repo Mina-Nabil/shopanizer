@@ -23,6 +23,8 @@ class ShopanizerImage extends StatelessWidget {
     return Image.network(
       _url,
       fit: BoxFit.fitWidth,
+      width: _imageWidth,
+      height: _height,
       cacheWidth: _imageWidth.toInt(),
       cacheHeight: _height.toInt(),
       loadingBuilder: (context, child, progress) {
