@@ -36,6 +36,7 @@ class Paths {
   static final String logoIcon = 'assets/icons/logo.svg';
   static final String fbBlueBGIcon = 'assets/icons/fb_icon_bluebg.svg';
   static final String gmailRedBGIcon = 'assets/icons/gmail_plus_redbg.svg';
+  static final String loveIcon = 'assets/icons/love.svg';
 
   static final String camera = "assets/icons/camera.svg";
 

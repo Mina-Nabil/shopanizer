@@ -1,0 +1,11 @@
+<svg id="Component_97_22" data-name="Component 97 – 22" xmlns="http://www.w3.org/2000/svg" width="11.491" height="10.141" viewBox="0 0 11.491 10.141">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #ff006e;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path id="Heart" class="cls-1" d="M10.6.944A3.088,3.088,0,0,0,6.2.944l-.432.432L5.338.944A3.108,3.108,0,0,0,.944,5.338l4.827,4.827L10.6,5.338a3.088,3.088,0,0,0,0-4.395" transform="translate(-0.025 -0.025)"/>
+</svg>

@@ -14,7 +14,7 @@ class ShoppingCategory {
 
   ShoppingCategory(this.id, this.name, this.desc, this.value) ;
 
-  ShoppingCategory.fromSnapshot(QueryDocumentSnapshot qds) :
+  ShoppingCategory.fromSnapshot(DocumentSnapshot qds) :
     this.id = qds.id,
     this.name = qds[nameKey],
     this.desc = qds[descKey],

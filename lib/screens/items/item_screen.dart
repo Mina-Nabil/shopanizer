@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:shopanizer/models/item.dart';
 import 'package:shopanizer/services/ItemsDBService.dart';
+import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/bread_crumbs.dart';
@@ -21,9 +23,13 @@ class ItemScreen extends StatefulWidget {
 
 class _ItemScreenState extends State<ItemScreen> {
   //Screen dimensions
-  static const double _titlePlaceholderWidthRatio = 2.5;
-  static const double _breadCrumbsPlaceholderWidthRatio = _titlePlaceholderWidthRatio / 1.2;
+  static const double _titlePlaceholderWidth = 120; // the ratio is 1 / 2.5 of the screen
+  static const double _descPlaceholderWidth = 300;
+  static const double _breadCrumbsPlaceholderWidthRatio = 150;
   static const double _horizontalImagesListHeight = 135;
+  static const double _imagesWidth = 120;
+  static const double _belowImageslistPadding = 20;
+  static const double _loversPlaceholderWidth = 20;
 
   ShoppingItem? item;
 
@@ -56,6 +62,19 @@ class _ItemScreenState extends State<ItemScreen> {
           buildBreadCrumbs(),
           ItemScreenSpacing(),
           buildHorizontalImagesList(),
+          ItemScreenSpacing(),
+          buildDescription(),
+          ItemScreenSpacing(),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: _belowImageslistPadding),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                buildLovers(),
+              ],
+            ),
+          ),
+          ItemScreenSpacing(),
         ],
       ),
     );
@@ -65,7 +84,7 @@ class _ItemScreenState extends State<ItemScreen> {
     if (item == null) {
       return Center(
         child: Container(
-            width: MediaQuery.of(context).size.width / _titlePlaceholderWidthRatio,
+            width: _titlePlaceholderWidth,
             margin: EdgeInsets.all(12),
             child: PlaceholderLines(
               count: 1,
@@ -120,14 +139,74 @@ class _ItemScreenState extends State<ItemScreen> {
       return Container(
           height: _horizontalImagesListHeight,
           child: ListView(scrollDirection: Axis.horizontal, children: [
-            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: MediaQuery.of(context).size.width / 3),
-            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: MediaQuery.of(context).size.width / 3),
-            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: MediaQuery.of(context).size.width / 3),
+            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: _imagesWidth),
+            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: _imagesWidth),
+            ShopImagePlaceholder(height: _horizontalImagesListHeight, width: _imagesWidth),
           ]));
     }
   }
-}
 
+  Widget buildDescription() {
+    if (item == null) {
+      return Center(
+        child: Container(
+            width: _descPlaceholderWidth,
+            margin: EdgeInsets.all(_belowImageslistPadding),
+            child: PlaceholderLines(
+              count: 3,
+              animate: true,
+              lineHeight: 6,
+              align: TextAlign.center,
+              maxOpacity: 0.3,
+              minOpacity: 0.1,
+              color: ShopColors.labelDarkBlue,
+            )),
+      );
+    } else {
+      return Container(
+          alignment: Alignment.topCenter,
+          padding: EdgeInsets.symmetric(horizontal: _belowImageslistPadding),
+          child: ReadMoreTextTV(text: item!.desc ?? ""));
+    }
+  }
+
+  Widget buildLovers() {
+    if (item == null) {
+      return Center(
+        child: Container(
+            width: _loversPlaceholderWidth,
+            margin: EdgeInsets.all(_belowImageslistPadding),
+            child: PlaceholderLines(
+              count: 1,
+              animate: true,
+              lineHeight: 6,
+              align: TextAlign.center,
+              maxOpacity: 0.3,
+              minOpacity: 0.1,
+              color: ShopColors.labelDarkBlue,
+            )),
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Container(
+              margin: EdgeInsets.symmetric(horizontal: 2),
+              child: SvgPicture.asset(
+                Paths.loveIcon,
+                color: Colors.red,
+              )),
+          Container(
+              margin: EdgeInsets.symmetric(horizontal: 5),
+              child: LabelTV2(
+                text: 2.toString(),
+                color: ShopColors.labelDarkBlue,
+              ))
+        ],
+      );
+    }
+  }
+}
 
 class ItemScreenSpacing extends StatelessWidget {
   Widget build(context) {

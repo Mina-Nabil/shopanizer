@@ -14,7 +14,7 @@ class Group {
 
   Group(this.id, this.name, this.desc);
 
-  Group.fromSnapshot(QueryDocumentSnapshot qds) : 
+  Group.fromSnapshot(DocumentSnapshot qds) : 
     this.id = qds.id,
     this.name = qds[nameKey],
     this.desc = qds[descKey];

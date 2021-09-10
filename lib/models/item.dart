@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ShoppingItem {
   static const String documentKey = "items";
+  static const String loversDocumentKey = "itemsUsers";
+
   static const String nameKey = "name";
   static const String descKey = "desc";
   static const String categoryIDKey = "catgID";
@@ -13,6 +15,7 @@ class ShoppingItem {
   static const String facebookListKey = "fbs";
   static const String instagramListKey = "instas";
 
+  String? _id;
   String _name;
   String _catgID;
   String? _desc;
@@ -25,10 +28,13 @@ class ShoppingItem {
   late List<String> _instas;
   String? _groupName;
   String? _listName;
+  bool? _isLoved;
+  List<String>? _lovers;
 
   ShoppingItem({
     required String name,
     required String categoryID,
+    String? id,
     String? desc,
     List<double>? price,
     List<String>? brand,
@@ -42,6 +48,7 @@ class ShoppingItem {
   })  : _name = name,
         _catgID = categoryID,
         _desc = desc,
+        _id = id,
         _price = price ?? [],
         _brand = brand ?? [],
         _images = images ?? [],
@@ -53,7 +60,8 @@ class ShoppingItem {
         _listName = listName;
 
   ShoppingItem.fromSnapshot(DocumentSnapshot qds)
-      : _name = qds[nameKey],
+      : _id = qds.id,
+        _name = qds[nameKey],
         _catgID = qds[categoryIDKey],
         _desc = qds[descKey] {
     try {
@@ -100,6 +108,11 @@ class ShoppingItem {
     _groupName = "3zo";
   }
 
+  // Future<bool> like() {}
+
+  String? get id {
+    return _id;
+  }
   String get name {
     return _name;
   }
@@ -122,6 +135,32 @@ class ShoppingItem {
 
   List<double> get price {
     return _price;
+  }
+
+  double get avgPrice {
+    double ret = 0;
+    int i = 0;
+    _price.forEach((e) {
+      i++;
+      ret = (e + ret) / i;
+    });
+    return ret;
+  }
+
+  double get maxPrice {
+    double ret = 0;
+    _price.forEach((e) {
+      if (e > ret) ret = e;
+    });
+    return ret;
+  }
+
+  double get minPrice {
+    double ret = double.infinity;
+    _price.forEach((e) {
+      if (e < ret) ret = e;
+    });
+    return ret;
   }
 
   List<String> get brand {

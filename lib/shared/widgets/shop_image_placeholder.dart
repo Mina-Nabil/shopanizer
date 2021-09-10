@@ -14,9 +14,9 @@ class ShopImagePlaceholder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.all(2.0),
         height: _height,
         width: _width,
+        margin: EdgeInsets.all(2.0),
         color: ShopColors.primary.withAlpha((255 * .3).toInt()),
         child: Center(
             child: Icon(
