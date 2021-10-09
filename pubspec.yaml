@@ -40,6 +40,7 @@ dependencies:
   validators: ^3.0.0
   flutter_placeholder_textlines: ^1.1.2
   readmore: ^2.1.0
+  pin_code_fields: ^7.3.0
 
 dev_dependencies:
   flutter_test:
@@ -91,6 +92,7 @@ flutter:
     - assets/icons/fb_icon_bluebg.svg
     - assets/icons/gmail_plus_redbg.svg
     - assets/icons/love.svg
+    - assets/icons/congratulations.svg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
