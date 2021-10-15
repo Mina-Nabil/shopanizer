@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:shopanizer/screens/auth/mobile_number_screen.dart';
-import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/auth/auth_header.dart';
@@ -78,6 +76,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MobileNumberScreen())),
                 ),
               ),
+              VerticalSpace(height: 15,),
             ]
           ))
       ),

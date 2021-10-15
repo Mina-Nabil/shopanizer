@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shopanizer/screens/auth/add_picture_screen.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
@@ -34,7 +35,11 @@ class FinishSignupScreen extends StatelessWidget {
                 child: RoundedCornerButton.text(
                   text: "Next",
                   backgroundColor: ShopColors.primary,
-                  onPressed: () => {},
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              AddPictureScreen())),
                 ),
               ),
             ],

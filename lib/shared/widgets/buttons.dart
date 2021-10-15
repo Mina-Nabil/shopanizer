@@ -7,7 +7,7 @@ class RoundedCornerButton extends StatelessWidget {
   static const double radius = 20;
 
   final Widget child;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final Color backgroundColor;
 
   RoundedCornerButton({
