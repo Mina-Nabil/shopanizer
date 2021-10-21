@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/models/item.dart';
 import 'package:shopanizer/screens/home/home_tab.dart';
-import 'package:shopanizer/screens/items/item_screen.dart';
+import 'package:shopanizer/screens/home/settings_tab.dart';
 
 class TabNavigatorRoutes {
   static const String root = '/';
@@ -29,7 +29,8 @@ class TabNavigator extends StatelessWidget {
           child: Text("Notifications"),
         ),
       ));
-    else if (tabItem == ItemScreen.screenName) child = SafeArea(child: ItemScreen("VJLooiV43woewB9il70o"));
+    else if (tabItem == SettingsTab.screenName)
+      child = SafeArea(child: SettingsTab());
 
     return Navigator(
       key: navigatorKey,
