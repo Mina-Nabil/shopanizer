@@ -13,7 +13,7 @@ class SettingsTab extends StatelessWidget {
         child: Container(
           child: TextButton(
             onPressed: () async {
-              _auth.signOut();
+              await _auth.signOut();
             },
             child: Text("Logout")
           ),

@@ -49,7 +49,6 @@ class AuthService {
   //Helper functions
   ShopUser? _shopUserFromFirebaseUser(User? user) {
     if(user == null) {
-      print("user is null");
       return null;
     }
     return ShopUser(id: user.uid);

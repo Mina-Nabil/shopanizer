@@ -69,7 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         if(result == null) {
                           print("Sign Ip is failed");
                         } else {
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MainScreen()));
+                          //streambuilder will update view to main_screen
+                          //Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MainScreen()));
                         }
                       }
                     },
@@ -88,12 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     CircularButton(
                       child: SvgPicture.asset(Paths.fbBlueBGIcon),
                       backgroundColor: Colors.transparent,
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) => MainScreen()));
-                      },
+                      onPressed: () {},
                       radius: 20,
                     ),
                     CircularButton(
