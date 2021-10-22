@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/screens/auth/mobile_number_screen.dart';
 import 'package:shopanizer/services/Auth.dart';
+import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/auth/auth_header.dart';
@@ -89,10 +90,15 @@ class _SignupScreenState extends State<SignupScreen> {
                         print(_emailController.text);
                         print(_passwordController.text);
                         dynamic result = await _auth.signUpEmail(_emailController.text, _passwordController.text);
-                        print("2");
+
                         if(result == null) {
                           print("Sign Up is failed");
                         } else {
+                          //Add this user to users database
+                          UserDatabaseServive userdb = UserDatabaseServive();
+                          await userdb.updateUserData(_firstNameController.text, _lastNameController.text, _emailController.text);
+
+                          //Should be remove as the stream builder will update once there is valid user
                           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MobileNumberScreen()));
                         }
                       }
