@@ -76,6 +76,6 @@ class _HomeTabState extends State<HomeTab> {
 
   Widget _buildBody() {
     return Expanded(
-        child: StreamProvider<List<Group>>(initialData: [], create: (_) => GroupsDBService().groups, child: GroupsList()));
+        child: StreamProvider<List<ShopGroup>>(initialData: [], create: (_) => GroupsDBService().groups, child: GroupsList()));
   }
 }

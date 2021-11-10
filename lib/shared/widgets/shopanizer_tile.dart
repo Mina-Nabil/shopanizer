@@ -5,7 +5,7 @@ import 'package:shopanizer/shared/widgets/TextViews.dart';
 
 class ShopanizerTile extends StatelessWidget {
 
-  ShopanizerTile.group(Group group, {required this.onPressed}) {
+  ShopanizerTile.group(ShopGroup group, {required this.onPressed}) {
     tileColor = ShopColors.groupTileBG;
     image = Image.network("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ba-0111778-lr-1592404733.jpg",fit: BoxFit.contain,);
     title = group.name;
@@ -34,7 +34,7 @@ class ShopanizerTile extends StatelessWidget {
   ShopanizerTile.item({required this.onPressed}) {
     tileColor = ShopColors.listTileBG;
     image = Image.network("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ba-0111778-lr-1592404733.jpg",fit: BoxFit.contain,);
-    title = "List Name";
+    title = "Item Name";
     subtitle = "15 Items";
     trailing = Column(
         mainAxisAlignment: MainAxisAlignment.end,

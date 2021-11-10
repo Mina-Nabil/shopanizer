@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shopanizer/models/group.dart';
 import 'package:shopanizer/models/list_model.dart';
 import 'package:shopanizer/screens/home/list_screen.dart';
 import 'package:shopanizer/shared/paths.dart';
@@ -13,6 +14,9 @@ import 'package:shopanizer/shared/widgets/search_field.dart';
 import 'new_list_screen.dart';
 
 class GroupScreen extends StatelessWidget {
+  GroupScreen(this.currentGroup);
+
+  ShopGroup currentGroup;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +36,7 @@ class GroupScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleTV3(text: "My Home",),
+                    TitleTV3(text: currentGroup.name,),
                     LabelTV2(text: "0 Lists | 2 Participants",),
                   ],
                 )

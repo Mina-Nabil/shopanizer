@@ -14,11 +14,11 @@ class GroupsList extends StatefulWidget {
 }
 
 class _GroupsListState extends State<GroupsList> {
-  List<Group> _groups = [];
+  List<ShopGroup> _groups = [];
 
   @override
   void didChangeDependencies() {
-    _groups = Provider.of<List<Group>>(context);
+    _groups = Provider.of<List<ShopGroup>>(context);
     super.didChangeDependencies();
   }
 
@@ -30,7 +30,7 @@ class _GroupsListState extends State<GroupsList> {
             children: _groups.map((e) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 5),
               child:  ShopanizerTile.group(e,
-                onPressed: () =>Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => GroupScreen()))),
+                onPressed: () =>Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => GroupScreen(e)))),
             )).toList(),
           );
   }

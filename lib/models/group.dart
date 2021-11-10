@@ -1,22 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Group {
+abstract class ShopModel {
+  Map<String, dynamic> toJson();
+}
+class ShopGroup extends ShopModel{
 
+  ShopGroup({required this.name, this.desc="", this.groupPhoto="", required this.members});
 
-  static const String documentKey = "groups" ; 
-  static const String nameKey = "name" ; 
-  static const String descKey = "desc" ; 
-  static const String imageURLKey = "image" ; 
-
-  late String name;
-  late String desc;
-  late String id;
-
-  Group(this.id, this.name, this.desc);
-
-  Group.fromSnapshot(DocumentSnapshot qds) : 
+  ShopGroup.fromSnapshot(DocumentSnapshot qds) :
     this.id = qds.id,
-    this.name = qds[nameKey],
-    this.desc = qds[descKey];
-  
+    this.name = qds[GroupFSKeys.name],
+    this.groupPhoto = qds[GroupFSKeys.photo],
+    this.members = (qds[GroupFSKeys.members] as List<dynamic>).cast<String>(),
+    this.desc = qds[GroupFSKeys.desc];
+
+  String id="";
+  String name;
+  String desc;
+  String groupPhoto;
+  List<String> members;
+
+  @override
+  Map<String, dynamic> toJson() {
+    return
+    {
+      GroupFSKeys.name    : name,
+      GroupFSKeys.desc    : desc,
+      GroupFSKeys.photo   : groupPhoto,
+      GroupFSKeys.members : members,
+    };
+  }
+}
+class GroupFSKeys {
+
+  static const String name = "name" ;
+  static const String desc = "desc" ;
+  static const String photo = "group_photo" ;
+  static const String members = "members" ;
 }
