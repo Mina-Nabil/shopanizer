@@ -35,7 +35,7 @@ class FinishSignupScreen extends StatelessWidget {
                 child: RoundedCornerButton.text(
                   text: "Next",
                   backgroundColor: ShopColors.primary,
-                  onPressed: () => Navigator.push(
+                  onPressed: () => Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>

@@ -66,7 +66,8 @@ class _AddPictureScreenState extends State<AddPictureScreen> {
               Center(
                 child: TextButton(
                       child:LabelTV2(text: "Skip this step",color: ShopColors.labelBlue),
-                      onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MainScreen())),
+                      //onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MainScreen())),
+                      onPressed: () => Navigator.pop(context),
                     ),
               ),
               SizedBox(

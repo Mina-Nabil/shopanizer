@@ -1,16 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shopanizer/models/group.dart';
-import 'package:shopanizer/services/DatabaseService.dart';
-
-class GroupsDBService extends DatabaseService {
+class GroupsDBService  {
 
   static const String groupsDocumentKey = "groups" ;
 
-  GroupsDBService({userID}) :super(userID: userID);
-
   Stream<List<ShopGroup>> get groups {
     print("get groups");
-    final Query<Map<String, dynamic>> userGroups = FirebaseFirestore.instance.collection(groupsDocumentKey).where('members', arrayContains: userID);
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    final Query<Map<String, dynamic>> userGroups = FirebaseFirestore.instance.collection(groupsDocumentKey).where('members', arrayContains: userId);
     return userGroups.snapshots().map(_groupsFromSnapshot);
   }
 

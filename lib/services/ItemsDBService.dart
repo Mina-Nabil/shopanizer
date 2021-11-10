@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shopanizer/models/category.dart';
 import 'package:shopanizer/models/item.dart';
 import 'package:shopanizer/models/shopper.dart';
-import 'package:shopanizer/services/DatabaseService.dart';
-
-class ItemsDBService extends DatabaseService {
-  ItemsDBService({userID}) : super(userID: userID);
-
+class ItemsDBService {
+  final userID = FirebaseAuth.instance.currentUser!.uid;
   final CollectionReference itemsCollection =
       FirebaseFirestore.instance.collection(ShoppingItem.documentKey); //.where('userID',?)
 

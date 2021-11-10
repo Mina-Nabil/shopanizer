@@ -2,13 +2,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-abstract class DatabaseService {
-  final String? userID;
-  DatabaseService({required this.userID});
-
-}
-
-
 class UserDatabaseServive {
     Future updateUserData(String firstName, String lastName, String email) async {
     final CollectionReference userCollection = FirebaseFirestore.instance.collection('users');

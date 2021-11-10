@@ -99,7 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           await userdb.updateUserData(_firstNameController.text, _lastNameController.text, _emailController.text);
 
                           //Should be remove as the stream builder will update once there is valid user
-                          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => MobileNumberScreen()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => MobileNumberScreen()));
                         }
                       }
                     } 
