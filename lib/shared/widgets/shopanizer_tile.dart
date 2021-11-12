@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopanizer/models/group.dart';
+import 'package:shopanizer/models/list_model.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 
@@ -18,10 +19,10 @@ class ShopanizerTile extends StatelessWidget {
       );
   }
 
-  ShopanizerTile.list({required this.onPressed}) {
+  ShopanizerTile.list(ShopList list, {required this.onPressed}) {
     tileColor = ShopColors.itemTileBG;
     image = Image.network("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ba-0111778-lr-1592404733.jpg",fit: BoxFit.contain,);
-    title = "Bedroom 1";
+    title = list.name;
     subtitle = "price";
     trailing = Column(
         mainAxisAlignment: MainAxisAlignment.end,

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shopanizer/models/group.dart';
+import 'package:shopanizer/models/list_model.dart';
 class GroupsDBService  {
 
   static const String groupsDocumentKey = "groups" ;
@@ -23,8 +24,28 @@ class GroupsDBService  {
     return qs.docs.map((e) => new ShopGroup.fromSnapshot(e)).toList();
   }
 
+  List<ShopList> _listsFromSnapshot(QuerySnapshot qs) {
+    return qs.docs.map((e) => new ShopList.fromSnapshot(e)).toList();
+  }
   Future? deleteGroup(groupID){
     final CollectionReference groupsCollection = FirebaseFirestore.instance.collection(groupsDocumentKey);
     groupsCollection.doc(groupID).delete();
   }
+
+  void addListToGroup(String groupPath, ShopList list) {
+      String listCollectionPath = groupPath + '/lists';
+
+    final CollectionReference listCollection = FirebaseFirestore.instance.collection(listCollectionPath);
+    listCollection.add(list.toJson());
+  }
+
+  
+  Stream<List<ShopList>> listIngroup(String groupPath) {
+    print("get listIngroup");
+    String listCollectionPath = groupPath + '/lists';
+    final CollectionReference listCollection = FirebaseFirestore.instance.collection(listCollectionPath);
+    return listCollection.snapshots().map(_listsFromSnapshot);
+  }
+
+
 }

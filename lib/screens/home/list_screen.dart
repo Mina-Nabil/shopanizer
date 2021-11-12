@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shopanizer/models/item.dart';
+import 'package:shopanizer/models/list_model.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/screens/items/add_item.dart';
 import 'package:shopanizer/screens/items/item_screen.dart';
@@ -12,6 +13,8 @@ import 'package:shopanizer/shared/widgets/shopanizer_tile.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:shopanizer/shared/widgets/search_field.dart';
 class ListScreen extends StatelessWidget {
+  ListScreen(this.currentList);
+  ShopList currentList;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +34,8 @@ class ListScreen extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TitleTV3(text: "Bedrooms",),
-                    LabelTV2(text: "list name | group name",),
-                    LabelTV2(text: "category",),
+                    TitleTV3(text: currentList.name,),
+                    LabelTV2(text: "group name",),
                   ],
                 )
               ],

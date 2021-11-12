@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:shopanizer/models/group.dart';
 import 'package:shopanizer/models/list_model.dart';
-import 'package:shopanizer/screens/home/list_screen.dart';
+import 'package:shopanizer/screens/home/lists_list.dart';
+import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/expandable_floating_button.dart';
-import 'package:shopanizer/shared/widgets/shopanizer_tile.dart';
 import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:shopanizer/shared/widgets/search_field.dart';
 
@@ -54,21 +55,14 @@ class GroupScreen extends StatelessWidget {
       floatingActionButton: EaxpandableFAB(
         widget1: SvgPicture.asset(Paths.addListIcon),
         backgroundColor1: ShopColors.lightGreenButton,
-        onPressed1: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => NewListScreen())),
+        onPressed1: () => Navigator.push(context, MaterialPageRoute(
+          builder: (BuildContext context) => NewListScreen(parentPath: currentGroup.path(),))
+        ),
       ),
     );
   }
 
   Widget listsList(context) {
-    List<ListModel> _lists = [
-      ListModel(id: "1", name: "Grocery", desc: ""),
-      ListModel(id: "1", name: "Grocery", desc: ""),
-    ];
-    return ListView(
-      children: _lists.map((e) => Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5),
-              child: ShopanizerTile.list(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ListScreen())),),
-            )).toList(),
-    );
+    return StreamProvider<List<ShopList>>(initialData: [], create: (_) => GroupsDBService().listIngroup(currentGroup.path()), child: ListsList());
   }
 }
