@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopanizer/models/list_model.dart';
 import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
@@ -10,8 +11,8 @@ import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class NewListScreen extends StatefulWidget {
 
-  NewListScreen({this.parentPath= ""});
-  String parentPath;
+  NewListScreen({this.parentId=""});
+  String parentId;
 
   @override
   _NewListScreenState createState() => _NewListScreenState();
@@ -40,10 +41,12 @@ class _NewListScreenState extends State<NewListScreen> {
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 DoneButton(
-                  onPressed: () {
-                    GroupsDBService db = new GroupsDBService();
+                  onPressed: () async {
                     ShopList newList = new ShopList(name: _listNameController.text);
-                    db.addListToGroup(widget.parentPath, newList);
+                    ShopList addedList = await Provider.of<GroupsProvider>(context, listen: false).addListToGroup(widget.parentId, newList);
+                    Provider.of<ListsProvider>(context, listen: false).addNewList(addedList);
+                    
+                    //SHould open list screen
                     Navigator.pop(context);
                   },
                 )

@@ -10,7 +10,7 @@ class ShopanizerTile extends StatelessWidget {
     tileColor = ShopColors.groupTileBG;
     image = Image.network("https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/ba-0111778-lr-1592404733.jpg",fit: BoxFit.contain,);
     title = group.name;
-    subtitle = "0 Lists | 3 participants";
+    subtitle = "${group.lists.length} Lists | 3 participants";
     trailing = Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shopanizer/models/group.dart';
-import 'package:shopanizer/screens/home/group_screen.dart';
 import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
@@ -25,15 +25,14 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
 
   addNewGroup() async {
     if(_formKey.currentState!.validate()) {
-      ShopGroup newgroup = await GroupsDBService().addNewGroup(
+      ShopGroup newgroup = await Provider.of<GroupsProvider>(context, listen: false).addNewGroup(
         ShopGroup(
           name: _groupNameController.text,
           desc: _groupDescController.text,
           members: [FirebaseAuth.instance.currentUser!.uid]
         )
       );
-
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => GroupScreen(newgroup)));
+      Navigator.pushReplacementNamed(context, '/group', arguments: newgroup);
     }
   }
 

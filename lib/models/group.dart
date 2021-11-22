@@ -13,6 +13,7 @@ class ShopGroup extends ShopModel{
     this.name = qds[GroupFSKeys.name],
     this.groupPhoto = qds[GroupFSKeys.photo],
     this.members = (qds[GroupFSKeys.members] as List<dynamic>).cast<String>(),
+    this.lists = (qds['lists'] as List<dynamic>).cast<String>(),
     this.desc = qds[GroupFSKeys.desc];
 
   String id="";
@@ -20,6 +21,7 @@ class ShopGroup extends ShopModel{
   String desc;
   String groupPhoto;
   List<String> members;
+  List<String> lists = [];
 
   @override
   Map<String, dynamic> toJson() {
@@ -29,6 +31,7 @@ class ShopGroup extends ShopModel{
       GroupFSKeys.desc    : desc,
       GroupFSKeys.photo   : groupPhoto,
       GroupFSKeys.members : members,
+      GroupFSKeys.lists   : lists,
     };
   }
 
@@ -43,4 +46,5 @@ class GroupFSKeys {
   static const String desc = "desc" ;
   static const String photo = "group_photo" ;
   static const String members = "members" ;
+  static const String lists   = "lists" ;
 }

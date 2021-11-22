@@ -10,6 +10,7 @@ class UserDatabaseServive {
       'firstName': firstName,
       'lastName' : lastName,
       'email'    : email,
+      'groups'   : []
     });
   }
 }
