@@ -17,21 +17,26 @@ class ShopList extends ShopModel {
     this.id = docSnapshot.id,
     this.name = docSnapshot['name'],
     this.desc = docSnapshot['desc'],
-    this.photo = ""/*docSnapshot['photo']*/;
+    this.photo = docSnapshot['photo'],
+    this.lists = (docSnapshot['lists'] as List<dynamic>).cast<String>();
   
 
   String id = "";
   String name;
   String desc;
   String photo;
+  List<String> lists = [];
+  List<String> items = [];
 
 
   @override
   Map<String, dynamic> toJson() {
     return {
-      'name' : name,
-      'desc' : desc,
+      'name'  : name,
+      'desc'  : desc,
       'photo' : photo,
+      'lists' : lists,
+      'items' : items,
     };
   }
 }

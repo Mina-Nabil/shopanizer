@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shopanizer/models/group.dart';
 import 'package:shopanizer/models/list_model.dart';
+import 'package:shopanizer/services/DatabaseService.dart';
 class GroupsDBService  {
 
   static const String groupsDocumentKey = "groups" ;
@@ -122,69 +123,23 @@ class GroupsProvider with ChangeNotifier {
 
   Future<ShopList> addListToGroup(String groupId, ShopList list) async {
 
-    // add the new list to listCollection
-    final CollectionReference listCollection = FirebaseFirestore.instance.collection('listCollection');
-    DocumentReference listDocRef = await listCollection.add(list.toJson());
-
-    print("list added with id = "+listDocRef.id);
+    String newListId = await DatabaseHelper.createNewList(groupId, list);
+    print("list added with id = "+ newListId);
     
     //add list id to group's lists array
     FirebaseFirestore.instance.collection('groupCollection').doc(groupId).update(
       {
-        'lists' : FieldValue.arrayUnion([listDocRef.id])
+        'lists' : FieldValue.arrayUnion([newListId])
       }
     );
 
     //add list id to local version of group
-    _groups.firstWhere((element) => element.id == groupId).lists.add(listDocRef.id);
+    _groups.firstWhere((element) => element.id == groupId).lists.add(newListId);
 
     //notify and return the new list object
     notifyListeners();
-    DocumentSnapshot documentSnapshot = await listDocRef.get();
-    return ShopList.fromSnapshot(documentSnapshot);
+
+    return await DatabaseHelper.getListById(newListId);
   }
 
-}
-
-class ListsProvider with ChangeNotifier {
-
-  List<ShopList> _lists = [];
-
-  Future<void> loadGroupLists(ShopGroup group) async {
-    _lists = [];
-    print("load GroupLists of group " + group.id);
-    
-    final CollectionReference listCollection = FirebaseFirestore.instance.collection('listCollection');
-    for (var listId in group.lists) {
-      //check if this list is loaded before
-      DocumentSnapshot docSnapshot = await listCollection.doc(listId).get();
-      _lists.add(ShopList.fromSnapshot(docSnapshot));
-    }
-    notifyListeners();
-  }
-
-
-  Future<void> loadListsById(List<String> ids) async {
-    _lists = [];
-    print("load lists of ids: " + ids.toString());
-    
-    final CollectionReference listCollection = FirebaseFirestore.instance.collection('listCollection');
-    for (var listId in ids) {
-      //check if this list is loaded before
-      DocumentSnapshot docSnapshot = await listCollection.doc(listId).get();
-      _lists.add(ShopList.fromSnapshot(docSnapshot));
-    }
-    print("done");
-
-    notifyListeners();
-  }
-
-  void addNewList(ShopList list) {
-    _lists.add(list);
-    notifyListeners();
-  }
-
-    List<ShopList> get lists {
-    return _lists;
-  }
 }

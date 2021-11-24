@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopanizer/models/list_model.dart';
+import 'package:shopanizer/screens/home/list_screen.dart';
+import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/widgets/buttons.dart';
 import 'package:shopanizer/shared/widgets/photo_picker.dart';
@@ -11,9 +13,9 @@ import 'package:shopanizer/shared/widgets/textbox_with_label.dart';
 
 class NewListScreen extends StatefulWidget {
 
-  NewListScreen({this.parentId=""});
+  NewListScreen({this.parentId="", this.parentType = ShopCollection.GROUP});
   String parentId;
-
+  ShopCollection parentType;
   @override
   _NewListScreenState createState() => _NewListScreenState();
 }
@@ -43,11 +45,14 @@ class _NewListScreenState extends State<NewListScreen> {
                 DoneButton(
                   onPressed: () async {
                     ShopList newList = new ShopList(name: _listNameController.text);
-                    ShopList addedList = await Provider.of<GroupsProvider>(context, listen: false).addListToGroup(widget.parentId, newList);
-                    Provider.of<ListsProvider>(context, listen: false).addNewList(addedList);
-                    
-                    //SHould open list screen
-                    Navigator.pop(context);
+                    ShopList addedList;
+                    if(widget.parentType == ShopCollection.GROUP) {
+                      addedList = await Provider.of<GroupsProvider>(context, listen: false).addListToGroup(widget.parentId, newList);
+                    } else {
+                      // If parent in list
+                      addedList = await DatabaseHelper.createNewListInList(widget.parentId, newList);
+                    }
+                    Navigator.pushReplacementNamed(context, '/list', arguments: addedList);
                   },
                 )
               ],

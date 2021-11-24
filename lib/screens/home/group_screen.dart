@@ -2,7 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shopanizer/models/group.dart';
-import 'package:shopanizer/screens/home/lists_list.dart';
+import 'package:shopanizer/models/list_model.dart';
+import 'package:shopanizer/screens/home/list_screen.dart';
+import 'package:shopanizer/screens/home/tiles_list.dart';
+import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
@@ -23,6 +26,19 @@ class GroupScreen extends StatefulWidget {
 
 class _GroupScreenState extends State<GroupScreen> {
 
+  List<ShopList> groupLists = [];
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero).then((_) async {
+      List<ShopList> lists = await DatabaseHelper.getListsById(widget.currentGroup.lists);
+      setState(() {
+        groupLists =lists;
+      });
+    });
+    super.initState();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +59,8 @@ class _GroupScreenState extends State<GroupScreen> {
                   children: [
                     TitleTV3(text: widget.currentGroup.name,),
                     LabelTV2(text: "${widget.currentGroup.lists.length} Lists | 2 Participants",),
+                    //TODO: Remove and replace by pull to refresh
+                    TextButton(onPressed: refresh, child: Text("refresh"))
                   ],
                 )
               ],
@@ -53,7 +71,7 @@ class _GroupScreenState extends State<GroupScreen> {
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 
             Expanded(
-              child: ListsList(widget.currentGroup.lists),
+              child: TilesList(groupLists,[]),
             )
           ],
         ),
@@ -62,9 +80,18 @@ class _GroupScreenState extends State<GroupScreen> {
         widget1: SvgPicture.asset(Paths.addListIcon),
         backgroundColor1: ShopColors.lightGreenButton,
         onPressed1: () => Navigator.push(context, MaterialPageRoute(
-          builder: (BuildContext context) => NewListScreen(parentId: widget.currentGroup.id))
+          builder: (BuildContext context) => NewListScreen(parentId: widget.currentGroup.id, parentType: ShopCollection.GROUP,))
         ),
       ),
     );
   }
+
+  Future<void> refresh() async {
+    //should not be from cache
+    List<ShopList> lists = await DatabaseHelper.getListsById(widget.currentGroup.lists);
+    setState(() {
+      groupLists =lists;
+    });
+  }
 }
+

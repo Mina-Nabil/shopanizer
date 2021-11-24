@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopanizer/models/group.dart';
+import 'package:shopanizer/models/list_model.dart';
 import 'package:shopanizer/screens/home/group_screen.dart';
 import 'package:shopanizer/screens/home/home_tab.dart';
+import 'package:shopanizer/screens/home/list_screen.dart';
 import 'package:shopanizer/screens/home/new_group_screen.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/screens/home/settings_tab.dart';
@@ -28,7 +30,6 @@ class TabNavigator extends StatelessWidget {
       return MultiProvider(
         providers: [
           ChangeNotifierProvider<GroupsProvider>(create: (_)  => GroupsProvider(),),
-          ChangeNotifierProvider<ListsProvider>(create: (_)   => ListsProvider(),),
         ],
         child: SafeArea(
           child: Navigator(
@@ -38,17 +39,15 @@ class TabNavigator extends StatelessWidget {
               String name = routeSettings.name?? "empty route";
               switch (routeSettings.name) {
                 case '/':
-                  print("found route " + name);
                   return MaterialPageRoute(builder: (_) => HomeTab());
                 case '/newGroup':
-                  print("found route " + name);
                   return MaterialPageRoute(builder: (_) => NewGroupScreen());
                 case '/newList':
-                  print("found route " + name);
                   return MaterialPageRoute(builder: (_) => NewListScreen());
                 case '/group':
-                  print("found route " + name);
                   return MaterialPageRoute(builder: (_) => GroupScreen(routeSettings.arguments as ShopGroup));
+                case '/list':
+                  return MaterialPageRoute(builder: (_) => ListScreen(routeSettings.arguments as ShopList));
                 default:
                   print("Route not found: " + name);
               }
