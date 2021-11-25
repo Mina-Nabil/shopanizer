@@ -11,24 +11,20 @@ class TilesList extends StatelessWidget {
   const TilesList(this.lists,this.items);
 
   final List<ShopList> lists;
-  final List<ShoppingItem> items;
+  final List<ShopItem> items;
 
   @override
   Widget build(BuildContext context) {
 
-    // List<ShoppingItem> items = [
-    //   ShoppingItem(name: "Bedroom 1", categoryID: "1"),
-    //   ShoppingItem(name: "Bedroom 2", categoryID: "1"),
-    // ];
-
     print("list count : ${lists.length}");
+    print("item count : ${items.length}");
 
     List<Widget> tiles = lists.map((e) => ShopanizerTile.list(e,
       onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ListScreen(e)),)
     )).toList();
 
     tiles.addAll(
-      items.map((e) => ShopanizerTile.item(
+      items.map((e) => ShopanizerTile.item(e,
         onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => ItemScreen("1")),
       ))
     ).toList());

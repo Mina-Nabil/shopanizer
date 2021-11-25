@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shopanizer/models/item.dart';
-import 'package:shopanizer/services/ItemsDBService.dart';
+import 'package:shopanizer/services/DatabaseService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/categories_list.dart';
@@ -19,8 +19,9 @@ import 'package:validators/validators.dart';
 class AddNewItemScreen extends StatefulWidget {
   static final screenName = "AddNewItem";
 
-  final ShoppingItem? item;
-  const AddNewItemScreen({this.item});
+  final ShopItem? item;
+  final String parentId;
+  const AddNewItemScreen({this.parentId ="", this.item});
 
   @override
   _AddNewItemScreenState createState() => _AddNewItemScreenState();
@@ -235,9 +236,9 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
     );
   }
 
-  submitForm() {
+  submitForm() async {
     if (_formKey.currentState?.validate() ?? false) {
-      ShoppingItem newItem = new ShoppingItem(
+      ShopItem newItem = new ShopItem(
         name: _itemNameController.text,
         categoryID: _selectedCategory.value.toString(),
         desc: _descriptionController.text,
@@ -248,7 +249,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
         fbs: mapEditingControllersToStrings(_fbEditingControllers),
         instas: mapEditingControllersToStrings(_instagramEditingControllers),
       );
-      ItemsDBService().setItemData(newItem);
+      await DatabaseHelper.createNewItemInList(widget.parentId,newItem);
+      Navigator.pop(context);
     }
   }
 

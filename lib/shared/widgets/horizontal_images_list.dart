@@ -13,7 +13,7 @@ class ShopHorizontalImagesList extends StatelessWidget {
         super(key: key);
 
   final double _height;
-  final ShoppingItem? item;
+  final ShopItem? item;
 
   @override
   Widget build(BuildContext context) {

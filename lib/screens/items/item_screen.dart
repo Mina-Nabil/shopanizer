@@ -31,7 +31,7 @@ class _ItemScreenState extends State<ItemScreen> {
   static const double _belowImageslistPadding = 20;
   static const double _loversPlaceholderWidth = 20;
 
-  ShoppingItem? item;
+  ShopItem? item;
 
   @override
   void initState() {

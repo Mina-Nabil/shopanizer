@@ -6,14 +6,14 @@ import 'package:shopanizer/models/shopper.dart';
 class ItemsDBService {
   final userID = FirebaseAuth.instance.currentUser!.uid;
   final CollectionReference itemsCollection =
-      FirebaseFirestore.instance.collection(ShoppingItem.documentKey); //.where('userID',?)
+      FirebaseFirestore.instance.collection(ShopItem.documentKey); //.where('userID',?)
 
   final CollectionReference categoriesCollection = FirebaseFirestore.instance.collection(ShoppingCategory.documentKey);
 
   final CollectionReference loversCollection =
-      FirebaseFirestore.instance.collection(ShoppingItem.loversDocumentKey); //whereItemID
+      FirebaseFirestore.instance.collection(ShopItem.loversDocumentKey); //whereItemID
 
-  Stream<List<ShoppingItem>> get items {
+  Stream<List<ShopItem>> get items {
     return itemsCollection.snapshots().map(_itemsFromSnapshot);
   }
 
@@ -48,29 +48,29 @@ class ItemsDBService {
     }
   }
 
-  Future<ShoppingItem>? getFullItemById(String itemID) async {
+  Future<ShopItem>? getFullItemById(String itemID) async {
     DocumentSnapshot ds = await itemsCollection.doc(itemID).get();
     if (ds.exists)
-      return ShoppingItem.fromSnapshot(await itemsCollection.doc(itemID).get());
+      return ShopItem.fromSnapshot(await itemsCollection.doc(itemID).get());
     else
       throw Exception("Document Not Found");
   }
 
-  List<ShoppingItem> _itemsFromSnapshot(QuerySnapshot qs) {
-    return qs.docs.map((e) => new ShoppingItem.fromSnapshot(e)).toList();
+  List<ShopItem> _itemsFromSnapshot(QuerySnapshot qs) {
+    return qs.docs.map((e) => new ShopItem.fromSnapshot(e)).toList();
   }
 
-  setItemData(ShoppingItem item) {
+  setItemData(ShopItem item) {
     itemsCollection.doc().set({
-      ShoppingItem.nameKey: item.name,
-      ShoppingItem.categoryIDKey: item.catgID,
-      ShoppingItem.descKey: item.desc,
-      ShoppingItem.priceKey: item.price,
-      ShoppingItem.brandKey: item.brand,
-      ShoppingItem.urlsListKey: item.urls,
-      ShoppingItem.locationListKey: item.locations,
-      ShoppingItem.facebookListKey: item.fbs,
-      ShoppingItem.instagramListKey: item.instas,
+      ShopItem.nameKey: item.name,
+      ShopItem.categoryIDKey: item.catgID,
+      ShopItem.descKey: item.desc,
+      ShopItem.priceKey: item.price,
+      ShopItem.brandKey: item.brand,
+      ShopItem.urlsListKey: item.urls,
+      ShopItem.locationListKey: item.locations,
+      ShopItem.facebookListKey: item.fbs,
+      ShopItem.instagramListKey: item.instas,
     });
   }
 }

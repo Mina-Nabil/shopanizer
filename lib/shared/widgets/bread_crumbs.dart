@@ -9,7 +9,7 @@ class ShopanizerBreadCrumbs extends StatelessWidget {
   final String? listName;
   final bool isIcon;
 
-  ShopanizerBreadCrumbs.fromItem(ShoppingItem item, {this.isIcon = true})
+  ShopanizerBreadCrumbs.fromItem(ShopItem item, {this.isIcon = true})
       : groupName = item.groupName,
         listName = item.listName;
   ShopanizerBreadCrumbs(this.listName, this.groupName, {this.isIcon = true});

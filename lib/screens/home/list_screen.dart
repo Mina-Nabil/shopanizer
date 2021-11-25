@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shopanizer/models/item.dart';
 import 'package:shopanizer/models/list_model.dart';
 import 'package:shopanizer/screens/home/new_list_screen.dart';
 import 'package:shopanizer/screens/home/tiles_list.dart';
@@ -27,13 +28,16 @@ class ListScreen extends StatefulWidget {
 class _ListScreenState extends State<ListScreen> {
 
   List<ShopList> lists = [];
+  List<ShopItem> items = [];
  @override
   void initState() {
     Future.delayed(Duration.zero).then((_) async {
       //maybe from cache
       List<ShopList> fetchedLists = await DatabaseHelper.getListsById(widget.currentList.lists);
+      List<ShopItem> fetchedItems = await DatabaseHelper.getItemsById(widget.currentList.items);
       setState(() {
         lists = fetchedLists;
+        items = fetchedItems;
       });
     });
     super.initState();
@@ -71,7 +75,7 @@ class _ListScreenState extends State<ListScreen> {
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 
             Expanded(
-              child: TilesList(lists, [])
+              child: TilesList(lists, items)
             )
           ],
         ),
@@ -84,21 +88,24 @@ class _ListScreenState extends State<ListScreen> {
         )),
         widget2: SvgPicture.asset(Paths.addItemIcon),
         backgroundColor2: ShopColors.greenButton,
-        onPressed2: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddNewItemScreen())),
+        //TODO: Should be refreshed only if new item is added
+        onPressed2: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddNewItemScreen(parentId: widget.currentList.id))).then((_) => refresh()),
       ),
     );
   }
 
     Future<void> refresh() async {
-
+print("refresh");
       // re-fetch the current list and its children
       //maybe in future try to eliminate multiple refreshes if time differenece is small ~1 sec
       ShopList fetchedList = await DatabaseHelper.getListById(widget.currentList.id);
       List<ShopList> fetchedChildrenLists = await DatabaseHelper.getListsById(fetchedList.lists);
+      List<ShopItem> fetchedChildrenItems = await DatabaseHelper.getItemsById(fetchedList.items);
 
       setState(() {
         widget.currentList = fetchedList;
-        lists =fetchedChildrenLists;
+        lists = fetchedChildrenLists;
+        items = fetchedChildrenItems;
       });
   }
 }

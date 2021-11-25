@@ -18,7 +18,8 @@ class ShopList extends ShopModel {
     this.name = docSnapshot['name'],
     this.desc = docSnapshot['desc'],
     this.photo = docSnapshot['photo'],
-    this.lists = (docSnapshot['lists'] as List<dynamic>).cast<String>();
+    this.lists = (docSnapshot['lists'] as List<dynamic>).cast<String>(),
+    this.items = (docSnapshot['items'] as List<dynamic>).cast<String>();
   
 
   String id = "";

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ShoppingItem {
+class ShopItem {
   static const String documentKey = "items";
   static const String loversDocumentKey = "itemsUsers";
 
@@ -31,7 +31,7 @@ class ShoppingItem {
   bool? _isLoved;
   List<String>? _lovers;
 
-  ShoppingItem({
+  ShopItem({
     required String name,
     required String categoryID,
     String? id,
@@ -59,7 +59,7 @@ class ShoppingItem {
         _groupName = groupName,
         _listName = listName;
 
-  ShoppingItem.fromSnapshot(DocumentSnapshot qds)
+  ShopItem.fromSnapshot(DocumentSnapshot qds)
       : _id = qds.id,
         _name = qds[nameKey],
         _catgID = qds[categoryIDKey],

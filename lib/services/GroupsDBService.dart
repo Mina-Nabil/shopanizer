@@ -123,7 +123,7 @@ class GroupsProvider with ChangeNotifier {
 
   Future<ShopList> addListToGroup(String groupId, ShopList list) async {
 
-    String newListId = await DatabaseHelper.createNewList(groupId, list);
+    String newListId = await DatabaseHelper.createNewList(list);
     print("list added with id = "+ newListId);
     
     //add list id to group's lists array
