@@ -69,21 +69,19 @@ class ShopanizerTile extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: contentPadding),
             child: bookmark,
-          )),
-         ListTile(
-           contentPadding: EdgeInsets.symmetric(horizontal: contentPadding),
-        tileColor: tileColor,
-        leading: CircleAvatar(backgroundImage: image.image,),
-        title: TileTitleTV(text:title,),
-        subtitle: TileSubtitleTV(text: subtitle),
-        trailing: trailing,
-        onTap: onPressed,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        )
-
-      ),
-    ]
+          )
+        ),
+        ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: contentPadding),
+          tileColor: tileColor,
+          leading: CircleAvatar(backgroundImage: image.image,),
+          title: TileTitleTV(text:title,),
+          subtitle: TileSubtitleTV(text: subtitle),
+          trailing: trailing,
+          onTap: onPressed,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0),)
+        ),
+      ]
     );
   }
 }

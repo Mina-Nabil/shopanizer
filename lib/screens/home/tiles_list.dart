@@ -42,7 +42,7 @@ class TilesList extends StatelessWidget {
     return (tiles.length == 0)
         ? EmptyHomeWidget()
         : ListView(
-            children: tiles.map((e) => Padding(padding: EdgeInsets.symmetric(vertical: 5),child: e,)).toList(),
+            children: tiles.map((e) => Material(child: Padding(padding: EdgeInsets.symmetric(vertical: 5),child: e,))).toList(),
           );
   }
 }
