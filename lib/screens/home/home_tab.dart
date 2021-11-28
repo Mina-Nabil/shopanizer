@@ -1,6 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shopanizer/screens/home/group_list.dart';
+import 'package:provider/provider.dart';
+import 'package:shopanizer/screens/home/list_screen.dart';
+import 'package:shopanizer/screens/home/tiles_list.dart';
+import 'package:shopanizer/services/GroupsDBService.dart';
 import 'package:shopanizer/shared/paths.dart';
 import 'package:shopanizer/shared/themes/shopanizer_theme.dart';
 import 'package:shopanizer/shared/widgets/TextViews.dart';
@@ -17,6 +21,12 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+
+  void initState() {
+    super.initState();
+    Provider.of<CurrentUser>(context, listen: false).loadGroups();
+  }
+
   bool isAddPressed = false;
   @override
   Widget build(BuildContext context) {
@@ -47,7 +57,7 @@ class _HomeTabState extends State<HomeTab> {
         onPressed1: () => Navigator.pushNamed(context, '/newGroup'),
         widget2: SvgPicture.asset(Paths.addListIcon),
         backgroundColor2: ShopColors.green,
-        onPressed2: () => Navigator.pushNamed(context, '/newList'),
+        onPressed2: () => Navigator.pushNamed(context, '/newList', arguments: [FirebaseAuth.instance.currentUser!.uid, ShopCollection.USER]),
       ),
     );
   }
@@ -71,6 +81,11 @@ class _HomeTabState extends State<HomeTab> {
 
   Widget _buildBody() {
     return Expanded(
-         child: GroupsList());
+      child: Consumer<CurrentUser> (
+        builder: (context,provider,_) {
+          return TilesList(provider.groups, provider.lists, []);
+        },
+      ),
+    );
   }
 }

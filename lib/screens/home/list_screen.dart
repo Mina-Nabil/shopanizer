@@ -14,6 +14,7 @@ import 'package:shopanizer/shared/widgets/photo_viewer.dart';
 import 'package:shopanizer/shared/widgets/search_field.dart';
 
 enum ShopCollection {
+  USER,
   GROUP,
   LIST
 }
@@ -75,7 +76,7 @@ class _ListScreenState extends State<ListScreen> {
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 
             Expanded(
-              child: TilesList(lists, items)
+              child: TilesList([], lists, items)
             )
           ],
         ),

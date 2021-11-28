@@ -71,7 +71,7 @@ class _GroupScreenState extends State<GroupScreen> {
             Divider(thickness: 0.75, color: ShopColors.textFieldBorder,),
 
             Expanded(
-              child: TilesList(groupLists,[]),
+              child: TilesList([], groupLists,[]),
             )
           ],
         ),

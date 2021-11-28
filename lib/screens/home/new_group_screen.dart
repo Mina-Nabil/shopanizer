@@ -25,7 +25,7 @@ class _NewGroupScreenState extends State<NewGroupScreen> {
 
   addNewGroup() async {
     if(_formKey.currentState!.validate()) {
-      ShopGroup newgroup = await Provider.of<GroupsProvider>(context, listen: false).addNewGroup(
+      ShopGroup newgroup = await Provider.of<CurrentUser>(context, listen: false).addNewGroup(
         ShopGroup(
           name: _groupNameController.text,
           desc: _groupDescController.text,

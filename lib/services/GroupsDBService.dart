@@ -61,18 +61,20 @@ class GroupsDBService  {
 
 }
 
-class GroupsProvider with ChangeNotifier {
+class CurrentUser with ChangeNotifier {
 
-  GroupsProvider() {
-    print("GroupsProvider is created");
+  CurrentUser() {
+    print("CurrentUser Provider is created");
   }
 
   List<ShopGroup> _groups = [];
+  List<ShopList> _lists = [];
 
   Future<void> loadGroups() async {
-    print("load user groups");
+    print("load user groups/lists");
     
     _groups = [];
+    _lists = [];
 
     String userId = FirebaseAuth.instance.currentUser!.uid;
     print("user id is " + userId);
@@ -93,6 +95,24 @@ class GroupsProvider with ChangeNotifier {
       //should be in try catch
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('groupCollection').doc(groupID).get();
       _groups.add( ShopGroup.fromSnapshot(documentSnapshot));
+    }
+
+
+    //lists
+    List<dynamic> listsRef;
+    
+    try {
+      listsRef = qds['lists'];
+    } catch (e) {
+      print("found no lists");
+      listsRef = [];
+    }
+
+    print(listsRef);
+    for (String listID in listsRef) {
+      //should be in try catch
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance.collection('listCollection').doc(listID).get();
+      _lists.add( ShopList.fromSnapshot(documentSnapshot));
     }
 
     notifyListeners();
@@ -119,6 +139,16 @@ class GroupsProvider with ChangeNotifier {
 
   List<ShopGroup> get groups {
     return _groups;
+  }
+
+  List<ShopList> get lists {
+    return _lists;
+  }
+
+
+  void addNewList(ShopList list) {
+    _lists.add(list);
+    notifyListeners();
   }
 
   Future<ShopList> addListToGroup(String groupId, ShopList list) async {

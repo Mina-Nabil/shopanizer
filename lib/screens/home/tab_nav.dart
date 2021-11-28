@@ -29,7 +29,7 @@ class TabNavigator extends StatelessWidget {
       child = SafeArea(child: HomeTab());
       return MultiProvider(
         providers: [
-          ChangeNotifierProvider<GroupsProvider>(create: (_)  => GroupsProvider(),),
+          ChangeNotifierProvider<CurrentUser>(create: (_)  => CurrentUser(),),
         ],
         child: SafeArea(
           child: Navigator(
@@ -43,7 +43,10 @@ class TabNavigator extends StatelessWidget {
                 case '/newGroup':
                   return MaterialPageRoute(builder: (_) => NewGroupScreen());
                 case '/newList':
-                  return MaterialPageRoute(builder: (_) => NewListScreen());
+                  return MaterialPageRoute(builder: (_) => NewListScreen(
+                    parentId: ((routeSettings.arguments as List<Object>)[0] as String),
+                    parentType: ((routeSettings.arguments as List<Object>)[1] as ShopCollection))
+                  );
                 case '/group':
                   return MaterialPageRoute(builder: (_) => GroupScreen(routeSettings.arguments as ShopGroup));
                 case '/list':

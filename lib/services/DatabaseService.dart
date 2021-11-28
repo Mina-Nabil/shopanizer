@@ -12,7 +12,8 @@ class UserDatabaseServive {
       'firstName': firstName,
       'lastName' : lastName,
       'email'    : email,
-      'groups'   : []
+      'groups'   : [],
+      'lists'    : [],
     });
   }
 }
@@ -50,6 +51,23 @@ class DatabaseHelper {
 
     return listDocRef.id;
    }
+
+  // users private lists
+  static Future<ShopList> createNewUserList(String parentId, ShopList list) async {
+    String newListId = await createNewList(list);
+    addListToUser(parentId, newListId);
+    return getListById(newListId);
+  }
+
+  static void addListToUser(String userId, String listId) {
+    
+    //add list id to list's lists array
+    FirebaseFirestore.instance.collection('users').doc(userId).update(
+      {
+        'lists' : FieldValue.arrayUnion([listId])
+      }
+    );
+  }
 
   static void addListToList(String parentId, String listId) {
     

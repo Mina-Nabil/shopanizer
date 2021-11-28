@@ -47,10 +47,14 @@ class _NewListScreenState extends State<NewListScreen> {
                     ShopList newList = new ShopList(name: _listNameController.text);
                     ShopList addedList;
                     if(widget.parentType == ShopCollection.GROUP) {
-                      addedList = await Provider.of<GroupsProvider>(context, listen: false).addListToGroup(widget.parentId, newList);
-                    } else {
+                      addedList = await Provider.of<CurrentUser>(context, listen: false).addListToGroup(widget.parentId, newList);
+                    } else if(widget.parentType == ShopCollection.LIST){
                       // If parent in list
                       addedList = await DatabaseHelper.createNewListInList(widget.parentId, newList);
+                    } else {
+                      // If parent in current user
+                      addedList = await DatabaseHelper.createNewUserList(widget.parentId, newList);
+                      Provider.of<CurrentUser>(context, listen: false).addNewList(addedList);
                     }
                     Navigator.pushReplacementNamed(context, '/list', arguments: addedList);
                   },
