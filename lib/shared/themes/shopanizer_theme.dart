@@ -51,9 +51,9 @@ class ShopColors {
 
   static Color photopickerBG = primary.withAlpha(11); // alpha 5%
 
-  static Color groupTileBG = blue.withAlpha(17); //8%
-  static Color listTileBG  = green.withAlpha(17); //8%
-  static Color itemTileBG  = Color(0xFF3BF2A3).withAlpha(17); //8%
+  static Color groupTileBG = blue.withAlpha(25); //8%
+  static Color listTileBG  = green.withAlpha(25); //8%
+  static Color itemTileBG  = Color(0xFF3BF2A3).withAlpha(25); //8%
 
 }
 

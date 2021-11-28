@@ -63,10 +63,12 @@ class _HomeTabState extends State<HomeTab> {
   }
 
   Widget _buildHeader() {
+    String name = Provider.of<CurrentUser>(context, listen: false).name;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Hello Mina",
+        Text("Hello $name",
             style: TextStyle(
               fontWeight: FontWeight.w500,
             )),

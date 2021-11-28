@@ -10,6 +10,11 @@ class Paths {
   static final String addListIcon = 'assets/icons/list.svg';
   static final String addItemIcon = 'assets/icons/item.svg';
 
+  //Tiles Icons
+  static final String groupBookmark = 'assets/icons/group_bookmark.svg';
+  static final String listBookmark = 'assets/icons/list_bookmark.svg';
+  static final String itemBookmark = 'assets/icons/item_bookmark.svg';
+
   //ButtonIcons
   static final String checkIcon = 'assets/icons/check.svg';
 

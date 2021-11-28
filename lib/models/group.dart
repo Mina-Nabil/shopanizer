@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:shopanizer/services/GroupsDBService.dart';
 
 abstract class ShopModel {
   Map<String, dynamic> toJson();
@@ -33,10 +32,6 @@ class ShopGroup extends ShopModel{
       GroupFSKeys.members : members,
       GroupFSKeys.lists   : lists,
     };
-  }
-
-  String path() {
-    return  GroupsDBService.groupsDocumentKey + '/'+ id;
   }
 }
 
