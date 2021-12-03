@@ -32,51 +32,53 @@ class _NewListScreenState extends State<NewListScreen> {
         padding: EdgeInsets.symmetric(
           horizontal: 20,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Add new list",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-                DoneButton(
-                  onPressed: () async {
-                    ShopList newList = new ShopList(name: _listNameController.text);
-                    ShopList addedList;
-                    if(widget.parentType == ShopCollection.GROUP) {
-                      addedList = await Provider.of<CurrentUser>(context, listen: false).addListToGroup(widget.parentId, newList);
-                    } else if(widget.parentType == ShopCollection.LIST){
-                      // If parent in list
-                      addedList = await DatabaseHelper.createNewListInList(widget.parentId, newList);
-                    } else {
-                      // If parent in current user
-                      addedList = await DatabaseHelper.createNewUserList(widget.parentId, newList);
-                      Provider.of<CurrentUser>(context, listen: false).addNewList(addedList);
-                    }
-                    Navigator.pushReplacementNamed(context, '/list', arguments: addedList);
-                  },
-                )
-              ],
-            ),
-            Center(child: listPhoto()),
-            TextBoxWithLabel(
-              controller: _listNameController,
-              labelText: "List Name",
-              placeHolder: "List Name",
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextBoxWithLabel(
-                controller: _listDescController,
-                labelText: "List Description",
-                placeHolder: "List Description",
-                maxLines: 3,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Add new list",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  ),
+                  DoneButton(
+                    onPressed: () async {
+                      ShopList newList = new ShopList(name: _listNameController.text);
+                      ShopList addedList;
+                      if(widget.parentType == ShopCollection.GROUP) {
+                        addedList = await Provider.of<CurrentUser>(context, listen: false).addListToGroup(widget.parentId, newList);
+                      } else if(widget.parentType == ShopCollection.LIST){
+                        // If parent in list
+                        addedList = await DatabaseHelper.createNewListInList(widget.parentId, newList);
+                      } else {
+                        // If parent in current user
+                        addedList = await DatabaseHelper.createNewUserList(widget.parentId, newList);
+                        Provider.of<CurrentUser>(context, listen: false).addNewList(addedList);
+                      }
+                      Navigator.pushReplacementNamed(context, '/list', arguments: addedList);
+                    },
+                  )
+                ],
+              ),
+              Center(child: listPhoto()),
+              TextBoxWithLabel(
+                controller: _listNameController,
+                labelText: "List Name",
+                placeHolder: "List Name",
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              TextBoxWithLabel(
+                  controller: _listDescController,
+                  labelText: "List Description",
+                  placeHolder: "List Description",
+                  maxLines: 3,
+              ),
+            ],
+          ),
         ),
       ),
     );
