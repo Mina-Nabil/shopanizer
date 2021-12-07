@@ -249,8 +249,8 @@ class _AddNewItemScreenState extends State<AddNewItemScreen> {
         fbs: mapEditingControllersToStrings(_fbEditingControllers),
         instas: mapEditingControllersToStrings(_instagramEditingControllers),
       );
-      await DatabaseHelper.createNewItemInList(widget.parentId,newItem);
-      Navigator.pop(context);
+      ShopItem addedItem =await DatabaseHelper.createNewItemInList(widget.parentId,newItem);
+      Navigator.pop(context, addedItem);
     }
   }
 

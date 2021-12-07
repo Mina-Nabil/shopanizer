@@ -59,8 +59,6 @@ class _GroupScreenState extends State<GroupScreen> {
                   children: [
                     TitleTV3(text: widget.currentGroup.name,),
                     LabelTV2(text: "${widget.currentGroup.lists.length} Lists | 2 Participants",),
-                    //TODO: Remove and replace by pull to refresh
-                    TextButton(onPressed: refresh, child: Text("refresh"))
                   ],
                 )
               ],
@@ -79,19 +77,31 @@ class _GroupScreenState extends State<GroupScreen> {
       floatingActionButton: EaxpandableFAB(
         widget1: SvgPicture.asset(Paths.addListIcon),
         backgroundColor1: ShopColors.lightGreenButton,
-        onPressed1: () => Navigator.push(context, MaterialPageRoute(
-          builder: (BuildContext context) => NewListScreen(parentId: widget.currentGroup.id, parentType: ShopCollection.GROUP,))
-        ),
+        onPressed1: () async {
+          var newList = await Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) => NewListScreen(parentId: widget.currentGroup.id, parentType: ShopCollection.GROUP,))
+          );
+          if(newList != null) {
+            setState(() {
+              groupLists.add(newList);
+            });
+            Navigator.pushNamed(context, '/list', arguments: newList);
+          } else {
+            print("normal back ya micky, no list added");
+          }
+          
+
+        }
       ),
     );
   }
 
-  Future<void> refresh() async {
-    //should not be from cache
-    List<ShopList> lists = await DatabaseHelper.getListsById(widget.currentGroup.lists);
-    setState(() {
-      groupLists =lists;
-    });
-  }
+  // Future<void> refresh() async {
+  //   //should not be from cache
+  //   List<ShopList> lists = await DatabaseHelper.getListsById(widget.currentGroup.lists);
+  //   setState(() {
+  //     groupLists =lists;
+  //   });
+  // }
 }
 

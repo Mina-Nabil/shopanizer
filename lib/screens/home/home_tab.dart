@@ -57,7 +57,14 @@ class _HomeTabState extends State<HomeTab> {
         onPressed1: () => Navigator.pushNamed(context, '/newGroup'),
         widget2: SvgPicture.asset(Paths.addListIcon),
         backgroundColor2: ShopColors.green,
-        onPressed2: () => Navigator.pushNamed(context, '/newList', arguments: [FirebaseAuth.instance.currentUser!.uid, ShopCollection.USER]),
+        onPressed2: () async {
+          var newList = await Navigator.pushNamed(context, '/newList', arguments: [FirebaseAuth.instance.currentUser!.uid, ShopCollection.USER]);
+          if(newList != null) {
+            Navigator.pushNamed(context, '/list', arguments: newList);
+          } else {
+            print("normal back ya micky, no list added");
+          }
+        }
       ),
     );
   }

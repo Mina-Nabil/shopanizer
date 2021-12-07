@@ -15,7 +15,7 @@ class ShopItem {
   static const String facebookListKey = "fbs";
   static const String instagramListKey = "instas";
 
-  String? _id;
+  String id = "";
   String _name;
   String _catgID;
   String? _desc;
@@ -34,7 +34,7 @@ class ShopItem {
   ShopItem({
     required String name,
     required String categoryID,
-    String? id,
+    this.id = "",
     String? desc,
     List<double>? price,
     List<String>? brand,
@@ -48,7 +48,6 @@ class ShopItem {
   })  : _name = name,
         _catgID = categoryID,
         _desc = desc,
-        _id = id,
         _price = price ?? [],
         _brand = brand ?? [],
         _images = images ?? [],
@@ -60,7 +59,7 @@ class ShopItem {
         _listName = listName;
 
   ShopItem.fromSnapshot(DocumentSnapshot qds)
-      : _id = qds.id,
+      : id = qds.id,
         _name = qds[nameKey],
         _catgID = qds[categoryIDKey],
         _desc = qds[descKey] {
@@ -110,9 +109,8 @@ class ShopItem {
 
   // Future<bool> like() {}
 
-  String? get id {
-    return _id;
-  }
+
+
   String get name {
     return _name;
   }

@@ -57,7 +57,8 @@ class _NewListScreenState extends State<NewListScreen> {
                         addedList = await DatabaseHelper.createNewUserList(widget.parentId, newList);
                         Provider.of<CurrentUser>(context, listen: false).addNewList(addedList);
                       }
-                      Navigator.pushReplacementNamed(context, '/list', arguments: addedList);
+                      //Navigator.pushReplacementNamed(context, '/list', arguments: addedList);
+                      Navigator.pop(context, addedList);
                     },
                   )
                 ],

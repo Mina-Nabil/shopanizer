@@ -64,8 +64,6 @@ class _ListScreenState extends State<ListScreen> {
                   children: [
                     TitleTV3(text: widget.currentList.name,),
                     LabelTV2(text: "group name",),
-                    //TODO: Remove and replace by pull to refresh
-                    TextButton(onPressed: refresh, child: Text("refresh"))
                   ],
                 )
               ],
@@ -84,29 +82,53 @@ class _ListScreenState extends State<ListScreen> {
       floatingActionButton: EaxpandableFAB(
         widget1: SvgPicture.asset(Paths.addListIcon),
         backgroundColor1: ShopColors.lightGreenButton,
-        onPressed1: () => Navigator.push(context, MaterialPageRoute(
-          builder: (BuildContext context) => NewListScreen(parentId: widget.currentList.id, parentType: ShopCollection.LIST,)
-        )),
+        onPressed1: () async {
+          ShopList? newList = await Navigator.push(context, MaterialPageRoute(
+            builder: (BuildContext context) => NewListScreen(parentId: widget.currentList.id, parentType: ShopCollection.LIST,)
+          ));
+          if(newList != null) {
+            setState(() {
+              widget.currentList.lists.add(newList.id);
+              lists.add(newList);
+            });
+            Navigator.pushNamed(context, '/list', arguments: newList);
+          } else {
+            print("Normal back from add new item");
+          }
+        },
         widget2: SvgPicture.asset(Paths.addItemIcon),
         backgroundColor2: ShopColors.greenButton,
-        //TODO: Should be refreshed only if new item is added
-        onPressed2: () => Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddNewItemScreen(parentId: widget.currentList.id))).then((_) => refresh()),
+        onPressed2: () async {
+          // will return the new item ID only if new item is created
+          ShopItem? addedItem = await Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => AddNewItemScreen(parentId: widget.currentList.id)));
+          if(addedItem != null) {
+            print("addedItemID ${addedItem.id}");
+            setState(() {
+              widget.currentList.items.add(addedItem.id);
+              items.add(addedItem);
+            });
+          }
+          else
+            print("Normal back from add new item");
+        },
       ),
     );
   }
 
-    Future<void> refresh() async {
-print("refresh");
-      // re-fetch the current list and its children
-      //maybe in future try to eliminate multiple refreshes if time differenece is small ~1 sec
-      ShopList fetchedList = await DatabaseHelper.getListById(widget.currentList.id);
-      List<ShopList> fetchedChildrenLists = await DatabaseHelper.getListsById(fetchedList.lists);
-      List<ShopItem> fetchedChildrenItems = await DatabaseHelper.getItemsById(fetchedList.items);
+//     Future<void> refresh() async {
+// print("refresh");
+//       // re-fetch the current list and its children
+//       //maybe in future try to eliminate multiple refreshes if time differenece is small ~1 sec
 
-      setState(() {
-        widget.currentList = fetchedList;
-        lists = fetchedChildrenLists;
-        items = fetchedChildrenItems;
-      });
-  }
+//       // Don't do re-assign to currentobject, as this will change this local object while the original one in previous screen will not change
+//       // --Bad-- ShopList fetchedList = await DatabaseHelper.getListById(widget.currentList.id);
+//       List<ShopList> fetchedChildrenLists = await DatabaseHelper.getListsById(widget.currentList.lists);
+//       List<ShopItem> fetchedChildrenItems = await DatabaseHelper.getItemsById(widget.currentList.items);
+
+//       setState(() {
+//         //print("setstate: ${widget.currentList.hashCode} ${widget.currentList.items}");
+//         lists = fetchedChildrenLists;
+//         items = fetchedChildrenItems;
+//       });
+//   }
 }
